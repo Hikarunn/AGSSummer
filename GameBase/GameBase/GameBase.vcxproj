@@ -17,7 +17,6 @@
       <Configuration>Release</Configuration>
       <Platform>x64</Platform>
     </ProjectConfiguration>
-
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
@@ -53,25 +52,23 @@
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
-
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
-  <ImportGroup Label="Shared" >
+  <ImportGroup Label="Shared">
   </ImportGroup>
-    <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-      <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-    </ImportGroup>
-    <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-      <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-    </ImportGroup>
-    <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-      <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-    </ImportGroup>
-    <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-      <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-    </ImportGroup>
-
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
@@ -85,7 +82,6 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
   </PropertyGroup>
-
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
@@ -120,10 +116,13 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(DXLIB_DIR)</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
-      <SubSystem>Console</SubSystem>
+      <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>$(DXLIB_DIR)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -142,8 +141,125 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
   </ItemDefinitionGroup>
-
-  <ItemGroup></ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Common\Camera.cpp" />
+    <ClCompile Include="Common\Debug.cpp" />
+    <ClCompile Include="Common\Input\Controller.cpp" />
+    <ClCompile Include="Common\Input\InputComfig\InputConfig.cpp" />
+    <ClCompile Include="Common\Input\InputType\Keybord.cpp" />
+    <ClCompile Include="Common\Input\InputType\Pad.cpp" />
+    <ClCompile Include="Common\Math.cpp" />
+    <ClCompile Include="Common\Quaternion.cpp" />
+    <ClCompile Include="Common\Random.cpp" />
+    <ClCompile Include="Common\ResourceManager.cpp" />
+    <ClCompile Include="Common\Shared.cpp" />
+    <ClCompile Include="Common\ThreadPool.cpp" />
+    <ClCompile Include="Common\Time.cpp" />
+    <ClCompile Include="Common\Utility.cpp" />
+    <ClCompile Include="Common\Worker.cpp" />
+    <ClCompile Include="Component\Animator\Animator.cpp" />
+    <ClCompile Include="Component\Behavior\Behavior.cpp" />
+    <ClCompile Include="Component\Collider\CapsuleCollider.cpp" />
+    <ClCompile Include="Component\Collider\CharactorCollider.cpp" />
+    <ClCompile Include="Component\Collider\Collider.cpp" />
+    <ClCompile Include="Component\Collider\MeshCollider.cpp" />
+    <ClCompile Include="Component\Collider\SphereCollider.cpp" />
+    <ClCompile Include="Component\Collider\TerrainCollider.cpp" />
+    <ClCompile Include="Component\ComponentBase.cpp" />
+    <ClCompile Include="Component\ComponentPool.cpp" />
+    <ClCompile Include="Component\Info\ObjectInfo.cpp" />
+    <ClCompile Include="Component\Render\Render.cpp" />
+    <ClCompile Include="Component\Sound\Sound.cpp" />
+    <ClCompile Include="Component\Transform\Transform.cpp" />
+    <ClCompile Include="Factory\Factory.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="Object\ObjectID.cpp" />
+    <ClCompile Include="Object\ObjectManager.cpp" />
+    <ClCompile Include="SceneManager.cpp" />
+    <ClCompile Include="Scene\BaseScene.cpp" />
+    <ClCompile Include="Scene\DialogScene.cpp" />
+    <ClCompile Include="Scene\GameScene.cpp" />
+    <ClCompile Include="Scene\InputSetScene.cpp" />
+    <ClCompile Include="Scene\OptionScene.cpp" />
+    <ClCompile Include="Scene\PauseScene.cpp" />
+    <ClCompile Include="Scene\ResultScene.cpp" />
+    <ClCompile Include="Scene\SelectScene.cpp" />
+    <ClCompile Include="Scene\TitleScene.cpp" />
+    <ClCompile Include="Scene\WindowScene.cpp" />
+    <ClCompile Include="UI\UiBase.cpp" />
+    <ClCompile Include="UI\UiManager.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Common\Camera.h" />
+    <ClInclude Include="Common\Debug.h" />
+    <ClInclude Include="Common\Input\Controller.h" />
+    <ClInclude Include="Common\Input\InputComfig\InputConfig.h" />
+    <ClInclude Include="Common\Input\InputComfig\InputConfigManager.h" />
+    <ClInclude Include="Common\Input\InputID.h" />
+    <ClInclude Include="Common\Input\InputType\Keybord.h" />
+    <ClInclude Include="Common\Input\InputType\Pad.h" />
+    <ClInclude Include="Common\Math.h" />
+    <ClInclude Include="Common\MathConcepts.h" />
+    <ClInclude Include="Common\ObjectData.h" />
+    <ClInclude Include="Common\Quaternion.h" />
+    <ClInclude Include="Common\Random.h" />
+    <ClInclude Include="Common\ResourceManager.h" />
+    <ClInclude Include="Common\ScreenID.h" />
+    <ClInclude Include="Common\Shared.h" />
+    <ClInclude Include="Common\ThreadPool.h" />
+    <ClInclude Include="Common\Time.h" />
+    <ClInclude Include="Common\Utility.h" />
+    <ClInclude Include="Common\Vector2.h" />
+    <ClInclude Include="Common\Vector3.h" />
+    <ClInclude Include="Common\Worker.h" />
+    <ClInclude Include="Component\Animator\Animator.h" />
+    <ClInclude Include="Component\Animator\PlayerAnimator.h" />
+    <ClInclude Include="Component\Behavior\Behavior.h" />
+    <ClInclude Include="Component\Collider\CapsuleCollider.h" />
+    <ClInclude Include="Component\Collider\CharactorCollider.h" />
+    <ClInclude Include="Component\Collider\Collider.h" />
+    <ClInclude Include="Component\Collider\ColliderType.h" />
+    <ClInclude Include="Component\Collider\MeshCollider.h" />
+    <ClInclude Include="Component\Collider\SphereCollider.h" />
+    <ClInclude Include="Component\Collider\TerrainCollider.h" />
+    <ClInclude Include="Component\ComponentBase.h" />
+    <ClInclude Include="Component\ComponentConcept.h" />
+    <ClInclude Include="Component\ComponentHandle.h" />
+    <ClInclude Include="Component\ComponentID.h" />
+    <ClInclude Include="Component\ComponentPool.h" />
+    <ClInclude Include="Component\Info\ObjectAttribute.h" />
+    <ClInclude Include="Component\Info\ObjectInfo.h" />
+    <ClInclude Include="Component\Render\Render.h" />
+    <ClInclude Include="Component\Sound\Sound.h" />
+    <ClInclude Include="Component\Transform\Transform.h" />
+    <ClInclude Include="Factory\Factory.h" />
+    <ClInclude Include="Factory\FactoryID.h" />
+    <ClInclude Include="Object\ObjectID.h" />
+    <ClInclude Include="Object\ObjectManager.h" />
+    <ClInclude Include="resourse.h" />
+    <ClInclude Include="SceneManager.h" />
+    <ClInclude Include="Scene\BaseScene.h" />
+    <ClInclude Include="Scene\DialogScene.h" />
+    <ClInclude Include="Scene\GameScene.h" />
+    <ClInclude Include="Scene\InputSetScene.h" />
+    <ClInclude Include="Scene\OptionScene.h" />
+    <ClInclude Include="Scene\PauseScene.h" />
+    <ClInclude Include="Scene\ResultScene.h" />
+    <ClInclude Include="Scene\SceneID.h" />
+    <ClInclude Include="Scene\SelectScene.h" />
+    <ClInclude Include="Scene\StageID.h" />
+    <ClInclude Include="Scene\TitleScene.h" />
+    <ClInclude Include="Scene\WindowScene.h" />
+    <ClInclude Include="UI\UiBase.h" />
+    <ClInclude Include="UI\UiID.h" />
+    <ClInclude Include="UI\UiManager.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Resource\Model\Log.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resource\Model\Map.mv1" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
