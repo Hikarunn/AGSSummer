@@ -175,6 +175,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Object\ObjectID.cpp" />
     <ClCompile Include="Object\ObjectManager.cpp" />
+    <ClCompile Include="Component\Behavior\PlayerBehavior.cpp" />
     <ClCompile Include="SceneManager.cpp" />
     <ClCompile Include="Scene\BaseScene.cpp" />
     <ClCompile Include="Scene\DialogScene.cpp" />
@@ -236,6 +237,7 @@
     <ClInclude Include="Factory\FactoryID.h" />
     <ClInclude Include="Object\ObjectID.h" />
     <ClInclude Include="Object\ObjectManager.h" />
+    <ClInclude Include="Component\Behavior\PlayerBehavior.h" />
     <ClInclude Include="resourse.h" />
     <ClInclude Include="SceneManager.h" />
     <ClInclude Include="Scene\BaseScene.h" />
