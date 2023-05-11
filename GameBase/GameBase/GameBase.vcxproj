@@ -173,6 +173,7 @@
     <ClCompile Include="Component\Transform\Transform.cpp" />
     <ClCompile Include="Factory\Factory.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Component\Render\ModelRender.cpp" />
     <ClCompile Include="Object\ObjectID.cpp" />
     <ClCompile Include="Object\ObjectManager.cpp" />
     <ClCompile Include="Component\Behavior\PlayerBehavior.cpp" />
@@ -235,6 +236,7 @@
     <ClInclude Include="Component\Transform\Transform.h" />
     <ClInclude Include="Factory\Factory.h" />
     <ClInclude Include="Factory\FactoryID.h" />
+    <ClInclude Include="Component\Render\ModelRender.h" />
     <ClInclude Include="Object\ObjectID.h" />
     <ClInclude Include="Object\ObjectManager.h" />
     <ClInclude Include="Component\Behavior\PlayerBehavior.h" />
