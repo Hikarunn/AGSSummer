@@ -6,7 +6,7 @@
 //#include "../../../Shader/PEID.h"
 
 
-#define lpConfigMng (InputConfig::GetInstance())
+#define lpConfigManager (InputConfig::GetInstance())
 
 using InputCodeTbl = std::map<std::string, int>;
 using InputCode = std::map<InputID, int>;
@@ -41,14 +41,14 @@ public:
 	/// </summary>
 	/// <param name=""></param>
 	/// <returns> コード </returns>
-	const InputCode& GetInputControllerCode(void) const&
+	const InputCode& GetInputCode(void) const&
 	{
-		return inputControllerCode_;
+		return inputCode_;
 	}
 
 	void SetInputCode(InputCode& code)
 	{
-		inputControllerCode_ = code;
+		inputCode_ = code;
 	}
 
 	
@@ -120,7 +120,7 @@ private:
 	static InputConfig* sInstance_;
 
 	// コード
-	InputCode inputControllerCode_;
+	InputCode inputCode_;
 	
 	// 現在の入力タイプ
 	int nowType_;

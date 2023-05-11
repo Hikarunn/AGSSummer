@@ -44,13 +44,13 @@ InputConfig& InputConfig::GetInstance(void)
 
 
 
-void InputConfig::ChangeInputCode(ControllerInputID id, int code)
+void InputConfig::ChangeInputCode(InputID id, int code)
 {
 	// 変更前の値をもっとく
-	auto tmp = inputControllerCode_[id];
-	inputControllerCode_[id] = code;
-	auto itr = std::find_if(inputControllerCode_.begin(), inputControllerCode_.end(), [code](auto& data) { return data.second == code; });
-	if (itr != inputControllerCode_.end())
+	auto tmp = inputCode_[id];
+	inputCode_[id] = code;
+	auto itr = std::find_if(inputCode_.begin(), inputCode_.end(), [code](auto& data) { return data.second == code; });
+	if (itr != inputCode_.end())
 	{
 		// 変更前の値を入れる
 		itr->second = tmp;
@@ -73,51 +73,37 @@ void InputConfig::SetDefalutCode(void)
 
 void InputConfig::SetPsDefalutCode(void)
 {
-	inputControllerCode_.emplace(ControllerInputID::Attack, 1);
-	inputControllerCode_.emplace(ControllerInputID::Jump, 2);
-	inputControllerCode_.emplace(ControllerInputID::MainTriger1, 0);
-	inputControllerCode_.emplace(ControllerInputID::MainTriger2, 3);
-	inputControllerCode_.emplace(ControllerInputID::MainTriger3, 0);
-	inputControllerCode_.emplace(ControllerInputID::MainTriger4, 0);
-	inputControllerCode_.emplace(ControllerInputID::SubTriger1, 1);
-	inputControllerCode_.emplace(ControllerInputID::SubTriger2, 3);
-	inputControllerCode_.emplace(ControllerInputID::SubTriger3, 2);
-	inputControllerCode_.emplace(ControllerInputID::SubTriger4, 0);
-	inputControllerCode_.emplace(ControllerInputID::LockOn, 1);
-	inputControllerCode_.emplace(ControllerInputID::CameraFlont, 3);
-	
+	inputCode_.emplace(InputID::MainTrigerAttack, 1);
+	inputCode_.emplace(InputID::Jump, 2);
+	inputCode_.emplace(InputID::MainTrigerChange, 0);
+	inputCode_.emplace(InputID::SubTrigerAttack, 3);
+	inputCode_.emplace(InputID::SubTrigerChange, 1);
+	inputCode_.emplace(InputID::LockOn, 1);
+	inputCode_.emplace(InputID::CameraFlont, 3);
 
 }
 
 void InputConfig::SetXboxDefalutCode(void)
 {
-	inputControllerCode_.emplace(ControllerInputID::Attack, 1);
-	inputControllerCode_.emplace(ControllerInputID::Jump, 2);
-	inputControllerCode_.emplace(ControllerInputID::MainTriger1, 0);
-	inputControllerCode_.emplace(ControllerInputID::MainTriger2, 3);
-	inputControllerCode_.emplace(ControllerInputID::MainTriger3, 0);
-	inputControllerCode_.emplace(ControllerInputID::MainTriger4, 0);
-	inputControllerCode_.emplace(ControllerInputID::SubTriger1, 1);
-	inputControllerCode_.emplace(ControllerInputID::SubTriger2, 3);
-	inputControllerCode_.emplace(ControllerInputID::SubTriger3, 2);
-	inputControllerCode_.emplace(ControllerInputID::SubTriger4, 0);
-	inputControllerCode_.emplace(ControllerInputID::LockOn, 1);
-	inputControllerCode_.emplace(ControllerInputID::CameraFlont, 3);
+	inputCode_.emplace(InputID::MainTrigerAttack, 1);
+	inputCode_.emplace(InputID::Jump, 2);
+	inputCode_.emplace(InputID::MainTrigerChange, 0);
+	inputCode_.emplace(InputID::SubTrigerAttack, 3);
+	inputCode_.emplace(InputID::SubTrigerChange, 1);
+	inputCode_.emplace(InputID::LockOn, 1);
+	inputCode_.emplace(InputID::CameraFlont, 3);
 	
 }
 
 void InputConfig::SetKeyDefalutCode(void)
 {
-	inputKeyCode_.emplace(KeyInputID::Attack, MOUSE_INPUT_LEFT);
-	inputKeyCode_.emplace(KeyInputID::Jump, KEY_INPUT_SPACE);
-	inputKeyCode_.emplace(KeyInputID::MainTrigerChange, MOUSE_INPUT_MIDDLE);
-	inputKeyCode_.emplace(KeyInputID::SubTrigerAttack, KEY_INPUT_Q);
-	inputKeyCode_.emplace(KeyInputID::SubTrigerChange1, KEY_INPUT_1);
-	inputKeyCode_.emplace(KeyInputID::SubTrigerChange2, KEY_INPUT_2);
-	inputKeyCode_.emplace(KeyInputID::SubTrigerChange3, KEY_INPUT_3);
-	inputKeyCode_.emplace(KeyInputID::SubTrigerChange4, KEY_INPUT_4);
-	inputKeyCode_.emplace(KeyInputID::LockOn, KEY_INPUT_LSHIFT);
-	inputKeyCode_.emplace(KeyInputID::CameraFlont, MOUSE_INPUT_RIGHT);
+	inputCode_.emplace(InputID::MainTrigerAttack, MOUSE_INPUT_LEFT);
+	inputCode_.emplace(InputID::Jump, KEY_INPUT_SPACE);
+	inputCode_.emplace(InputID::MainTrigerChange, MOUSE_INPUT_MIDDLE);
+	inputCode_.emplace(InputID::SubTrigerAttack, KEY_INPUT_Q);
+	inputCode_.emplace(InputID::SubTrigerChange, KEY_INPUT_1);
+	inputCode_.emplace(InputID::LockOn, KEY_INPUT_LSHIFT);
+	inputCode_.emplace(InputID::CameraFlont, MOUSE_INPUT_RIGHT);
 
 }
 //
@@ -244,7 +230,7 @@ bool InputConfig::Load(const std::string& fname)
 	// マップに入れる
 	for (auto& v : vec)
 	{
-		inputControllerCode_.emplace(v.id, v.code);
+		inputCode_.emplace(v.id, v.code);
 	}
 	return true;
 }
@@ -259,8 +245,8 @@ bool InputConfig::Save(const std::string& fname)
 	Header h{};
 	std::vector<Data> vec;
 	//std::vector<Data> vec(inputCode_.size());
-	vec.reserve(inputControllerCode_.size());
-	for (auto& code : inputControllerCode_)
+	vec.reserve(inputCode_.size());
+	for (auto& code : inputCode_)
 	{
 		vec.emplace_back(Data{ code.first, code.second });
 	}
