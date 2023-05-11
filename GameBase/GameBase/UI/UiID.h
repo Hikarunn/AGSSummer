@@ -8,7 +8,7 @@ enum class UiID
 	Button,			// ボタン
 	Frame,			// 枠
 	Combo,			// コンボ数
-	Qursor,			// カーソル
+	Cursor,			// カーソル
 	Time,			// 時間
 	Mess,			// メッセージ
 	Max					

@@ -156,7 +156,7 @@ protected:
 	std::unique_ptr<Camera> camera_;
 
 	// UIマネージャー
-	std::unique_ptr<UiManager> uiMneger_;
+	std::unique_ptr<UiManager> uiManager_;
 
 	// オブジェクトマネージャー
 	std::unique_ptr<ObjectManager> objManager_;

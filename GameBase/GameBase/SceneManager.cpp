@@ -2,11 +2,11 @@
 #include <DxLib.h>
 #include "Common/ResourceManager.h"
 #include "resourse.h"
-#include "Common/Input/InputComfig/InputConfig.h"
+#include "Common/Input/InputConfig/InputConfig.h"
 #include "Common/ThreadPool.h"
 #include "Scene/TitleScene.h"
 #include "Scene/GameScene.h"
-#include "Common/Input/InputType/Keybord.h"
+#include "Common/Input/InputType/Keyboard.h"
 #include "Common/Input/InputType/Pad.h"
 
 #include "Common/Debug.h"
@@ -73,6 +73,11 @@ ResourceManager& SceneManager::GetResourceManager(void)
 }
 
 
+Controller& SceneManager::GetController(void)
+{
+	return *controller_;
+}
+
 SceneManager::SceneManager():
 	isInit_{false}
 {
@@ -136,17 +141,6 @@ bool SceneManager::SystemInit(void)
 	// スレッドプールを作成
 	threadPool_ = std::make_unique<ThreadPool>(2);
 
-
-	//InputConfig::Create();
-
-	//if (InputConfig::GetInstance().GetNowType() != -1)
-	//{
-	//	controller_ = std::make_unique<Pad>(InputConfig::GetInstance().GetNowType());
-	//}
-	//else
-	//{
-	//	controller_ = std::make_unique<Keyboard>();
-	//}
 
 	// デバッグのセットアップ
 	DebugSetUp();

@@ -142,7 +142,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="UI\RoadIndicatorUi.cpp" />
+    <ClCompile Include="UI\LoadIndicatorUi.cpp" />
     <ClCompile Include="UI\Slider.cpp" />
     <ClCompile Include="UI\InputSetButton.cpp" />
     <ClCompile Include="UI\Button.cpp" />
@@ -216,7 +216,7 @@
     <ClCompile Include="UI\UiManager.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="UI\RoadIndicatorUi.h" />
+    <ClInclude Include="UI\LoadIndicatorUi.h" />
     <ClInclude Include="UI\Slider.h" />
     <ClInclude Include="UI\InputSetButton.h" />
     <ClInclude Include="UI\Button.h" />

@@ -74,10 +74,10 @@ enum class ButtonFuncID
 UiManager::UiManager(const std::filesystem::path& path, bool isAsync, bool isTutorial, bool isCreateCursor)
 {
 	isLoaded_.store(false);
-	if (isTutorial)
+	/*if (isTutorial)
 	{
 		uiList_.emplace_back(std::make_unique<TutorialMessage>());
-	}
+	}*/
 	if (!isAsync)
 	{
 		InitUi(path, isCreateCursor);
@@ -177,7 +177,7 @@ void UiManager::CreateButton(std::ifstream& file, int num)
 {
 	// É{É^ÉìÇÃèàóù
 	std::vector<std::function<void(BaseScene&)>> funcs{
-		[](BaseScene& scene) { static_cast<SelectScene&>(scene).Tutorial(); },
+	//	[](BaseScene& scene) { static_cast<SelectScene&>(scene).Tutorial(); },
 		[](BaseScene& scene) { static_cast<SelectScene&>(scene).Play(); },
 		[](BaseScene& scene) { static_cast<SelectScene&>(scene).Option(); },
 		[](BaseScene& scene) { static_cast<SelectScene&>(scene).Dialog(); },

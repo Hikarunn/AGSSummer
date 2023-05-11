@@ -30,12 +30,28 @@ class GameScene :
 public:
 	GameScene(StageID stageID);
 	~GameScene();
-
 	// ライトカメラの位置
+	static constexpr Vector3 camPos{ 500.0f, 800.0f, -3000.0f };
+	// ライトカメラの注視点
+	static constexpr Vector3 camTar{ 0.0f, 0.0f, -1000.0f };
+	// ライトカメラの正射影の表示範囲
+	static constexpr float offsetOrtho = 12000.0f;
+	// ライトカメラの手前の距離と奥の距離
+	static constexpr float offsetNear = 0.001f;
+	static constexpr float offsetFar = 13000.0f;
+	// ガウシアンブラの重さ
+	static constexpr int NUM_WEIGHTS = 8;
 
-	// ライトカメラ注視点
+	// ぼかし無しとぼかしありの補間距離
+	static constexpr float dofInterpSize = 7000;
+	// ぼかし無しの範囲の中心位置
+	static constexpr float dofFocus = 500.0;
+	// ぼかし無しの範囲
+	static constexpr float dofFocusSize = 17000;
 
-	// レーダーに敵を表示する範囲
+	// ミニマップに敵を表示する範囲
+	static constexpr float RADAR_RANGE = 90;
+
 
 	void SetResult(Result result)
 	{
@@ -126,6 +142,25 @@ private:
 	/// <param name=""></param>
 	void RaderDrow(void);
 
+	// シャドウマップ用の深度テクスチャ
+	// シャドウマップ用シェーダ
+	SharedShaderHandle shadowPs_;
+	int shadowMap_;
+	LIGHT_MAT* lightMat_;
+	LIGHT_MAT lightMat;
+	int shadowBuff_;
+
+	// 被写界深度用の深度テクスチャ
+	// 深度テクスチャ用シェーダ
+	SharedShaderHandle depthPS_;
+	int depth_;
+	DepthParameter* depthMat_;
+	DepthParameter depthMat;
+	int depthbuffer_;
+
+	float dofTotalSize_;
+
+
 	// オフスクリーン
 	int offScreen_;
 	// スカイドームのみのスクリーン
@@ -138,10 +173,12 @@ private:
 	int raderMap_;
 
 	// プレイヤーとエネミーの距離と角度をエネミーの数だけ取得
-	std::map<int, Rader>rader_;
+	std::map<int, Rader>radar_;
 
+	// 作成したmapの数を格納
+	int count_;
 	// レーダーのサイズ
-	int raderSize_;
+	int radarSize_;
 
 	Result result_;
 
