@@ -29,7 +29,7 @@ public:
 	/// </summary>
 	/// <param name=""></param>
 	/// <returns> コントローラーのタイプ </returns>
-	ControllerType GetCntrollerType(void) override { return ControllerType::Pad; };
+	ControllerType GetControllerType(void) override { return ControllerType::Pad; };
 
 	/// <summary>
 	/// ゲームパッドの情報を取得

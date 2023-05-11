@@ -22,7 +22,7 @@ enum class ControllerType
 	Max
 };
 
-using InputData = std::array<std::pair<bool, bool>, static_cast<size_t>(ControllerInputID::Max) + 1>;
+using InputData = std::array<std::pair<bool, bool>, static_cast<size_t>(InputID::Max) + 1>;
 
 class Controller
 {
@@ -63,35 +63,35 @@ public:
 	/// </summary>
 	/// <param name="id">キーの種類</param>
 	/// <returns>成否→　true,false</returns>
-	bool MousePress(ControllerInputID id);
+	bool MousePress(InputID id);
 
 	/// <summary>
 	/// 押しているか
 	/// </summary>
 	/// <param name="id">キーの種類</param>
 	/// <returns></returns>
-	bool Press(ControllerInputID id);
+	bool Press(InputID id);
 
 	/// <summary>
 	/// 押した瞬間
 	/// </summary>
 	/// <param name="id">キーの種類</param>
 	/// <returns></returns>
-	bool Pressed(ControllerInputID id);
+	bool Pressed(InputID id);
 
 	/// <summary>
 	/// 離した瞬間
 	/// </summary>
 	/// <param name="id">キーの種類</param>
 	/// <returns></returns>
-	bool Released(ControllerInputID id);
+	bool Released(InputID id);
 
 	/// <summary>
 	/// 押されていないとき
 	/// </summary>
 	/// <param name="id"></param>
 	/// <returns></returns>
-	bool NotPress(ControllerInputID id);
+	bool NotPress(InputID id);
 
 	/// <summary>
 	/// 何も押されていないかどうか
@@ -167,7 +167,7 @@ public:
 	/// <param name="limit">最大時間</param>
 	/// <param name="delta">デルタタイム</param>
 	/// <returns></returns>
-	std::string LongPress(ControllerInputID id, double limit, double delta);
+	std::string LongPress(InputID id, double limit, double delta);
 
 	/// <summary>
 	/// インプットデータを取得

@@ -10,7 +10,7 @@ struct Header
 
 struct Data
 {
-	ControllerInputID id;
+	InputID id;
 	int code;
 
 };

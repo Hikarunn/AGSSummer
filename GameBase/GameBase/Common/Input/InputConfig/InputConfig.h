@@ -9,8 +9,7 @@
 #define lpConfigMng (InputConfig::GetInstance())
 
 using InputCodeTbl = std::map<std::string, int>;
-using InputControllerCode = std::map<ControllerInputID, int>;
-using InputKeyCode = std::map<KeyInputID, int>;
+using InputCode = std::map<InputID, int>;
 
 class InputConfig
 {
@@ -27,7 +26,7 @@ public:
 	/// </summary>
 	/// <param name="id"> 変更したいID </param>
 	/// <param name="code"> 変更する値 </param>
-	void ChangeInputCode(ControllerInputID id, int code);
+	void ChangeInputCode(InputID id, int code);
 
 	/// <summary>
 	/// デフォルトの設定に戻す
@@ -42,25 +41,17 @@ public:
 	/// </summary>
 	/// <param name=""></param>
 	/// <returns> コード </returns>
-	const InputControllerCode& GetInputControllerCode(void) const&
+	const InputCode& GetInputControllerCode(void) const&
 	{
 		return inputControllerCode_;
 	}
 
-	void SetInputCode(InputControllerCode& code)
+	void SetInputCode(InputCode& code)
 	{
 		inputControllerCode_ = code;
 	}
 
-	const InputKeyCode& GetInputKeyCode(void) const&
-	{
-		return inputKeyCode_;
-	}
-
-	void SetInputCode(InputKeyCode& code)
-	{
-		inputKeyCode_ = code;
-	}
+	
 
 	/// <summary>
 	/// 現在の入力タイプをかえす
@@ -129,9 +120,8 @@ private:
 	static InputConfig* sInstance_;
 
 	// コード
-	InputControllerCode inputControllerCode_;
-	InputKeyCode inputKeyCode_;
-
+	InputCode inputControllerCode_;
+	
 	// 現在の入力タイプ
 	int nowType_;
 
