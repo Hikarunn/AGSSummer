@@ -146,7 +146,7 @@
     <ClCompile Include="Common\Debug.cpp" />
     <ClCompile Include="Common\Input\Controller.cpp" />
     <ClCompile Include="Common\Input\InputComfig\InputConfig.cpp" />
-    <ClCompile Include="Common\Input\InputType\Keybord.cpp" />
+    <ClCompile Include="Common\Input\InputType\Keyboard.cpp" />
     <ClCompile Include="Common\Input\InputType\Pad.cpp" />
     <ClCompile Include="Common\Math.cpp" />
     <ClCompile Include="Common\Quaternion.cpp" />
@@ -198,7 +198,7 @@
     <ClInclude Include="Common\Input\InputComfig\InputConfig.h" />
     <ClInclude Include="Common\Input\InputComfig\InputConfigManager.h" />
     <ClInclude Include="Common\Input\InputID.h" />
-    <ClInclude Include="Common\Input\InputType\Keybord.h" />
+    <ClInclude Include="Common\Input\InputType\Keyboard.h" />
     <ClInclude Include="Common\Input\InputType\Pad.h" />
     <ClInclude Include="Common\Math.h" />
     <ClInclude Include="Common\MathConcepts.h" />
@@ -215,7 +215,7 @@
     <ClInclude Include="Common\Vector3.h" />
     <ClInclude Include="Common\Worker.h" />
     <ClInclude Include="Component\Animator\Animator.h" />
-    <ClInclude Include="Component\Animator\PlayerAnimator.h" />
+    <ClInclude Include="Component\Animator\PlayerAnimationIndex.h" />
     <ClInclude Include="Component\Behavior\Behavior.h" />
     <ClInclude Include="Component\Collider\CapsuleCollider.h" />
     <ClInclude Include="Component\Collider\CharactorCollider.h" />
