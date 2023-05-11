@@ -7,10 +7,10 @@
 #include "../../Common/Camera.h"
 #include "../Collider/CharactorCollider.h"
 #include "../Info/ObjectInfo.h"
-//#include "EnemyBehavior.h"
-//#include "PlayerAttackBehavior.h"
-//#include "PlayerSkillBehavior.h"
-//#include "CameraBehavior.h"
+#include "EnemyBehavior.h"
+#include "PlayerAttackBehavior.h"
+#include "PlayerShotBehavior.h"
+#include "CameraBehavior.h"
 
 PlayerBehavior::PlayerBehavior(void)
 {
@@ -35,19 +35,17 @@ bool PlayerBehavior::Init(void)
 	// アニメーション
 	anim_.push_back(std::pair(AnimIndex::Idle, animtime_.idle));
 	anim_.push_back(std::pair(AnimIndex::ForwardMove, animtime_.move));
-	anim_.push_back(std::pair(AnimIndex::Attack1, animtime_.attack1));
-	anim_.push_back(std::pair(AnimIndex::Attack2, animtime_.attack2));
-	anim_.push_back(std::pair(AnimIndex::Attack3, animtime_.attack3));
+	anim_.push_back(std::pair(AnimIndex::Attack1SwordOn, animtime_.attack1));
+	anim_.push_back(std::pair(AnimIndex::Attack2SwordOn, animtime_.attack2));
+	anim_.push_back(std::pair(AnimIndex::Attack3SwordOn, animtime_.attack3));
 	// ゲージ
-	gauge_.emplace(UiID::Hp, std::pair(200.0f, std::pair(0.0f, 200.0f)));
-	gauge_.emplace(UiID::Skill, std::pair(0.0f, std::pair(0.0f, 200.0f)));
-	gauge_.emplace(UiID::Stamina, std::pair(200.0f, std::pair(0.0f, 200.0f)));
+	gauge_.emplace(UiID::Torion, std::pair(200.0f, std::pair(0.0f, 200.0f)));
 	atkCnt_ = 0;
 	// サウンド
-	for (int i = 0; i < static_cast<int>(SOUNDNAME_SE::Max); i++)
+	/*for (int i = 0; i < static_cast<int>(SOUNDNAME_SE::Max); i++)
 	{
 		sound_.push_back(std::pair(static_cast<SOUNDNAME_SE>(i), false));
-	}
+	}*/
 
 
 	return true;
@@ -72,25 +70,10 @@ void PlayerBehavior::Begin(ObjectManager& objectManager)
 	collider_ = objectManager.GetComponent<CharactorCollider>(ownerId_);
 	collider_->SetHitFunc(std::bind(&PlayerBehavior::OnHit, this, std::placeholders::_1, std::placeholders::_2));
 	// 音関係
-	lpSooundPross.PlayBackSound(SOUNDNAME_SE::playerMove, lpSooundPross.GetVolume(), true);
+	//lpSooundPross.PlayBackSound(SOUNDNAME_SE::playerMove, lpSooundPross.GetVolume(), true);
 
-	// エフェクト
-	// ブラスター
-	auto blasterID = objectManager.CreateFromFactory(FactoryID::BlasterEffect, ownerId_, transform_->GetPos());
-	objectManager.Begin(blasterID);
-	blaster_ = objectManager.GetComponent<ThrusterBehavior>(blasterID);
-	// 砂煙
-	auto sandID = objectManager.CreateFromFactory(FactoryID::SandSmokeEffect, ownerId_, transform_->GetPos());
-	objectManager.Begin(sandID);
-	sand_ = objectManager.GetComponent<SandSmokeBehavior>(sandID);
-	// 砂煙（広がり）エフェクト
-	auto sandDiffID = objectManager.CreateFromFactory(FactoryID::SandSmokeDiffusionEffect, ownerId_, transform_->GetPos());
-	objectManager.Begin(sandDiffID);
-	sandDiff_ = objectManager.GetComponent<SandSmokeDiffusionBehavior>(sandDiffID);
-
+	
 	camera_ = objectManager.GetComponent<Transform>(objectManager.GetCameraID());
-
-	sandDiff_->Play();
 
 	float_.groundPosY = transform_->Pos().y;
 }
