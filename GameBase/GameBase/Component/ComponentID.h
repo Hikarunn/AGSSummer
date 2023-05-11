@@ -23,13 +23,14 @@ enum class ComponentID :
 	EnemyBehavior = BehaviorBase | (1ull << 16),	// 敵の動き
 	EnemyBulletBehavior = BehaviorBase | (1ull << 17),		// 敵の弾の動き
 	StageBehavior = BehaviorBase | (1ull << 18),			// ステージの制御
-	PlayerAttackBehavior = BehaviorBase | (1ull << 19),	// プレイヤーの攻撃
-	TutorialBehavior = BehaviorBase | (1ull << 20),		// チュートリアル制御用
-	BillBoardRender = RenderBase | (1ull << 21),			// ビルボード描画用
-	CameraBehavior = BehaviorBase | (1ull << 22),			// カメラ
-	SkyBehavior = BehaviorBase | (1ull << 23),				// スカイドームの制御用
-	LineRender = RenderBase | (1ull << 24),					// 線の描画用
-	EnemyLaserSightBehavior = BehaviorBase | (1ull << 25),		// 敵の攻撃時に出る視線
-	reserve4 = 1ull << 26,
+	PlayerShotBehavior = BehaviorBase | (1ull << 19),	// プレイヤーの攻撃
+	PlayerAttackBehavior = BehaviorBase | (1ull << 20),	// プレイヤーの攻撃
+	TutorialBehavior = BehaviorBase | (1ull << 21),		// チュートリアル制御用
+	BillBoardRender = RenderBase | (1ull << 22),			// ビルボード描画用
+	CameraBehavior = BehaviorBase | (1ull << 23),			// カメラ
+	SkyBehavior = BehaviorBase | (1ull << 24),				// スカイドームの制御用
+	LineRender = RenderBase | (1ull << 25),					// 線の描画用
+	EnemyLaserSightBehavior = BehaviorBase | (1ull << 26),		// 敵の攻撃時に出る視線
+	reserve4 = 1ull << 27,
 	Max = ~Base
 };
