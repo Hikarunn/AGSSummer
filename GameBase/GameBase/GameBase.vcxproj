@@ -142,6 +142,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="UI\RoadIndicatorUi.cpp" />
+    <ClCompile Include="UI\Slider.cpp" />
+    <ClCompile Include="UI\InputSetButton.cpp" />
+    <ClCompile Include="UI\Button.cpp" />
+    <ClCompile Include="UI\ButtonBase.cpp" />
+    <ClCompile Include="Common\Input\InputConfig\InputConfig.cpp" />
+    <ClCompile Include="Component\Behavior\CameraBehavior.cpp" />
     <ClCompile Include="Common\Camera.cpp" />
     <ClCompile Include="Common\Debug.cpp" />
     <ClCompile Include="Common\Input\Controller.cpp" />
@@ -171,12 +178,23 @@
     <ClCompile Include="Component\Render\Render.cpp" />
     <ClCompile Include="Component\Sound\Sound.cpp" />
     <ClCompile Include="Component\Transform\Transform.cpp" />
+    <ClCompile Include="Component\Behavior\EnemyBehavior.cpp" />
+    <ClCompile Include="UI\Cursor.cpp" />
+    <ClCompile Include="Factory\EnemyFactory.cpp" />
     <ClCompile Include="Factory\Factory.cpp" />
+    <ClCompile Include="UI\Gage.cpp" />
+    <ClCompile Include="UI\Image.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Component\Render\ModelRender.cpp" />
+    <ClCompile Include="Component\Render\NonLightingRender.cpp" />
     <ClCompile Include="Object\ObjectID.cpp" />
     <ClCompile Include="Object\ObjectManager.cpp" />
     <ClCompile Include="Component\Behavior\PlayerBehavior.cpp" />
+    <ClCompile Include="Component\Behavior\PlayerAttackBehavior.cpp" />
+    <ClCompile Include="Component\Behavior\PlayerShotBehavior.cpp" />
+    <ClCompile Include="Factory\PlayerAttackFactory.cpp" />
+    <ClCompile Include="Factory\PlayerFactory.cpp" />
+    <ClCompile Include="Factory\PlayerShotFactory.cpp" />
     <ClCompile Include="SceneManager.cpp" />
     <ClCompile Include="Scene\BaseScene.cpp" />
     <ClCompile Include="Scene\DialogScene.cpp" />
@@ -188,10 +206,24 @@
     <ClCompile Include="Scene\SelectScene.cpp" />
     <ClCompile Include="Scene\TitleScene.cpp" />
     <ClCompile Include="Scene\WindowScene.cpp" />
+    <ClCompile Include="Component\Behavior\SkyBehavior.cpp" />
+    <ClCompile Include="Component\Behavior\StageBehavior.cpp" />
+    <ClCompile Include="Factory\SkyFactory.cpp" />
+    <ClCompile Include="Factory\StageFactory.cpp" />
+    <ClCompile Include="Component\Behavior\TutorialBehavior.cpp" />
+    <ClCompile Include="UI\SwitchButton.cpp" />
     <ClCompile Include="UI\UiBase.cpp" />
     <ClCompile Include="UI\UiManager.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="UI\RoadIndicatorUi.h" />
+    <ClInclude Include="UI\Slider.h" />
+    <ClInclude Include="UI\InputSetButton.h" />
+    <ClInclude Include="UI\Button.h" />
+    <ClInclude Include="UI\ButtonBase.h" />
+    <ClInclude Include="Common\Input\InputConfig\InputConfig.h" />
+    <ClInclude Include="Common\Input\InputConfig\InputConfigManager.h" />
+    <ClInclude Include="Component\Behavior\CameraBehavior.h" />
     <ClInclude Include="Common\Camera.h" />
     <ClInclude Include="Common\Debug.h" />
     <ClInclude Include="Common\Input\Controller.h" />
@@ -234,12 +266,23 @@
     <ClInclude Include="Component\Render\Render.h" />
     <ClInclude Include="Component\Sound\Sound.h" />
     <ClInclude Include="Component\Transform\Transform.h" />
+    <ClInclude Include="Component\Behavior\EnemyBehavior.h" />
+    <ClInclude Include="UI\Cursor.h" />
+    <ClInclude Include="Factory\EnemyFactory.h" />
     <ClInclude Include="Factory\Factory.h" />
     <ClInclude Include="Factory\FactoryID.h" />
     <ClInclude Include="Component\Render\ModelRender.h" />
+    <ClInclude Include="Component\Render\NonLightingRender.h" />
+    <ClInclude Include="UI\Gage.h" />
+    <ClInclude Include="UI\Image.h" />
     <ClInclude Include="Object\ObjectID.h" />
     <ClInclude Include="Object\ObjectManager.h" />
     <ClInclude Include="Component\Behavior\PlayerBehavior.h" />
+    <ClInclude Include="Component\Behavior\PlayerAttackBehavior.h" />
+    <ClInclude Include="Component\Behavior\PlayerShotBehavior.h" />
+    <ClInclude Include="Factory\PlayerAttackFactory.h" />
+    <ClInclude Include="Factory\PlayerFactory.h" />
+    <ClInclude Include="Factory\PlayerShotFactory.h" />
     <ClInclude Include="resourse.h" />
     <ClInclude Include="SceneManager.h" />
     <ClInclude Include="Scene\BaseScene.h" />
@@ -254,6 +297,12 @@
     <ClInclude Include="Scene\StageID.h" />
     <ClInclude Include="Scene\TitleScene.h" />
     <ClInclude Include="Scene\WindowScene.h" />
+    <ClInclude Include="Component\Behavior\SkyBehavior.h" />
+    <ClInclude Include="Component\Behavior\StageBehavior.h" />
+    <ClInclude Include="Factory\SkyFactory.h" />
+    <ClInclude Include="Factory\StageFactory.h" />
+    <ClInclude Include="Component\Behavior\TutorialBehavior.h" />
+    <ClInclude Include="UI\SwitchButton.h" />
     <ClInclude Include="UI\UiBase.h" />
     <ClInclude Include="UI\UiID.h" />
     <ClInclude Include="UI\UiManager.h" />
