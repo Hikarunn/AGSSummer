@@ -48,7 +48,7 @@ private:
 	/// カーソルの座標をセットする
 	/// </summary>
 	/// <param name="pos"></param>
-	void SetCursorPos(const Vector2& pos = lpSceneManager.screenSize_<float> / 2.0f) final;
+	void SetCursorPos(const Vector2& pos = lpSceneManager.screenSize_<float> / 2.0f) /*final*/;
 
 	/// <summary>
 	/// プレイステーション系のパッドの右スティックの更新

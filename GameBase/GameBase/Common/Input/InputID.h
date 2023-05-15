@@ -5,6 +5,7 @@
 enum class InputID
 {
 	Jump,
+	Dash,
 	MainTrigerAttack,
 	MainTrigerChange,
 	SubTrigerAttack,

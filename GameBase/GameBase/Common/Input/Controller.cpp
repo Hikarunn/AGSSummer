@@ -18,11 +18,6 @@ Controller::~Controller()
 {
 }
 
-ControllerType Controller::GetControllerType(void)
-{
-   
-}
-
 bool Controller::MousePress(InputID id)
 {
     if (InputID::MainTrigerAttack == id)

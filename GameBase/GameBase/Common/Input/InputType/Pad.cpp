@@ -39,7 +39,7 @@ void Pad::Update(float delta)
 {
 	GetJoypadDirectInputState(DX_INPUT_PAD1, &state_);
 
-	for (auto& code : lpConfigMng.GetInputCode())
+	for (auto& code : lpConfigManager.GetInputCode())
 	{
 		data_[static_cast<size_t>(code.first)].second = data_[static_cast<size_t>(code.first)].first;
 		data_[static_cast<size_t>(code.first)].first = state_.Buttons[code.second];
