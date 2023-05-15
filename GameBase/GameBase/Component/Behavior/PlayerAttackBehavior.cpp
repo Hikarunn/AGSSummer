@@ -142,7 +142,7 @@ void PlayerAttackBehavior::OnHit(Collider& col, ObjectManager& objectManager)
 
 void PlayerAttackBehavior::Destory(ObjectManager& objManager)
 {
-	objManager.GetFactory(FactoryID::PlayerAttack).Destroy(ownerId_)
+	objManager.GetFactory(FactoryID::PlayerAttack).Destroy(ownerId_);
 //	objManager.GetFactory(FactoryID::PlayerAttack).Destroy(ownerId_);
 }
 

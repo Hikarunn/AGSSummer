@@ -140,14 +140,12 @@ float PlayerBehavior::ProcessMove(BaseScene& scene, ObjectManager& objectManager
 		transform_->Pos().x -= sinf(camAngle.y + rot) * speed;
 		transform_->Pos().z -= cosf(camAngle.y + rot) * speed;
 		float_.canFloat = false;
-		/*	blaster_->Stop();*/
-		sandDiff_->Play();
+	
 	}
 	else
 	{
 		float_.canFloat = true;
-		//blaster_->Stop();
-		sand_->Play();
+		
 
 	}
 
@@ -166,17 +164,14 @@ float PlayerBehavior::ProcessMove(BaseScene& scene, ObjectManager& objectManager
 
 	return rot;
 }
-
-void PlayerBehavior::ProcessMoveSkill(float interval, float delta)
-{
-	if (!blaster_->IsPlay())
-	{
-		return;
-	}
-	// ビームの反動で後に下がる
-	transform_->Pos().x += sinf(angles_.y);
-	transform_->Pos().z += cosf(angles_.y);
-}
+//
+//void PlayerBehavior::ProcessMoveSkill(float interval, float delta)
+//{
+//	
+//	// ビームの反動で後に下がる
+//	transform_->Pos().x += sinf(angles_.y);
+//	transform_->Pos().z += cosf(angles_.y);
+//}
 
 float PlayerBehavior::ProcessDash(Controller& controller, const float& delta)
 {
@@ -191,14 +186,7 @@ float PlayerBehavior::ProcessDash(Controller& controller, const float& delta)
 	{
 		isDodge_ = true;
 		isDash_ = true;
-		// ダッシュした地点でのエフェクト
-		blaster_->Play();
-		sand_->Play();
-		sandDiff_->Stop();
-
-		sound_.at(static_cast<int>(SOUNDNAME_SE::playerDash)).second = true;
-		lpSooundPross.PlayBackSound(SOUNDNAME_SE::playerAB, lpSooundPross.GetVolume(), true);
-	}
+		}
 	else if (dodgeTimer_ > DodgeLimit)
 	{
 		isDodge_ = false;
@@ -216,10 +204,7 @@ float PlayerBehavior::ProcessDash(Controller& controller, const float& delta)
 	}
 	else if (controller.Released(InputID::Dash))
 	{
-		blaster_->Stop();
-		sand_->Stop();
-		//sandDiff_->Play();
-		lpSooundPross.SoundStop(SOUNDNAME_SE::playerAB);
+	
 	}
 
 	return speed;
@@ -277,8 +262,7 @@ void PlayerBehavior::ProcessJump(Controller& controller)
 		transform_->Pos().y = Clamp(transform_->Pos().y + transform_->GetUp().y * jump_.vel, 0.0f, HoverPosYMax);
 		// ジャンプ中は浮遊処理させない
 		float_.canFloat = false;
-		sand_->Stop();
-		sandDiff_->Stop();
+		
 	}
 	else
 	{
@@ -290,26 +274,14 @@ void PlayerBehavior::ProcessJump(Controller& controller)
 		}
 	}
 
-	// ジャンプした地点でのエフェクト
-	if (controller.Pressed(InputID::Jump))
-	{
-		blaster_->Play();
-		sand_->Stop();
-		//	sandDiff_->Stop();
-	}
-
-	// ジャンプのエフェクトの取り消し
-	if (controller.Released(InputID::Jump))
-	{
-		blaster_->Stop();
-	}
+	
 }
 
 void PlayerBehavior::ProcessFloat(void)
 {
 	auto floatUD = (float_.isUp) ? 1 : -1;									// Up : Down
 	float_.vel += float_.acc * floatUD;										// 浮遊速度計算
-	auto disY = Clamp(transform_->GetUp().y * float_.vel, -0.14, 0.14);		// 浮遊ふれ幅計算
+	auto disY = Clamp(transform_->GetUp().y * float_.vel, -0.14f, 0.14f);		// 浮遊ふれ幅計算
 	transform_->Pos().y += disY;											// 座標更新
 	// 浮遊方向切り替え
 	float_.isUp = (disY >= 0.14) ? false									// 下降させる
@@ -320,7 +292,7 @@ void PlayerBehavior::ProcessFloat(void)
 
 void PlayerBehavior::ProcessAttack(Controller& controller, ObjectManager& objectManager)
 {
-	if (controller.Pressed(InputID::Attack) && !isSkill_ && !isAttack_)
+	if (controller.Pressed(InputID::MainTrigerAttack) && !isSkill_ && !isAttack_)
 	{
 		// コンボ攻撃
 		auto animPlayTime = animation_->GetAnimState()->GetPlayTime();
@@ -347,7 +319,6 @@ void PlayerBehavior::ProcessAttack(Controller& controller, ObjectManager& object
 			atkLimit_ = true;
 			isAttack_ = true;
 			// SE
-			sound_.at(static_cast<int>(SOUNDNAME_SE::playerAttack)).second = true;
 		}
 	}
 }
@@ -361,33 +332,30 @@ void PlayerBehavior::ResetCombo(void)
 
 void PlayerBehavior::ProcessStamina(Controller& controller)
 {
-	auto& value = gauge_.at(UiID::Stamina);
-	auto& [min, max] = value.second;
-	auto dashFlag = (controller.Press(InputID::Dash) && controller.GetLeftInput().SqMagnitude() > 0.0f && !isStaminaLoss_);
-	// ダッシュ
-	value.first = (dashFlag && isDodge_) ? value.first - RiseValue				// 回避
-		: dashFlag ? value.first - RiseValue * 0.5								// ダッシュ
-		: value.first;															// 回復
-	// ジャンプ
-	auto jumpFlag = (controller.Press(InputID::Jump) && !isStaminaLoss_);
-	value.first = (jumpFlag && jump_.vel >= 15.0f) ? value.first - RiseValue	// ジャンプ加速後
-		: (jumpFlag && jump_.vel < 15.0f) ? value.first - RiseValue * 0.5		// ジャンプ加速中
-		: value.first;															// 回復
+	//auto& value = gauge_.at(UiID::Stamina);
+	//auto& [min, max] = value.second;
+	//auto dashFlag = (controller.Press(InputID::Dash) && controller.GetLeftInput().SqMagnitude() > 0.0f && !isStaminaLoss_);
+	//// ダッシュ
+	//value.first = (dashFlag && isDodge_) ? value.first - RiseValue				// 回避
+	//	: dashFlag ? value.first - RiseValue * 0.5								// ダッシュ
+	//	: value.first;															// 回復
+	//// ジャンプ
+	//auto jumpFlag = (controller.Press(InputID::Jump) && !isStaminaLoss_);
+	//value.first = (jumpFlag && jump_.vel >= 15.0f) ? value.first - RiseValue	// ジャンプ加速後
+	//	: (jumpFlag && jump_.vel < 15.0f) ? value.first - RiseValue * 0.5		// ジャンプ加速中
+	//	: value.first;															// 回復
 
-	if ((!controller.Press(InputID::Jump) && !(controller.Press(InputID::Dash) && (controller.GetLeftInput().SqMagnitude() > 0.0f))) || isStaminaLoss_)
-	{
-		value.first += RiseValue;
-	}
-	value.first = Clamp(value.first, min, max);
-	// スタミナ切れ
-	if (value.first <= min)
-	{
-		isStaminaLoss_ = true;
-		blaster_->Stop();
-		sand_->Stop();
-
-		lpSooundPross.SoundStop(SOUNDNAME_SE::playerAB);
-	}
+	//if ((!controller.Press(InputID::Jump) && !(controller.Press(InputID::Dash) && (controller.GetLeftInput().SqMagnitude() > 0.0f))) || isStaminaLoss_)
+	//{
+	//	value.first += RiseValue;
+	//}
+	//value.first = Clamp(value.first, min, max);
+	//// スタミナ切れ
+	//if (value.first <= min)
+	//{
+	//	isStaminaLoss_ = true;
+	//
+	//}
 }
 
 void PlayerBehavior::CoolTimer(float& delta)
@@ -400,50 +368,43 @@ void PlayerBehavior::CoolTimer(float& delta)
 		noDashTime_ = 0.0f;
 	}
 }
-
-void PlayerBehavior::ProcessSkill(Controller& controller, ObjectManager& objectManager)
-{
-	if (controller.Pressed(InputID::Skil) && canSkill_)
-	{
-		// 必殺スキル
-		auto id = objectManager.CreateFromFactory(FactoryID::PlayerSkill, ownerId_, transform_->GetPos());
-		objectManager.Begin(id);
-
-		auto skill = objectManager.GetComponent<PlayerSkillBehavior>(id);
-		skill->SetAttackStartTime(1.0f);
-		isSkill_ = true;
-		// ブラスター発動
-		blaster_->Play(1.0f);
-		sand_->Play(1.0f);
-		sandDiff_->Stop();
-		// ゲージリセット
-		gauge_.at(UiID::Skill).first = 0.0f;
-		canSkill_ = false;
-		sound_.at(static_cast<int>(SOUNDNAME_SE::playerSpetial)).second = true;
-	}
-}
-
-void PlayerBehavior::RiseSkillValue(void)
-{
-	auto& value = gauge_.at(UiID::Skill);
-	auto& [min, max] = value.second;
-	// スキルゲージ上昇
-	value.first = Clamp(value.first + RiseValue * 30.0f, min, max);
-	// ゲージMAX
-	if (value.first >= max)
-	{
-		canSkill_ = true;
-	}
-}
-
-void PlayerBehavior::RiseSkillMax(void)
-{
-	auto& value = gauge_.at(UiID::Skill);
-	auto& [min, max] = value.second;
-	// ゲージMAX
-	value.first = max;
-	canSkill_ = true;
-}
+//
+//void PlayerBehavior::ProcessSkill(Controller& controller, ObjectManager& objectManager)
+//{
+//	if (controller.Pressed(InputID::Skil) && canSkill_)
+//	{
+//		// 必殺スキル
+//		auto id = objectManager.CreateFromFactory(FactoryID::PlayerSkill, ownerId_, transform_->GetPos());
+//		objectManager.Begin(id);
+//
+//		auto skill = objectManager.GetComponent<PlayerSkillBehavior>(id);
+//		skill->SetAttackStartTime(1.0f);
+//		isSkill_ = true;
+//	
+//	}
+//}
+//
+//void PlayerBehavior::RiseSkillValue(void)
+//{
+//	auto& value = gauge_.at(UiID::Skill);
+//	auto& [min, max] = value.second;
+//	// スキルゲージ上昇
+//	value.first = Clamp(value.first + RiseValue * 30.0f, min, max);
+//	// ゲージMAX
+//	if (value.first >= max)
+//	{
+//		canSkill_ = true;
+//	}
+//}
+//
+//void PlayerBehavior::RiseSkillMax(void)
+//{
+//	auto& value = gauge_.at(UiID::Skill);
+//	auto& [min, max] = value.second;
+//	// ゲージMAX
+//	value.first = max;
+//	canSkill_ = true;
+//}
 
 void PlayerBehavior::Animation(Controller& controller, ObjectManager& objectManager)
 {
@@ -452,9 +413,9 @@ void PlayerBehavior::Animation(Controller& controller, ObjectManager& objectMana
 	if (atkLimit_)
 	{
 		// 攻撃アニメーション
-		index = (atkCnt_ % AtkAnimMax == 1) ? AnimIndex::Attack1
-			: (atkCnt_ % AtkAnimMax == 2) ? AnimIndex::Attack2
-			: (atkCnt_ % AtkAnimMax == 0) ? AnimIndex::Attack3
+		index = (atkCnt_ % AtkAnimMax == 1) ? AnimIndex::Attack1SwordOn
+			: (atkCnt_ % AtkAnimMax == 2) ? AnimIndex::Attack2SwordOn
+			: (atkCnt_ % AtkAnimMax == 0) ? AnimIndex::Attack3SwordOn
 			: index;
 		// 入力受付時間内に入力が無ければコンボ終了
 		auto animPlayTime = animation_->GetAnimState()->GetPlayTime();
@@ -473,7 +434,7 @@ void PlayerBehavior::Animation(Controller& controller, ObjectManager& objectMana
 	}
 	else
 	{
-		index = isSkill_ ? AnimIndex::Attack1		// 必殺技
+		index = isSkill_ ? AnimIndex::Attack1SwordOn		// 必殺技
 			: (controller.GetLeftInput().SqMagnitude() > 0.0f) ? AnimIndex::ForwardMove		// 移動
 			: (controller.IsNeutral()) ? AnimIndex::Idle		// 立ち
 			: index;// 何もしない
@@ -492,15 +453,15 @@ void PlayerBehavior::Animation(Controller& controller, ObjectManager& objectMana
 
 void PlayerBehavior::Sound(void)
 {
-	// 音制御
-	for (auto& s : sound_)
-	{
-		if (s.second)
-		{
-			lpSooundPross.PlayBackSound(s.first, lpSooundPross.GetVolume(), false);
-			s.second = false;
-		}
-	}
+	//// 音制御
+	//for (auto& s : sound_)
+	//{
+	//	if (s.second)
+	//	{
+	//		lpSooundPross.PlayBackSound(s.first, lpSooundPross.GetVolume(), false);
+	//		s.second = false;
+	//	}
+	//}
 }
 
 void PlayerBehavior::OnHit(Collider& col, ObjectManager& objectManager)
@@ -515,13 +476,13 @@ void PlayerBehavior::OnHit(Collider& col, ObjectManager& objectManager)
 		}
 
 		auto attackTransform = objectManager.GetComponent<Transform>(col.GetOwnerID());
-		auto effect = objectManager.CreateFromFactory(FactoryID::HitEffect, ownerId_, (transform_->GetPos() + attackTransform->GetPos()) / 2.0f);
+	/*	auto effect = objectManager.CreateFromFactory(FactoryID::HitEffect, ownerId_, (transform_->GetPos() + attackTransform->GetPos()) / 2.0f);
 		objectManager.GetComponent<Transform>(effect)->Scale() = Vector3{ 0.3f,0.3f ,0.3f };
-		objectManager.Begin(effect);
+		objectManager.Begin(effect);*/
 
 		// HP減らす
 		auto power = objectManager.GetComponent<EnemyBehavior>(objectManager.GetEnemyID())->GetEnemyPower();
-		auto& value = gauge_.at(UiID::Hp);
+		auto& value = gauge_.at(UiID::Torion);
 		auto& [min, max] = value.second;
 		// HP消費
 		value.first = Clamp(value.first - power, min, max);
@@ -530,11 +491,11 @@ void PlayerBehavior::OnHit(Collider& col, ObjectManager& objectManager)
 		{
 			// プレイヤー消滅処理
 			objectManager.GetComponent<ObjectInfo>(objectManager.GetPlayerID())->Destory();
-			sound_.at(static_cast<int>(SOUNDNAME_SE::playerDestory)).second = true;
+		//	sound_.at(static_cast<int>(SOUNDNAME_SE::playerDestory)).second = true;
 		}
 		else
 		{
-			sound_.at(static_cast<int>(SOUNDNAME_SE::playerHit)).second = true;
+		//	sound_.at(static_cast<int>(SOUNDNAME_SE::playerHit)).second = true;
 		}
 	}
 }

@@ -71,18 +71,18 @@ void PlayerShotBehavior::UpdateAttack(ObjectManager& objectManager, float delta)
 	}
 }
 
-void PlayerSkillBehavior::UpdateNonAttack(ObjectManager& objectManager, float delta)
+void PlayerShotBehavior::UpdateNonAttack(ObjectManager& objectManager, float delta)
 {
 	attackStartTime_ -= delta;
 	if (attackStartTime_ <= 0.0f)
 	{
-		update_ = &PlayerSkillBehavior::UpdateAttack;
+		update_ = &PlayerShotBehavior::UpdateAttack;
 		collider_->SetActiveFlag(true);
-		// エフェクト発動
-		auto beem = objectManager.GetComponent<BeemEffectBehavior>(effectID_);
-		if (beem.IsActive())
-		{
-			beem->Start();
-		}
+		//// エフェクト発動
+		//auto beem = objectManager.GetComponent<BeemEffectBehavior>(effectID_);
+		//if (beem.IsActive())
+		//{
+		//	beem->Start();
+		//}
 	}
 }

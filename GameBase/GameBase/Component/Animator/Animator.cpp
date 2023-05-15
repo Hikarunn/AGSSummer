@@ -57,7 +57,7 @@ void NormalState::Init(AnimationState* start, AnimationState* end)
 
 AnimationState* NormalState::Update(AnimationState* state, ObjectManager& objManager, float delta)
 {
-	if (animIdx_ == static_cast<int>(AnimIndex::Attack3))
+	if (animIdx_ == static_cast<int>(AnimIndex::Attack3SwordOn))
 	{
 		MV1ResetFrameUserLocalMatrix(handle_, MV1SearchFrame(handle_, L"Root"));
 		// çUåÇ3íiñ⁄
