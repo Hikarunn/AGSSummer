@@ -16,6 +16,12 @@ void Camera::SetScreen(void) const
 
 }
 
+const Vector3 Camera::GetUp(void) const
+{
+	auto vec = quaRot_ * upVector3<float>;
+	return { vec.x, vec.y, vec.z };
+}
+
 const Vector3 Camera::GetForward(void) const
 {
 	auto vec = quaRot_ * forwardVector3<float>;
