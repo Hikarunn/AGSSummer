@@ -5,9 +5,9 @@
 SwitchButton::SwitchButton(const PushFunc& pushFunc, const UpdateFunc& updateFunc, const std::filesystem::path& onPath, const std::filesystem::path& offPath, const std::filesystem::path& cursorPath, const Vector2& pos) :
 	ButtonBase{ pos }, pushFunc_{ pushFunc }, updateFunc_{ updateFunc }
 {
-	lpSceneMng.GetResourceMng().LoadTexture(onBtnHandle_, onPath);
-	lpSceneMng.GetResourceMng().LoadTexture(offBtnHandle_, offPath);
-	lpSceneMng.GetResourceMng().LoadTexture(hitCursorHandle_, cursorPath);
+	lpSceneManager.GetResourceManager().LoadTexture(onBtnHandle_, onPath);
+	lpSceneManager.GetResourceManager().LoadTexture(offBtnHandle_, offPath);
+	lpSceneManager.GetResourceManager().LoadTexture(hitCursorHandle_, cursorPath);
 	drawButton_ = &SwitchButton::DrawOnButton;
 	drawFrame_ = &SwitchButton::DrawNotCursor;
 	isOn_ = true;

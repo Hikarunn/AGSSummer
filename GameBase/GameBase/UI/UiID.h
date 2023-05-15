@@ -10,6 +10,7 @@ enum class UiID
 	Combo,			// コンボ数
 	Cursor,			// カーソル
 	Time,			// 時間
+	Indicator,		// インジケーター
 	Mess,			// メッセージ
 	Max					
 };

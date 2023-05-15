@@ -18,6 +18,7 @@ class ObjectID;
 class Factory;
 class ComponentPool;
 class ThreadPool;
+class Controller;
 
 class ObjectManager
 {

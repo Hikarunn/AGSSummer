@@ -118,6 +118,11 @@
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>$(DXLIB_DIR)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp20</LanguageStandard>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <ExternalWarningLevel>TurnOffAllWarnings</ExternalWarningLevel>
+      <DisableSpecificWarnings>
+      </DisableSpecificWarnings>
+      <AdditionalOptions>wd"4099" /wd"6385" / %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -142,12 +147,17 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Common\Input\InputConfig\InputConfig.cpp" />
+    <ClCompile Include="Scene\Transition\BackLoading.cpp" />
+    <ClCompile Include="Scene\Transition\Fade.cpp" />
+    <ClCompile Include="Scene\Transition\FadeLoading.cpp" />
+    <ClCompile Include="Scene\Transition\Loading.cpp" />
+    <ClCompile Include="Scene\Transition\Transition.cpp" />
     <ClCompile Include="UI\LoadIndicatorUi.cpp" />
     <ClCompile Include="UI\Slider.cpp" />
     <ClCompile Include="UI\InputSetButton.cpp" />
     <ClCompile Include="UI\Button.cpp" />
     <ClCompile Include="UI\ButtonBase.cpp" />
-    <ClCompile Include="Common\Input\InputConfig\InputConfig.cpp" />
     <ClCompile Include="Component\Behavior\CameraBehavior.cpp" />
     <ClCompile Include="Common\Camera.cpp" />
     <ClCompile Include="Common\Debug.cpp" />
@@ -216,6 +226,12 @@
     <ClCompile Include="UI\UiManager.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Scene\Transition\BackLoading.h" />
+    <ClInclude Include="Scene\Transition\Fade.h" />
+    <ClInclude Include="Scene\Transition\FadeLoading.h" />
+    <ClInclude Include="Scene\Transition\Loading.h" />
+    <ClInclude Include="Scene\Transition\TransitionType.h" />
+    <ClInclude Include="Scene\Transition\Transition.h" />
     <ClInclude Include="UI\LoadIndicatorUi.h" />
     <ClInclude Include="UI\Slider.h" />
     <ClInclude Include="UI\InputSetButton.h" />

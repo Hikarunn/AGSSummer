@@ -262,9 +262,9 @@ void UiManager::CreateSlider(std::ifstream& file, int num)
 {
 	std::vector< std::pair<std::function<void(const float)>, float>> funcs
 	{
-		{[](const float v) { lpSooundPross.SetSEVolumeEntire(v); },lpSooundPross.GetSEVolumeEntire()},
+	/*	{[](const float v) { lpSooundPross.SetSEVolumeEntire(v); },lpSooundPross.GetSEVolumeEntire()},
 		{[](const float v) { lpSooundPross.SetBGMVolumeEntire(v); }, lpSooundPross.GetBGMVolumeEntire()},
-		{[](const float v) { lpConfigMng.SetCameraSpeed(v); },lpConfigMng.GetCameraSpeed()}
+	*/	{[](const float v) { lpConfigManager.SetCameraSpeed(v); },lpConfigManager.GetCameraSpeed()}
 	};
 
 	// ˆ—‚ÌID
@@ -362,10 +362,10 @@ void UiManager::CreateGage(std::ifstream& file, int num)
 	{
 		[](ObjectManager& objMng) {
 				auto player = objMng.GetComponent<PlayerBehavior>(objMng.GetPlayerID());
-				auto [value, minmax] = player->GetGaugeValue(UiID::Hp);
+				auto [value, minmax] = player->GetGaugeValue(UiID::Torion);
 				return value;
 			},
-		[](ObjectManager& objMng) {
+		/*[](ObjectManager& objMng) {
 				auto player = objMng.GetComponent<PlayerBehavior>(objMng.GetPlayerID());
 				auto [value, minmax] = player->GetGaugeValue(UiID::Skill);
 				return value;
@@ -374,7 +374,7 @@ void UiManager::CreateGage(std::ifstream& file, int num)
 			auto player = objMng.GetComponent<PlayerBehavior>(objMng.GetPlayerID());
 			auto [value, minmax] = player->GetGaugeValue(UiID::Stamina);
 			return value;
-		}
+		}*/
 	};
 
 	// ˆ—‚Ìí—Ş
@@ -508,7 +508,7 @@ void UiManager::CreateCombo(std::ifstream& file, int num)
 		file.read(reinterpret_cast<char*>(&inerval), sizeof(inerval));
 
 		// ƒRƒ“ƒ{‚ğ¶¬
-		uiList_.emplace_back(
+		/*uiList_.emplace_back(
 			std::make_unique<ComboUi>(
 				numImgName,
 				div,
@@ -516,7 +516,7 @@ void UiManager::CreateCombo(std::ifstream& file, int num)
 				imgName,
 				pos,
 				inerval
-				));
+				));*/
 	}
 }
 
