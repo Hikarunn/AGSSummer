@@ -3,13 +3,11 @@
 #include "../Common/Camera.h"
 #include "../Object/ObjectManager.h"
 #include "../UI/UiManager.h"
-//#include "../Shader/PEManager.h"
 #include "../Factory/StageFactory.h"
 #include "PauseScene.h"
 #include "../Common/ResourceManager.h"
 #include "../Component/Transform/Transform.h"
-//#include "Transition/FadeLoading.h"
-//#include "../Common/SoundPross.h"
+#include "Transition/FadeLoading.h"
 #include "ResultScene.h"
 #include "../Common/Input/InputConfig/InputConfig.h"
 #include "../Component/Behavior/CameraBehavior.h"
@@ -17,6 +15,7 @@
 #include "GameScene.h"
 
 #include "../Common/Debug.h"
+#include "../Component/Render/Render.h"
 
 GameScene::GameScene(StageID stageID) :
 	BaseScene{ ScreenID::Game,SceneID::Game }, stageID_{ stageID }
@@ -86,7 +85,7 @@ GameScene::GameScene(StageID stageID) :
 
 	// ミニマップ用のスクリーン
 	radarSize_ = y / 4;
-	raderMap_ = MakeScreen(radarSize_, radarSize_, false);
+	radarMap_ = MakeScreen(radarSize_, radarSize_, false);
 	count_ = 0;
 
 	// シャドウマップ用カメラ情報の初期化
@@ -151,21 +150,24 @@ void GameScene::SetUp(void)
 
 BaseScene::SceneUptr GameScene::MakeResultFunc(SceneUptr own)
 {
+	//return;
 //	Capture();
 	//lpSooundPross.SoundStop(SOUNDNAME_BGM::GameSceneBGM);
 //	lpSooundPross.SoundStop(SOUNDNAME_SE::playerMove);
-	//return std::make_unique<FadeLoading>(std::move(own), std::make_unique<ResultScene>(stageID_, result_, resultCapture_), 1.0f);
+	return std::make_unique<FadeLoading>(std::move(own), std::make_unique<ResultScene>(stageID_, result_, resultCapture_), 1.0f);
 }
 
 BaseScene::SceneUptr GameScene::MakePauseFunc(SceneUptr own)
 {
+	//return;
 	//lpSooundPross.SoundStop(SOUNDNAME_BGM::GameSceneBGM);
 	//lpSooundPross.SoundStop(SOUNDNAME_SE::playerMove);
-	//return std::make_unique<PauseScene>(std::move(own));
+	return std::make_unique<PauseScene>(std::move(own));
 }
 
 BaseScene::SceneUptr GameScene::MakeSelectFunc(SceneUptr own)
 {
+	return std::make_unique<FadeLoading>(std::move(own), std::make_unique<TitleScene>(), 0.5f);
 	//lpSooundPross.SoundStop(SOUNDNAME_BGM::GameSceneBGM);
 	//lpSooundPross.SoundStop(SOUNDNAME_SE::playerMove);
 	//return std::make_unique<FadeLoading>(std::move(own), std::make_unique<TitleScene>(), 0.5f);
@@ -205,10 +207,8 @@ void GameScene::Update(float delta, Controller& controller)
 	{
 		RadarUpdate(Vector2(player->GetPos().x, player->GetPos().z));
 	}
-	peMng_->Update(delta);
+	//peManager_->Update(delta);
 
-	// エフェクシアの更新
-	UpdateEffekseer3D();
 }
 
 void GameScene::DrawScene(void)
@@ -225,15 +225,15 @@ void GameScene::DrawScene(void)
 	SetUpDepth();
 
 	depthMat_[0] = depthMat;
-	peMng_->SetBuffer(depthbuffer_);
+	//peMng_->SetBuffer(depthbuffer_);
 	// ポストエフェクトか通常描画
-	peMng_->Draw(offScreen_, *screenHandle_, depth_, skyScreen_, subScreen_);
+	//peMng_->Draw(offScreen_, *screenHandle_, depth_, skyScreen_, subScreen_);
 
 	// ミニマップの作成
-	DrawGraph(10, 10, miniMap_, true);
+	DrawGraph(10, 10, radarMap_, true);
 
 	// UIの描画
-	uiMng_->Draw();
+	uiManager_->Draw();
 
 }
 
@@ -250,7 +250,7 @@ void GameScene::SetupShadowMap(void)
 	camera_->SetUpShadow(offsetOrtho, offsetNear, offsetFar, camTar);
 
 	MV1SetUseOrigShader(true);
-	objMng_->SetupDepthTex(*shadowPs_, -1);
+	objManager_->SetupDepthTex(*shadowPs_, -1);
 	MV1SetUseOrigShader(false);
 
 	// シャドウマップ作成に使ったカメラ情報を取得
@@ -271,7 +271,7 @@ void GameScene::SetUpDepth(void)
 	SetBackgroundColor(255, 255, 255);
 	ClsDrawScreen();
 	SetBackgroundColor(0, 0, 0);
-	camera_->SetUpScreen();
+	camera_->SetScreen();
 
 	// 被写界深度開始位置の計算
 	depthMat.start = dofFocus - dofFocusSize / 2.0f - dofInterpSize;
@@ -285,7 +285,7 @@ void GameScene::SetUpDepth(void)
 	// 取得したデータをhlsl側に渡す
 	depthMat_[0] = depthMat;
 	MV1SetUseOrigShader(true);
-	objMng_->SetupDepthTex(*depthPS_, depthbuffer_);
+	objManager_->SetupDepthTex(*depthPS_, depthbuffer_);
 	MV1SetUseOrigShader(false);
 
 	// 描画用に切り替え
@@ -300,15 +300,11 @@ void GameScene::SetUpDepth(void)
 
 void GameScene::SetOffsetScreen(void)
 {
-	camera_->SetUpScreen();
+	camera_->SetScreen();
 
 	// 描画
-	objMng_->ShadowDraw(shadowMap_, shadowBuff_);
+	objManager_->ShadowDraw(shadowMap_, shadowBuff_);
 	MV1SetUseOrigShader(false);
-
-	// エフェクシアの描画
-	Effekseer_Sync3DSetting();
-	DrawEffekseer3D();
 
 	// 3D系のデバッグ描画
 	DebugDraw3DScreen();
@@ -322,59 +318,58 @@ void GameScene::SetSubScreen(void)
 	// スカイドームのみのスクリーン
 	SetDrawScreen(skyScreen_);
 	ClsDrawScreen();
-	camera_->SetUpScreen();
-	auto [result, id] = objMng_->Find(ObjectAttribute::Sky);
-	objMng_->GetComponent<Render>(id)->Draw();
+	camera_->SetScreen();
+	auto [result, id] = objManager_->Find(ObjectAttribute::Sky);
+	objManager_->GetComponent<Render>(id)->Draw();
 
 	// スカイドームとステージのみのスクリーン
 	SetDrawScreen(subScreen_);
 	ClsDrawScreen();
-	camera_->SetUpScreen();
-	auto [result1, id1] = objMng_->Find(ObjectAttribute::Stage);
-	objMng_->GetComponent<Render>(id)->Draw();
-	objMng_->GetComponent<Render>(id1)->Draw();
+	camera_->SetScreen();
+	auto [result1, id1] = objManager_->Find(ObjectAttribute::Stage);
+	objManager_->GetComponent<Render>(id)->Draw();
+	objManager_->GetComponent<Render>(id1)->Draw();
 }
 
 bool GameScene::IsLoaded(void)
 {
-	return BaseScene::IsLoaded() && objMng_->IsLoaded() && uiMng_->IsLoaded();
+	return BaseScene::IsLoaded() && objManager_->IsLoaded() && uiManager_->IsLoaded();
 }
 
 void GameScene::Loaded(Controller& controller)
 {
 	// ロード完了時に呼ばれる
-	lpSceneMng.GetResourceMng().Loaded();
-	objMng_->Begin();
-	objMng_->Update(0.0f, controller, *this);
-	uiMng_->Begin();
+	lpSceneManager.GetResourceManager().Loaded();
+	objManager_->Begin();
+	objManager_->Update(0.0f, controller, *this);
+	uiManager_->Begin();
 
 
-	lpSceneMng.GetResourceMng().LoadPS(shadowPs_, "Resource/resource/Shader/ShadowMap/ShadowMap.pso");
-	lpSceneMng.GetResourceMng().LoadPS(depthPS_, "Resource/resource/Shader/PostEffect/Dof/depth.pso");
+	lpSceneManager.GetResourceManager().LoadPS(shadowPs_, "Resource/resource/Shader/ShadowMap/ShadowMap.pso");
+	lpSceneManager.GetResourceManager().LoadPS(depthPS_, "Resource/resource/Shader/PostEffect/Dof/depth.pso");
 	SetUp();
 	RadarSetUp();
-	UpdateEffekseer3D();
 }
 
 void GameScene::RadarSetUp(void)
 {
 	// プレイヤーの情報を取得
-	auto player = objMng_->GetComponent<Transform>(objMng_->GetPlayerID());
+	auto player = objManager_->GetComponent<Transform>(objManager_->GetPlayerID());
 	Vector2 pPos = Vector2(player->GetPos().x, player->GetPos().z);
 	// エネミーの情報を取得
-	auto stage = objMng_->GetComponent<StageBehavior>(objMng_->GetStageID());
+	auto stage = objManager_->GetComponent<StageBehavior>(objManager_->GetStageID());
 	auto& list = stage->GetEnemyPosList();
 	// プレイヤーとの距離と角度を取得
 	int i = 0;
 	for (auto ePos : list)
 	{
-		MiniMapRadar radar;
+		Radar radar;
 		// プレイヤーとの距離を取得
 		Vector2 tmp = ePos.second - pPos;
 		radar.range = tmp.Magnitude();
 		// プレイヤーとの角度を取得
 		// カメラの情報を取得
-		auto camera = objMng_->GetComponent<Transform>(objMng_->GetCameraID());
+		auto camera = objManager_->GetComponent<Transform>(objManager_->GetCameraID());
 		// カメラの向いている方向からの角度を求める
 		float angle = GetAngle2Vector(Vector2(camera->GetForward().x, camera->GetForward().z), tmp);
 		// 出たものを格納
@@ -396,9 +391,9 @@ void GameScene::RadarSetUp(void)
 void GameScene::RadarUpdate(Vector2 pPos)
 {
 	// プレイヤーの情報を取得
-	auto player = objMng_->GetComponent<Transform>(objMng_->GetPlayerID());
+	auto player = objManager_->GetComponent<Transform>(objManager_->GetPlayerID());
 	// エネミーの情報を取得
-	auto stage = objMng_->GetComponent<StageBehavior>(objMng_->GetStageID());
+	auto stage = objManager_->GetComponent<StageBehavior>(objManager_->GetStageID());
 	auto& list = stage->GetEnemyPosList();
 	// プレイヤーとの距離と角度を取得
 	int i = 0;
@@ -408,7 +403,7 @@ void GameScene::RadarUpdate(Vector2 pPos)
 		Vector2 tmp = ePos.second - pPos;
 		float range = tmp.Magnitude();
 		// カメラの情報を取得
-		auto camera = objMng_->GetComponent<Transform>(objMng_->GetCameraID());
+		auto camera = objManager_->GetComponent<Transform>(objManager_->GetCameraID());
 		// カメラの向いている方向からの角度を求める
 		float angle = GetAngle2Vector(Vector2(camera->GetForward().x, camera->GetForward().z), tmp);
 		// デフォルトは表示しない
@@ -430,7 +425,7 @@ void GameScene::RadarUpdate(Vector2 pPos)
 
 void GameScene::RadarDraw()
 {
-	SetDrawScreen(miniMap_);
+	SetDrawScreen(radarMap_);
 	ClsDrawScreen();
 	DrawGraph(0, 0, radarGraph_, true);
 

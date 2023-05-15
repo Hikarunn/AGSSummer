@@ -18,7 +18,7 @@ struct WEIGHT_NUM
 };
 
 // 敵との距離と角度を確保
-struct Rader
+struct Radar
 {
 	float angle;
 	float range;
@@ -106,6 +106,24 @@ private:
 	void DrawScene(void)final;
 
 	/// <summary>
+	/// シャドウマップの作成
+	/// </summary>
+	/// <param name=""></param>
+	void SetupShadowMap(void);
+	
+	/// <summary>
+	/// 被写界深度用の深度テクスチャ
+	/// </summary>
+	/// <param name=""></param>
+	void SetUpDepth(void);
+
+	/// <summary>
+	/// ポストエフェクトで使うスクリーンの作成
+	/// </summary>
+	/// <param name=""></param>
+	void SetOffsetScreen(void);
+
+	/// <summary>
 	/// メイン以外のスクリーン
 	/// </summary>
 	/// <param name=""></param>
@@ -128,19 +146,19 @@ private:
 	/// レーダーのセットアップ
 	/// </summary>
 	/// <param name=""></param>
-	void RaderSetUp(void);
+	void RadarSetUp(void);
 
 	/// <summary>
 	/// レーダーの更新
 	/// </summary>
 	/// <param name="pPos"></param>
-	void RaderUpdate(Vector2 pPos);
+	void RadarUpdate(Vector2 pPos);
 
 	/// <summary>
 	/// レーダーの描画
 	/// </summary>
 	/// <param name=""></param>
-	void RaderDrow(void);
+	void RadarDraw(void);
 
 	// シャドウマップ用の深度テクスチャ
 	// シャドウマップ用シェーダ
@@ -170,10 +188,10 @@ private:
 	int subScreen_;
 
 	// レーダー用のスクリーン
-	int raderMap_;
+	int radarMap_;
 
 	// プレイヤーとエネミーの距離と角度をエネミーの数だけ取得
-	std::map<int, Rader>radar_;
+	std::map<int, Radar>radar_;
 
 	// 作成したmapの数を格納
 	int count_;
@@ -181,6 +199,8 @@ private:
 	int radarSize_;
 
 	Result result_;
+
+	SharedRenderTargetHandle resultCapture_;
 
 	// 現在のステージID
 	StageID stageID_;
