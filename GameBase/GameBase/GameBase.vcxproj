@@ -162,7 +162,6 @@
     <ClCompile Include="Common\Camera.cpp" />
     <ClCompile Include="Common\Debug.cpp" />
     <ClCompile Include="Common\Input\Controller.cpp" />
-    <ClCompile Include="Common\Input\InputComfig\InputConfig.cpp" />
     <ClCompile Include="Common\Input\InputType\Keyboard.cpp" />
     <ClCompile Include="Common\Input\InputType\Pad.cpp" />
     <ClCompile Include="Common\Math.cpp" />
@@ -243,8 +242,6 @@
     <ClInclude Include="Common\Camera.h" />
     <ClInclude Include="Common\Debug.h" />
     <ClInclude Include="Common\Input\Controller.h" />
-    <ClInclude Include="Common\Input\InputComfig\InputConfig.h" />
-    <ClInclude Include="Common\Input\InputComfig\InputConfigManager.h" />
     <ClInclude Include="Common\Input\InputID.h" />
     <ClInclude Include="Common\Input\InputType\Keyboard.h" />
     <ClInclude Include="Common\Input\InputType\Pad.h" />

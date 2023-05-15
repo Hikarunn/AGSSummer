@@ -15,9 +15,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Common\Input\InputComfig\InputConfig.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
     <ClCompile Include="Common\Camera.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
@@ -248,9 +245,6 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Common\Input\InputComfig\InputConfig.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
     <ClInclude Include="Common\Camera.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
@@ -297,9 +291,6 @@
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="Common\Worker.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="Common\Input\InputComfig\InputConfigManager.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="Common\Input\InputType\Pad.h">
