@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Users\\2016008\\Desktop\\20230417\\03後期\\ObjectDataPacker\\ObjectDataPacker.csproj": {}
+    "D:\\Users\\2016008\\Desktop\\AGSSummer\\ObjectDataPacker\\ObjectDataPacker.csproj": {}
   },
   "projects": {
-    "D:\\Users\\2016008\\Desktop\\20230417\\03後期\\ObjectDataPacker\\ObjectDataPacker.csproj": {
+    "D:\\Users\\2016008\\Desktop\\AGSSummer\\ObjectDataPacker\\ObjectDataPacker.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Users\\2016008\\Desktop\\20230417\\03後期\\ObjectDataPacker\\ObjectDataPacker.csproj",
+        "projectUniqueName": "D:\\Users\\2016008\\Desktop\\AGSSummer\\ObjectDataPacker\\ObjectDataPacker.csproj",
         "projectName": "ObjectDataPacker",
-        "projectPath": "D:\\Users\\2016008\\Desktop\\20230417\\03後期\\ObjectDataPacker\\ObjectDataPacker.csproj",
+        "projectPath": "D:\\Users\\2016008\\Desktop\\AGSSummer\\ObjectDataPacker\\ObjectDataPacker.csproj",
         "packagesPath": "D:\\Users\\2016008\\.nuget\\packages\\",
-        "outputPath": "D:\\Users\\2016008\\Desktop\\20230417\\03後期\\ObjectDataPacker\\obj\\",
+        "outputPath": "D:\\Users\\2016008\\Desktop\\AGSSummer\\ObjectDataPacker\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "D:\\Users\\2016008\\AppData\\Roaming\\NuGet\\NuGet.Config",
