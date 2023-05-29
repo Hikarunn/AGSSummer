@@ -36,10 +36,10 @@ public:
     void AddCombo(void) { combo_++; }
     // 攻撃終了
     void AttackEnd(void) { isAttack_ = false; }
-    // スキルゲージ上昇
-    void RiseSkillValue(void);
-    // スキルゲージMaxにする（チュートリアル用）
-    void RiseSkillMax(void);
+    //// スキルゲージ上昇
+    //void RiseSkillValue(void);
+    //// スキルゲージMaxにする（チュートリアル用）
+    //void RiseSkillMax(void);
     // スキル攻撃終了
     void EndSkill(void) { isSkill_ = false; }
     // コンボリセット
@@ -57,7 +57,7 @@ private:
     // 移動制御
     float ProcessMove(BaseScene& scene, ObjectManager& objectManager, Controller& controller, float speed, float delta);
     // 必殺発動時に後に下がる
-    void ProcessMoveSkill(float interval, float delta);
+  //  void ProcessMoveSkill(float interval, float delta);
     // ダッシュ制御
     float ProcessDash(Controller& controller, const float& delta);
     // 回転制御
@@ -73,7 +73,7 @@ private:
     // クールタイム計測
     void CoolTimer(float& delta);
     // スキル制御
-    void ProcessSkill(Controller& controller, ObjectManager& objectManager);
+   // void ProcessSkill(Controller& controller, ObjectManager& objectManager);
     // アニメーション制御
     void Animation(Controller& controller, ObjectManager& objectManager);
     // 音関係制御

@@ -105,7 +105,7 @@ void PlayerBehavior::Update(BaseScene& scene, ObjectManager& objectManager, floa
 		CoolTimer(delta);
 	}
 
-	ProcessSkill(controller, objectManager);
+	//ProcessSkill(controller, objectManager);
 	// アニメーション制御
 	Animation(controller, objectManager);
 	// 音関係制御
@@ -116,11 +116,7 @@ float PlayerBehavior::ProcessMove(BaseScene& scene, ObjectManager& objectManager
 {
 	auto rot = controller.GetLeftInput().GetAngle();
 	// 必殺技発動中は移動自体をさせない
-	if (isSkill_)
-	{
-		ProcessMoveSkill(1.0f, delta);
-		return rot;
-	}
+
 
 	// アニメーション移動量
 	auto animMove = animation_->GetAnimState()->GetMovePosition();

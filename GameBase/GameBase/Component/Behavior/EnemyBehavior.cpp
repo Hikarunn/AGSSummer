@@ -310,7 +310,7 @@ void EnemyBehavior::OnHit(Collider& col, ObjectManager& objectManager)
 		// UŒ‚‚ðŽó‚¯‚½‚Æ‚«‚Ìˆ—
 		hitCombo_ = player->GetAtkCnt();
 		damageCnt_++;
-		player->RiseSkillValue();
+		//player->RiseSkillValue();
 		player->AddCombo();
 
 		auto hit = objectManager.GetComponent<Transform>(col.GetOwnerID());

@@ -13,9 +13,9 @@
 #include "../Component/Behavior/CameraBehavior.h"
 #include "../Component/Behavior/StageBehavior.h"
 #include "GameScene.h"
+#include "../Component/Render/Render.h"
 
 #include "../Common/Debug.h"
-#include "../Component/Render/Render.h"
 
 GameScene::GameScene(StageID stageID) :
 	BaseScene{ ScreenID::Game,SceneID::Game }, stageID_{ stageID }
