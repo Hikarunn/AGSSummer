@@ -149,11 +149,6 @@ void EnemyBehavior::Shot(ObjectManager& objectManager, float delta)
 			burstCnt_++;
 			auto shotPos = transform_->GetPos() + (transform_->GetRotation() * Vector3 { 10.0f, 190.0f, 120.0f });
 
-			// ‰Eã•ûŒü‚É‚¸‚ç‚µ‚Äì¬
-			/*auto id = objectManager.CreateFromFactory(FactoryID::EnemyBullet, ownerId_, shotPos);
-			objectManager.Begin(id);*/
-		
-
 			DebugLog("”­ŽË");
 
 			if (burstCnt_ >= shotData_.burstNum)

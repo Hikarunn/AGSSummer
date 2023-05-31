@@ -20,7 +20,7 @@ public:
 	~ResourceManager();
 
 	/// <summary>
-	/// ‰æ‘œ‚ñ‚Ì“Ç‚İ‚İ
+	/// ‰æ‘œ‚Ì“Ç‚İ‚İ
 	/// </summary>
 	/// <param name="out"></param>
 	/// <param name=""></param>
