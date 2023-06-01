@@ -109,7 +109,7 @@ public:
 	/// カーソルの位置セット
 	/// </summary>
 	/// <param name="pos"></param>
-	virtual void SetQursorPos(const Vector2& pos = lpSceneManager.screenSize_<float> / 2.0f) = 0;
+	virtual void SetCursorPos(const Vector2& pos = lpSceneManager.screenSize_<float> / 2.0f) = 0;
 
 	/// <summary>
 	/// カーソル位置の取得

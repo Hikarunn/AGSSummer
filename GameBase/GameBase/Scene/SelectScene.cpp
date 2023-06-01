@@ -123,7 +123,7 @@ void SelectScene::UpdateOpend(float delta, Controller& controller)
 	uiManager_->Update(delta, *this, *objManager_, controller);
 
 #ifdef _DEBUG
-	if (CheckHitKey(KEY_INPUT_1))
+	if (CheckHitKey(KEY_INPUT_SPACE))
 	{
 		ChangeSceneID(SceneID::Title);
 	}
@@ -134,6 +134,8 @@ void SelectScene::DrawWindow(void)
 {
 	DrawRotaGraph(SceneManager::screenSize_<int>.x / 2, SceneManager::screenSize_<int>.y / 2, 1.0, 0.0f, *frame_, true);
 	uiManager_->Draw();
+	DrawFormatString(0, 0, 0xff0000, TEXT("%dÉVÅ[ÉìÇ≈Ç∑"), static_cast<unsigned int>(screenID_));
+
 }
 
 void SelectScene::Closed(void)

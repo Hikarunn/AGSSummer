@@ -1,4 +1,3 @@
-#include "SceneManager.h"
 #include <DxLib.h>
 #include "Common/ResourceManager.h"
 #include "resourse.h"
@@ -8,6 +7,8 @@
 #include "Scene/GameScene.h"
 #include "Common/Input/InputType/Keyboard.h"
 #include "Common/Input/InputType/Pad.h"
+#include "Scene/Transition/FadeLoading.h"
+#include "SceneManager.h"
 
 #include "Common/Debug.h"
 
@@ -47,7 +48,7 @@ void SceneManager::Draw()
 void SceneManager::Update()
 {
 	timeClass_.DeltaTimeStart();
-	//controller_->Update(timeClass_.GetDeltaTime<float>());
+	controller_->Update(timeClass_.GetDeltaTime<float>());
 	scene_ = scene_->Update(std::move(scene_), timeClass_.GetDeltaTime<float>(), *controller_);
 	timeClass_.GameTimeEnd();
 }
@@ -69,7 +70,7 @@ ThreadPool& SceneManager::GetThredPool(void)
 
 ResourceManager& SceneManager::GetResourceManager(void)
 {
-	return *resourceMnager_;
+	return *resourceManager_;
 }
 
 
@@ -86,11 +87,14 @@ SceneManager::SceneManager():
 
 SceneManager::~SceneManager()
 {
+	InputConfig::Destroy();
+
 	DxLib_End();
 }
 
 bool SceneManager::Init(void)
 {
+
 	SetChangeScreenModeGraphicsSystemResetFlag(false);
 
 	// あらかじめ作成スクリーンを作成しておく
@@ -103,7 +107,7 @@ bool SceneManager::Init(void)
 	SetUseASyncLoadFlag(true);
 	//scene_ = std::make_unique<Loading>(std::make_unique<GameScene>(), TransitionType::Fade, 1.0f);
 	//scene_ = std::make_unique<FadeLoading>(std::make_unique<GameScene>(), 1.0f);
-	//scene_ = std::make_unique<FadeLoading>(std::make_unique<TitleScene>(), 1.0f);	DebugLog("シーン作成終了");
+	scene_ = std::make_unique<FadeLoading>(std::make_unique<TitleScene>(), 1.0f);	DebugLog("シーン作成終了");
 	timeClass_.DeltaTimeEnd();
 	timeClass_.DeltaTimeStart();
 	timeClass_.GameTimeEnd();
@@ -141,6 +145,16 @@ bool SceneManager::SystemInit(void)
 	// スレッドプールを作成
 	threadPool_ = std::make_unique<ThreadPool>(2);
 
+	InputConfig::Create();
+
+	if (InputConfig::GetInstance().GetNowType() != -1)
+	{
+		controller_ = std::make_unique<Pad>(InputConfig::GetInstance().GetNowType());
+	}
+	else
+	{
+		controller_ = std::make_unique<Keyboard>();
+	}
 
 	// デバッグのセットアップ
 	DebugSetUp();

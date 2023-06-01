@@ -105,6 +105,7 @@ private:
 	// 終了するかのフラグ
 	bool isEnd_;
 
+	// リソースマネージャー
 	std::unique_ptr<ResourceManager>resourceManager_;
 
 	// タイムクラス
@@ -122,7 +123,6 @@ private:
 	// コントローラー
 	std::unique_ptr<Controller> controller_;
 
-	// リソースマネージャー
-	std::unique_ptr<ResourceManager> resourceMnager_;
+	
 };
 

@@ -234,6 +234,9 @@ void GameScene::DrawScene(void)
 
 	// UI‚Ì•`‰æ
 	uiManager_->Draw();
+	// ‚±‚±‚É’¼‘‚«‚µ‚Ä‚¢‚é‚ªŒã‚©‚ç•Ï‚¦‚é‚±‚Æ
+	DrawFormatString(0, 0, 0xffffff, TEXT("%dID‚Å‚·"), static_cast<unsigned int>(screenID_));
+
 
 }
 

@@ -99,7 +99,7 @@ void CameraBehavior::UpdateSync(BaseScene& scene, ObjectManager& objectManager, 
 	}
 
 	transform_->AddRotation({ 0.0f,rotY,0.0f });
-	controller.SetQursorPos();
+	controller.SetCursorPos();
 	auto syncObj = objectManager.GetComponent<Transform>(syncID_);
 	if (syncObj.IsActive())
 	{

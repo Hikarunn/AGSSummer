@@ -18,7 +18,7 @@ InputConfig::TypeDataTbl InputConfig::typeDataTbl_{
 };
 
 // サウンド設定のデータのパス
-constexpr char soundFile[] = "Resource/Other/Input/Sound.data";
+//constexpr char soundFile[] = "Resource/Other/Input/Sound.data";
 
 void InputConfig::Create(void)
 {
@@ -137,26 +137,26 @@ InputConfig::InputConfig()
 void InputConfig::InitSound()
 {
 	// サウンド設定ファイルを読み込む
-	std::ifstream file{ soundFile, std::ios::binary };
+	//std::ifstream file{ soundFile, std::ios::binary };
 
 	// とりあえず1.0fで初期化
-	auto se = 1.0f;
-	auto bg = 1.0f;
-	if (file)
-	{
-		// ファイルを読み込めた時
-		std::uint64_t ck;
-		file.read(reinterpret_cast<char*>(&se), sizeof(se));
-		file.read(reinterpret_cast<char*>(&bg), sizeof(bg));
-		file.read(reinterpret_cast<char*>(&ck), sizeof(ck));
+	//auto se = 1.0f;
+	//auto bg = 1.0f;
+	//if (file)
+	//{
+	//	// ファイルを読み込めた時
+	//	std::uint64_t ck;
+	//	file.read(reinterpret_cast<char*>(&se), sizeof(se));
+	//	file.read(reinterpret_cast<char*>(&bg), sizeof(bg));
+	//	file.read(reinterpret_cast<char*>(&ck), sizeof(ck));
 
-		if (std::hash<float>()(se + bg) != ck)
-		{
-			// チェックで値が一致していないときデフォルトにする
-		/*	se = lpSooundPross.GetDefaultVolume();
-			bg = lpSooundPross.GetDefaultVolume();*/
-		}
-	}
+	//	if (std::hash<float>()(se + bg) != ck)
+	//	{
+	//		// チェックで値が一致していないときデフォルトにする
+	//	/*	se = lpSooundPross.GetDefaultVolume();
+	//		bg = lpSooundPross.GetDefaultVolume();*/
+	//	}
+	//}
 
 	// セットする
 	/*lpSooundPross.SetSEVolumeEntire(se);
@@ -191,16 +191,16 @@ InputConfig::~InputConfig()
 		Save(typeDataTbl_[nowType_].first);
 	}
 
-	std::ofstream file{ soundFile, std::ios::binary };
-	if (file)
-	{
-		/*auto ck = std::hash<float>()(lpSooundPross.GetSEVolumeEntire() + lpSooundPross.GetBGMVolumeEntire());
-		auto se = lpSooundPross.GetSEVolumeEntire();
-		auto bg = lpSooundPross.GetBGMVolumeEntire();
-		file.write(reinterpret_cast<char*>(&se), sizeof(se));
-		file.write(reinterpret_cast<char*>(&bg), sizeof(bg));
-		file.write(reinterpret_cast<char*>(&ck), sizeof(ck));*/
-	}
+	//std::ofstream file{ soundFile, std::ios::binary };
+	//if (file)
+	//{
+	//	/*auto ck = std::hash<float>()(lpSooundPross.GetSEVolumeEntire() + lpSooundPross.GetBGMVolumeEntire());
+	//	auto se = lpSooundPross.GetSEVolumeEntire();
+	//	auto bg = lpSooundPross.GetBGMVolumeEntire();
+	//	file.write(reinterpret_cast<char*>(&se), sizeof(se));
+	//	file.write(reinterpret_cast<char*>(&bg), sizeof(bg));
+	//	file.write(reinterpret_cast<char*>(&ck), sizeof(ck));*/
+	//}
 }
 
 bool InputConfig::Load(const std::string& fname)

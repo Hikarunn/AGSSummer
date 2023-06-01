@@ -75,7 +75,7 @@ void TitleScene::DrawScene(void)
 
 	//objMng_->Draw();
 	// ここに直書きしているが後から変えること
-	//DrawFormatString(0, 0, 0xffffff, TEXT("%dIDのシーンです"), static_cast<unsigned int>(scID_));
+	DrawFormatString(0, 0, 0xff0000, TEXT("%dIDのシーンです"), static_cast<unsigned int>(screenID_));
 }
 
 bool TitleScene::IsLoaded(void)
@@ -145,8 +145,8 @@ void TitleScene::CreateBackGround(void)
 	auto id = objManager_->MakeObjectID();
 
 	std::unique_ptr<Render> render = std::make_unique<ModelRender>();
-	//render->Load("Resource/resource/Title/Title.mv1");
-	render->Load("Resource/resource/Map.mv1");
+	render->Load("Resource/resource/Title/Title.mv1");
+	//render->Load("Resource/Model/Player/妖夢.mv1");
 	objManager_->AddComponent(std::move(render), id);
 
 	auto transform = std::make_unique<Transform>();
