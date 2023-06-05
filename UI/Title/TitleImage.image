@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<root>
+	<Datas>
+		<Data>
+			<posX>640</posX>
+			<posY>300</posY>
+			<imageName>Resource/resource/TitleLogoKijin.png</imageName>
+			<viewType>0</viewType>
+		</Data>
+		<Data>
+			<posX>640</posX>
+			<posY>500</posY>
+			<imageName>Resource/resource/TitleKey.png</imageName>
+			<viewType>1</viewType>
+		</Data>
+	</Datas>
+</root>

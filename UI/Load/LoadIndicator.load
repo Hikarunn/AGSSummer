@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<root>
+	<Datas>
+		<Data>
+			<imageName1>Resource/resource/Ui/loading.png</imageName1>
+			<imageName2>Resource/resource/Ui/load.png</imageName2>
+			<posX>640</posX>
+			<posY>360</posY>
+		</Data>
+	</Datas>
+</root>

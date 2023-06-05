@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<root>
+	<parameters>
+		<parameter>
+			<X>0</X>
+			<Y>0</Y>
+			<ImageFile>test.png</ImageFile>
+		</parameter>
+	</parameters>
+</root>

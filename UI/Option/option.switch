@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<root>
+	<Datas>
+		<Data>
+			<funcID>0</funcID>
+			<onImageName>Resource/resource/Ui/Monotone.png</onImageName>
+			<offImageName>Resource/resource/Ui/OffMonotone.png</offImageName>
+			<frameImageName>Resource/resource/Ui/MonotoneFrame.png</frameImageName>
+			<posX>1070</posX>
+			<posY>70</posY>
+		</Data>
+		<Data>
+			<funcID>1</funcID>
+			<onImageName>Resource/resource/Ui/Fog.png</onImageName>
+			<offImageName>Resource/resource/Ui/OffFog.png</offImageName>
+			<frameImageName>Resource/resource/Ui/MonotoneFrame.png</frameImageName>
+			<posX>1070</posX>
+			<posY>176.5</posY>
+		</Data>
+	</Datas>
+</root>

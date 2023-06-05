@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<root>
+	<Datas>
+		<Data>
+			<funcID>11</funcID>
+			<imageName>Resource/resource/Ui/retry.png</imageName>
+			<frameImageName>Resource/resource/Ui/RetryFrame.png</frameImageName>
+			<posX>640</posX>
+			<posY>253.5</posY>
+		</Data>
+		<Data>
+			<funcID>15</funcID>
+			<imageName>Resource/resource/Ui/Next.png</imageName>
+			<frameImageName>Resource/resource/Ui/NextFrame.png</frameImageName>
+			<posX>640</posX>
+			<posY>360</posY>
+		</Data>
+		<Data>
+			<funcID>12</funcID>
+			<imageName>Resource/resource/Ui/Select.png</imageName>
+			<frameImageName>Resource/resource/Ui/SelectFrame.png</frameImageName>
+			<posX>640</posX>
+			<posY>466.5</posY>
+		</Data>
+		<Data>
+			<funcID>13</funcID>
+			<imageName>Resource/resource/Ui/End.png</imageName>
+			<frameImageName>Resource/resource/Ui/EndFrame.png</frameImageName>
+			<posX>640</posX>
+			<posY>573</posY>
+		</Data>
+	</Datas>
+</root>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<root>
+	<Datas>
+		<Data>
+			<posX>640</posX>
+			<posY>113.5</posY>
+			<imageName>Resource/resource/GameClearLogo.png</imageName>
+			<viewType>0</viewType>
+		</Data>
+	</Datas>
+</root>

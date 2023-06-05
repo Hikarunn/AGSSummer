@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<root>
+	<Datas>
+		<Data>
+			<imageName>Resource/resource/Ui/playerGaugeIcon.png</imageName>
+			<divX>3</divX>
+			<divY>1</divY>
+			<sizeX>30</sizeX>
+			<sizeY>30</sizeY>
+			<posX>35</posX>
+			<posY>660</posY>
+			<interval>23</interval>
+		</Data>
+	</Datas>
+</root>

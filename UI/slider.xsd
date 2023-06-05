@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+	<xs:element name="root">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="Datas">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element maxOccurs="unbounded" name="Data">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="funcID" type="xs:string" />
+										<xs:element name="barImageName" type="xs:string" />
+										<xs:element name="tabImageName" type="xs:string" />
+										<xs:element name="startValue" type="xs:string" />
+										<xs:element name="posX" type="xs:string" />
+										<xs:element name="posY" type="xs:string" />
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

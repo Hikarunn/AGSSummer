@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<root>
+	<Datas>
+		<Data>
+			<inputID>1</inputID>
+			<posX>269.5</posX>
+			<posY>70</posY>
+		</Data>
+		<Data>
+			<inputID>2</inputID>
+			<posX>269.5</posX>
+			<posY>176.5</posY>
+		</Data>
+		<Data>
+			<inputID>0</inputID>
+			<posX>269.5</posX>
+			<posY>283</posY>
+		</Data>
+		<Data>
+			<inputID>3</inputID>
+			<posX>269.5</posX>
+			<posY>389.5</posY>
+		</Data>
+	</Datas>
+</root>

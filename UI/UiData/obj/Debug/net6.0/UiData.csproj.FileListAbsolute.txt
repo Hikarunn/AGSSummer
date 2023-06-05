@@ -1,0 +1,5 @@
+D:\Users\2016008\Desktop\AGSSummer\UI\UiData\obj\Debug\net6.0\UiData.csproj.AssemblyReference.cache
+D:\Users\2016008\Desktop\AGSSummer\UI\UiData\obj\Debug\net6.0\UiData.GeneratedMSBuildEditorConfig.editorconfig
+D:\Users\2016008\Desktop\AGSSummer\UI\UiData\obj\Debug\net6.0\UiData.AssemblyInfoInputs.cache
+D:\Users\2016008\Desktop\AGSSummer\UI\UiData\obj\Debug\net6.0\UiData.AssemblyInfo.cs
+D:\Users\2016008\Desktop\AGSSummer\UI\UiData\obj\Debug\net6.0\UiData.csproj.CoreCompileInputs.cache

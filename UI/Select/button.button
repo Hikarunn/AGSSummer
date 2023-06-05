@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<root>
+	<Datas>
+		<Data>
+			<funcID>0</funcID>
+			<imageName>Resource/resource/Ui/Tutorial.png</imageName>
+			<frameImageName>Resource/resource/Ui/TutorialFrame.png</frameImageName>
+			<posX>640</posX>
+			<posY>200.25</posY>
+		</Data>
+		<Data>
+			<funcID>1</funcID>
+			<imageName>Resource/resource/Ui/play.png</imageName>
+			<frameImageName>Resource/resource/Ui/PlayFrame.png</frameImageName>
+			<posX>640</posX>
+			<posY>306.75</posY>
+		</Data>
+		<Data>
+			<funcID>2</funcID>
+			<imageName>Resource/resource/Ui/Setting.png</imageName>
+			<frameImageName>Resource/resource/Ui/SettingFrame.png</frameImageName>
+			<posX>640</posX>
+			<posY>413.25</posY>
+		</Data>
+		<Data>
+			<funcID>3</funcID>
+			<imageName>Resource/resource/Ui/End.png</imageName>
+			<frameImageName>Resource/resource/Ui/EndFrame.png</frameImageName>
+			<posX>640</posX>
+			<posY>519.75</posY>
+		</Data>
+	</Datas>
+</root>

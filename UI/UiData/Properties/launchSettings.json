@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "UiData": {
+      "commandName": "Project",
+      "commandLineArgs": "export.ui Imagexml.image button.button slider.slider"
+    }
+  }
+}

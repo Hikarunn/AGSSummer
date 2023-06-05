@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<root>
+	<Datas>
+		<Data>
+			<funcID>7</funcID>
+			<imageName>Resource/resource/Ui/Cancel.png</imageName>
+			<frameImageName>Resource/resource/Ui/CancelFrame.png</frameImageName>
+			<posX>740</posX>
+			<posY>650</posY>
+		</Data>
+		<Data>
+			<funcID>8</funcID>
+			<imageName>Resource/resource/Ui/Ok.png</imageName>
+			<frameImageName>Resource/resource/Ui/OkFrame.png</frameImageName>
+			<posX>540</posX>
+			<posY>650</posY>
+		</Data>
+		<Data>
+			<funcID>14</funcID>
+			<imageName>Resource/resource/Ui/Default.png</imageName>
+			<frameImageName>Resource/resource/Ui/DefaultFrame.png</frameImageName>
+			<posX>269.5</posX>
+			<posY>496</posY>
+		</Data>
+	</Datas>
+</root>

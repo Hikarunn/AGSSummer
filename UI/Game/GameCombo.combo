@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<root>
+	<Datas>
+		<Data>
+			<numImageName>Resource/resource/Ui/num.png</numImageName>
+			<divX>10</divX>
+			<divY>1</divY>
+			<sizeX>100</sizeX>
+			<sizeY>130</sizeY>
+			<imageName>Resource/resource/Ui/combo.png</imageName>
+			<frameImageName>n</frameImageName>
+			<startValue>0.0</startValue>
+			<posX>1000</posX>
+			<posY>50</posY>
+			<intervalX>80</intervalX>
+			<intervalY>40</intervalY>
+		</Data>
+	</Datas>
+</root>

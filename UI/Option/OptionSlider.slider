@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<root>
+	<Datas>
+		<Data>
+			<funcID>0</funcID>
+			<barImageName>Resource/resource/Ui/SliderBar.png</barImageName>
+			<tabImageName>Resource/resource/Ui/SliderTab.png</tabImageName>
+			<startValue>0</startValue>
+			<posX>574</posX>
+			<posY>55</posY>
+		</Data>
+		<Data>
+			<funcID>1</funcID>
+			<barImageName>Resource/resource/Ui/SliderBar.png</barImageName>
+			<tabImageName>Resource/resource/Ui/SliderTab.png</tabImageName>
+			<startValue>0</startValue>
+			<posX>574</posX>
+			<posY>164</posY>
+		</Data>
+		<Data>
+			<funcID>2</funcID>
+			<barImageName>Resource/resource/Ui/SliderBar.png</barImageName>
+			<tabImageName>Resource/resource/Ui/SliderTab.png</tabImageName>
+			<startValue>0.5</startValue>
+			<posX>574</posX>
+			<posY>274</posY>
+		</Data>
+	</Datas>
+</root>
