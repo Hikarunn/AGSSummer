@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<root>
+	<parameters>
+		<parameter>
+			<id>0</id>
+			<name>HitTime</name>
+			<value>2</value>
+		</parameter>
+		<parameter>
+			<id>1</id>
+			<name>SearchDistance</name>
+			<value>2000</value>
+		</parameter>
+		<parameter>
+			<id>2</id>
+			<name>Speed</name>
+			<value>180</value>
+		</parameter>
+		<parameter>
+			<id>3</id>
+			<name>StopDistance</name>
+			<value>700</value>
+		</parameter>
+	</parameters>
+</root>
