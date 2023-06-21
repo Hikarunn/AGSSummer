@@ -73,7 +73,7 @@ void ObjectManager::Begin(void)
 			comp.second->Begin(*this);
 		}
 	}
-	DebugLog("behavior‚Ì”", componentMap_[ComponentID::BehaviorBase].size());
+//	DebugLog("behavior‚Ì”", componentMap_[ComponentID::BehaviorBase].size());
 }
 
 void ObjectManager::Begin(ObjectID& id)

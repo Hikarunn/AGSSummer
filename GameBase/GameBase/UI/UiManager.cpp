@@ -365,16 +365,6 @@ void UiManager::CreateGage(std::ifstream& file, int num)
 				auto [value, minmax] = player->GetGaugeValue(UiID::Torion);
 				return value;
 			},
-		/*[](ObjectManager& objMng) {
-				auto player = objMng.GetComponent<PlayerBehavior>(objMng.GetPlayerID());
-				auto [value, minmax] = player->GetGaugeValue(UiID::Skill);
-				return value;
-			},
-		[](ObjectManager& objMng) {
-			auto player = objMng.GetComponent<PlayerBehavior>(objMng.GetPlayerID());
-			auto [value, minmax] = player->GetGaugeValue(UiID::Stamina);
-			return value;
-		}*/
 	};
 
 	// ˆ—‚Ìí—Ş
