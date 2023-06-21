@@ -268,38 +268,38 @@ SharedGraphicHandle& SharedGraphicHandle::operator=(const SharedGraphicHandle& s
 	ptr_ = sharedHandle.ptr_;
 	return *this;
 }
-
-SharedSoundHandle::~SharedSoundHandle()
-{
-	if (ptr_)
-	{
-		if (ptr_.use_count() <= 2)
-		{
-			lpSceneManager.GetResourceManager().RemoveSound(*ptr_);
-		}
-		DeleteSoundMem(handle_);
-		ptr_.reset();
-	}
-}
-
-SharedSoundHandle& SharedSoundHandle::operator=(const SharedSoundHandle& sharedHandle) noexcept
-{
-	DeleteSoundMem(handle_);
-	if (ptr_ && ptr_.use_count() <= 2)
-	{
-		lpSceneManager.GetResourceManager().RemoveSound(*ptr_);
-	}
-	ptr_ = sharedHandle.ptr_;
-	handle_ = DuplicateSoundMem(*ptr_);
-	return *this;
-}
-
-void SharedSoundHandle::SetHandle(const int handle)
-{
-	handle_ = handle;
-}
-
-void SharedSoundHandle::CopyParent(void)
-{
-	handle_ = DuplicateSoundMem(*ptr_);
-}
+//
+//SharedSoundHandle::~SharedSoundHandle()
+//{
+//	if (ptr_)
+//	{
+//		if (ptr_.use_count() <= 2)
+//		{
+//			lpSceneManager.GetResourceManager().RemoveSound(*ptr_);
+//		}
+//		DeleteSoundMem(handle_);
+//		ptr_.reset();
+//	}
+//}
+//
+//SharedSoundHandle& SharedSoundHandle::operator=(const SharedSoundHandle& sharedHandle) noexcept
+//{
+//	DeleteSoundMem(handle_);
+//	if (ptr_ && ptr_.use_count() <= 2)
+//	{
+//		lpSceneManager.GetResourceManager().RemoveSound(*ptr_);
+//	}
+//	ptr_ = sharedHandle.ptr_;
+//	handle_ = DuplicateSoundMem(*ptr_);
+//	return *this;
+//}
+//
+//void SharedSoundHandle::SetHandle(const int handle)
+//{
+//	handle_ = handle;
+//}
+//
+//void SharedSoundHandle::CopyParent(void)
+//{
+//	handle_ = DuplicateSoundMem(*ptr_);
+//}

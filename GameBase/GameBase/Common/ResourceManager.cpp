@@ -204,44 +204,44 @@ void ResourceManager::RemoveModel(const int handle)
 		});
 
 }
-
-void ResourceManager::LoadPS(SharedShaderHandle& out, const std::filesystem::path& path, bool isNotRelese)
-{
-	auto key{ std::hash<std::string>()(path.string()) };
-	if (shaderMap_.contains(key))
-	{
-		out.SetPtr(shaderMap_[key].first);
-		return;
-	}
-	int h{ LoadPixelShader(path.wstring().c_str()) };
-	if (h == -1)
-	{
-		DebugErrorLog("ピクセルシェーダ読み込み失敗");
-	}
-	shaderMap_.emplace(key, std::make_pair(std::make_shared<int>(), isNotRelese));
-	*shaderMap_[key].first = h;
-	out.SetPtr(shaderMap_[key].first);
-	return;
-}
-
-void ResourceManager::LoadVS(SharedShaderHandle& out, const std::filesystem::path& path, bool isNotRelese)
-{
-	auto key{ std::hash<std::string>()(path.string()) };
-	if (shaderMap_.contains(key))
-	{
-		out.SetPtr(shaderMap_[key].first);
-		return;
-	}
-	int h{ LoadVertexShader(path.wstring().c_str()) };
-	if (h == -1)
-	{
-		DebugErrorLog("頂点シェーダ読み込み失敗");
-	}
-	shaderMap_.emplace(key, std::make_pair(std::make_shared<int>(), isNotRelese));
-	*shaderMap_[key].first = h;
-	out.SetPtr(shaderMap_[key].first);
-	return;
-}
+//
+//void ResourceManager::LoadPS(SharedShaderHandle& out, const std::filesystem::path& path, bool isNotRelese)
+//{
+//	auto key{ std::hash<std::string>()(path.string()) };
+//	if (shaderMap_.contains(key))
+//	{
+//		out.SetPtr(shaderMap_[key].first);
+//		return;
+//	}
+//	int h{ LoadPixelShader(path.wstring().c_str()) };
+//	if (h == -1)
+//	{
+//		DebugErrorLog("ピクセルシェーダ読み込み失敗");
+//	}
+//	shaderMap_.emplace(key, std::make_pair(std::make_shared<int>(), isNotRelese));
+//	*shaderMap_[key].first = h;
+//	out.SetPtr(shaderMap_[key].first);
+//	return;
+//}
+//
+//void ResourceManager::LoadVS(SharedShaderHandle& out, const std::filesystem::path& path, bool isNotRelese)
+//{
+//	auto key{ std::hash<std::string>()(path.string()) };
+//	if (shaderMap_.contains(key))
+//	{
+//		out.SetPtr(shaderMap_[key].first);
+//		return;
+//	}
+//	int h{ LoadVertexShader(path.wstring().c_str()) };
+//	if (h == -1)
+//	{
+//		DebugErrorLog("頂点シェーダ読み込み失敗");
+//	}
+//	shaderMap_.emplace(key, std::make_pair(std::make_shared<int>(), isNotRelese));
+//	*shaderMap_[key].first = h;
+//	out.SetPtr(shaderMap_[key].first);
+//	return;
+//}
 
 bool ResourceManager::IsRemove(SharedShaderHandle& handle)
 {
@@ -264,50 +264,50 @@ void ResourceManager::Remove(SharedShaderHandle& handle)
 		}
 	}
 }
-
-void ResourceManager::LoadSound(SharedSoundHandle&& out, const std::filesystem::path& path, bool isNotRelese)
-{
-	auto key{ std::hash<std::string>()(path.string()) };
-	if (soundMap_.contains(key))
-	{
-		// 既にロードしたものが有ったら
-		if (CheckHandleASyncLoad(*soundMap_[key].first) == TRUE)
-		{
-			// ロードが完了していないとき
-			// 大元になるハンドルのshared_ptrをセット
-			out.SetPtr(soundMap_[key].first);
-
-			// ロード完了時のcollbackされる関数をセット
-			loadedFunc_.push_back(std::bind(&SharedSoundHandle::CopyParent, &out));
-			return;
-		}
-		out.SetHandle(DuplicateSoundMem(*std::get<0>(modelMap_[key])));
-		return;
-	}
-	int h{ LoadSoundMem(path.c_str()) };
-	if (h == -1)
-	{
-		DebugErrorLog("サウンド読み込み失敗");
-	}
-	soundMap_.emplace(key, std::make_pair(std::make_shared<int>(), isNotRelese));
-	*soundMap_[key].first = h;
-	out.SetPtr(soundMap_[key].first);
-	loadedFunc_.push_back(std::bind(&SharedSoundHandle::CopyParent, &out));
-}
-
-void ResourceManager::RemoveSound(const int handle)
-{
-	auto itr = std::find_if(soundMap_.begin(), soundMap_.end(), [&handle](auto& img) {return *img.second.first == handle; });
-	if (itr != soundMap_.end())
-	{
-		if (!itr->second.second)
-		{
-			DeleteSoundMem(*itr->second.first);
-			soundMap_.erase(itr);
-		}
-	}
-}
-
+//
+//void ResourceManager::LoadSound(SharedSoundHandle&& out, const std::filesystem::path& path, bool isNotRelese)
+//{
+//	auto key{ std::hash<std::string>()(path.string()) };
+//	if (soundMap_.contains(key))
+//	{
+//		// 既にロードしたものが有ったら
+//		if (CheckHandleASyncLoad(*soundMap_[key].first) == TRUE)
+//		{
+//			// ロードが完了していないとき
+//			// 大元になるハンドルのshared_ptrをセット
+//			out.SetPtr(soundMap_[key].first);
+//
+//			// ロード完了時のcollbackされる関数をセット
+//			loadedFunc_.push_back(std::bind(&SharedSoundHandle::CopyParent, &out));
+//			return;
+//		}
+//		out.SetHandle(DuplicateSoundMem(*std::get<0>(modelMap_[key])));
+//		return;
+//	}
+//	int h{ LoadSoundMem(path.c_str()) };
+//	if (h == -1)
+//	{
+//		DebugErrorLog("サウンド読み込み失敗");
+//	}
+//	soundMap_.emplace(key, std::make_pair(std::make_shared<int>(), isNotRelese));
+//	*soundMap_[key].first = h;
+//	out.SetPtr(soundMap_[key].first);
+//	loadedFunc_.push_back(std::bind(&SharedSoundHandle::CopyParent, &out));
+//}
+//
+//void ResourceManager::RemoveSound(const int handle)
+//{
+//	auto itr = std::find_if(soundMap_.begin(), soundMap_.end(), [&handle](auto& img) {return *img.second.first == handle; });
+//	if (itr != soundMap_.end())
+//	{
+//		if (!itr->second.second)
+//		{
+//			DeleteSoundMem(*itr->second.first);
+//			soundMap_.erase(itr);
+//		}
+//	}
+//}
+//
 void ResourceManager::Loaded(void)
 {
 	for (auto& f : loadedFunc_)

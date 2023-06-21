@@ -98,7 +98,7 @@ public:
 	/// <param name="path"></param>
 	/// <param name="isNotRelese"></param>
 	/// <returns></returns>
-	void LoadPS(SharedShaderHandle& out, const std::filesystem::path& path, bool isNotRelese = false);
+	/*void LoadPS(SharedShaderHandle& out, const std::filesystem::path& path, bool isNotRelese = false);
 
 	/// <summary>
 	/// 頂点シェーダを読み込む
@@ -106,7 +106,7 @@ public:
 	/// <param name="path"></param>
 	/// <param name="isNotRelese"></param>
 	/// <returns></returns>
-	void LoadVS(SharedShaderHandle& out, const std::filesystem::path& path, bool isNotRelese = false);
+	void LoadVS(SharedShaderHandle& out, const std::filesystem::path& path, bool isNotRelese = false);*/
 
 	/// <summary>
 	/// 一致するシェーダハンドルが管理から削除すべきか
@@ -128,13 +128,13 @@ public:
 	/// <param name="out"></param>
 	/// <param name=""></param>
 	/// <param name="isNotRelese"></param>
-	void LoadSound(SharedSoundHandle&& out, const std::filesystem::path& path, bool isNotRelese);
+//	void LoadSound(SharedSoundHandle&& out, const std::filesystem::path& path, bool isNotRelese);
 
 	/// <summary>
 	/// サウンドのハンドル削除
 	/// </summary>
 	/// <param name="handle"></param>
-	void RemoveSound(const int handle);
+	//void RemoveSound(const int handle);
 
 
 	void Loaded(void);

@@ -66,6 +66,7 @@ public:
 	{
 		x = vec.x;
 		y = vec.y;
+
 		return *this;
 	}
 	constexpr Vector2Tmp<T>& operator=(const T& val)
