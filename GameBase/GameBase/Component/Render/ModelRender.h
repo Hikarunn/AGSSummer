@@ -52,8 +52,8 @@ protected:
 	// モデルのハンドル
 	SharedModelHandle handle_;
 	// 使用するシェーダ
-	SharedShaderHandle ps_;
-	SharedShaderHandle vs_;
+	/*SharedShaderHandle ps_;
+	SharedShaderHandle vs_;*/
 	// シャドウマップ用シェーダ
 	SharedShaderHandle shadowPs_;
 	SharedShaderHandle shadowVs_;

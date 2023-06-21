@@ -3,7 +3,7 @@
 // アニメーション名
 enum class AnimIndex {
 	Idle,							// 待ち
-	ForwardMove,					// 全身
+	ForwardMove,					// 前身
 	Shot,							// 片手のショット
 	FullShot,						// ショットによるフルアッタック
 	Jamp,							// ジャンプ
