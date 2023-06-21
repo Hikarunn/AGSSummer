@@ -27,7 +27,7 @@ GameScene::GameScene(StageID stageID) :
 	if (stageID_ == StageID::Tutorial)
 	{
 		// チュートリアル時
-		uiManager_ = std::make_unique<UiManager>("Resource/Other/UiData/game.ui", true, true, false);
+		//uiManager_ = std::make_unique<UiManager>("Resource/Other/UiData/game.ui", true, true, false);
 		objManager_->AddFactory(std::make_unique<StageFactory>(*objManager_));
 		SetMakeSceneFunc(std::bind(&GameScene::MakeSelectFunc, this, std::placeholders::_1), SceneID::Select);
 	}
@@ -36,11 +36,11 @@ GameScene::GameScene(StageID stageID) :
 		// 通常時のゲーム時
 		objManager_->AddFactory(std::make_unique<StageFactory>("Resource/Other/Stage" + std::to_string(static_cast<int>(stageID)) + ".data", *objManager_));
 		//objMng_->AddFactory(std::make_unique<StageFactory>("Resource/Other/dbg.data", *objMng_));
-		uiManager_ = std::make_unique<UiManager>("Resource/Other/UiData/game.ui", true, false, false);
+		//uiManager_ = std::make_unique<UiManager>("Resource/Other/UiData/game.ui", true, false, false);
 //		lpSceneManager.GetResourceManager().MakeRenderTarget(resultCapture_, ScreenID::ResultCapture, SceneManager::screenSize_<float>, true);
 	}
 	AddLoadedFunc(std::bind(&GameScene::Loaded, this, std::placeholders::_1));
-	result_ = Result::Max;
+	//result_ = Result::Max;
 
 	// ゲームシーンで使うシェーダをあらかじめロードしておく
 	//useShaders_.resize(3);
@@ -72,7 +72,7 @@ GameScene::GameScene(StageID stageID) :
 	SetCreateDrawValidGraphChannelNum(4);
 	SetCreateGraphColorBitDepth(32);
 	// 被写界深度
-	depth_ = MakeScreen(x, y, false);
+//	depth_ = MakeScreen(x, y, false);
 
 	// オフスクリーンの初期化
 	offScreen_ = MakeScreen(x, y, false);
@@ -81,12 +81,12 @@ GameScene::GameScene(StageID stageID) :
 	// スカイドームとステージのスクリーン
 	subScreen_ = MakeScreen(x, y, false);
 
-	radarGraph_ = LoadGraph(L"Resource/resource/Radar.png");
+	//radarGraph_ = LoadGraph(L"Resource/resource/Radar.png");
 
 	// ミニマップ用のスクリーン
-	radarSize_ = y / 4;
+	/*radarSize_ = y / 4;
 	radarMap_ = MakeScreen(radarSize_, radarSize_, false);
-	count_ = 0;
+	count_ = 0;*/
 
 	// シャドウマップ用カメラ情報の初期化
 	SetUseASyncLoadFlag(false);
@@ -96,12 +96,12 @@ GameScene::GameScene(StageID stageID) :
 	lightMat.proj = MGetIdent();
 
 	// 被写界深度用のカメラ情報の初期化
-	depthbuffer_ = CreateShaderConstantBuffer(sizeof(DepthParameter) * 4);
+	/*depthbuffer_ = CreateShaderConstantBuffer(sizeof(DepthParameter) * 4);
 	depthMat_ = static_cast<DepthParameter*>(GetBufferShaderConstantBuffer(depthbuffer_));
 	depthMat.start = 0.0f;
 	depthMat.end = 0.0f;
 	depthMat.scope = 0.0f;
-	SetUseASyncLoadFlag(true);
+	SetUseASyncLoadFlag(true);*/
 
 	// ゲームシーン用のBGMのロード
 	//lpSooundPross.Init(SceneID::Game);
@@ -114,8 +114,8 @@ GameScene::GameScene(StageID stageID) :
 GameScene::~GameScene()
 {
 	DeleteShaderConstantBuffer(shadowBuff_);
-	DeleteShaderConstantBuffer(depthbuffer_);
-	radar_.erase(count_);
+	//DeleteShaderConstantBuffer(depthbuffer_);
+	//radar_.erase(count_);
 }
 
 //void GameScene::Capture(void)
@@ -202,18 +202,18 @@ void GameScene::Update(float delta, Controller& controller)
 
 	auto player = (objManager_->GetComponent<Transform>(objManager_->GetPlayerID()));
 	objManager_->Update(delta, controller, *this);
-	uiManager_->Update(delta, *this, *objManager_, controller);
-	if (player.IsActive())
-	{
-		RadarUpdate(Vector2(player->GetPos().x, player->GetPos().z));
-	}
+	//uiManager_->Update(delta, *this, *objManager_, controller);
+//	if (player.IsActive())
+//	{
+////		RadarUpdate(Vector2(player->GetPos().x, player->GetPos().z));
+//	}
 	//peManager_->Update(delta);
 
 }
 
 void GameScene::DrawScene(void)
 {
-	RadarDraw();
+	//RadarDraw();
 	// シャドウマップ作成
 	SetupShadowMap();
 	// オフスクリーンの作成
@@ -222,18 +222,18 @@ void GameScene::DrawScene(void)
 	SetSubScreen();
 
 	// 被写界深度用の深度テクスチャの作成
-	SetUpDepth();
+	//SetUpDepth();
 
-	depthMat_[0] = depthMat;
-	//peMng_->SetBuffer(depthbuffer_);
-	// ポストエフェクトか通常描画
-	//peMng_->Draw(offScreen_, *screenHandle_, depth_, skyScreen_, subScreen_);
+	//depthMat_[0] = depthMat;
+	////peMng_->SetBuffer(depthbuffer_);
+	//// ポストエフェクトか通常描画
+	////peMng_->Draw(offScreen_, *screenHandle_, depth_, skyScreen_, subScreen_);
 
-	// ミニマップの作成
-	DrawGraph(10, 10, radarMap_, true);
+	//// ミニマップの作成
+	//DrawGraph(10, 10, radarMap_, true);
 
 	// UIの描画
-	uiManager_->Draw();
+	//uiManager_->Draw();
 	// ここに直書きしているが後から変えること
 	DrawFormatString(0, 0, 0xffffff, TEXT("%dIDです"), static_cast<unsigned int>(screenID_));
 
@@ -266,40 +266,40 @@ void GameScene::SetupShadowMap(void)
 	lightMat_[0] = lightMat;
 }
 
-void GameScene::SetUpDepth(void)
-{
-	// 描画先を影用深度記録画像に変更
-	SetDrawScreen(depth_);
-	// 影用深度記録画像を一度真っ白にする
-	SetBackgroundColor(255, 255, 255);
-	ClsDrawScreen();
-	SetBackgroundColor(0, 0, 0);
-	camera_->SetScreen();
-
-	// 被写界深度開始位置の計算
-	depthMat.start = dofFocus - dofFocusSize / 2.0f - dofInterpSize;
-	// 被写界深度終了位置を計算
-	depthMat.end = dofFocus + dofFocusSize / 2.0f + dofInterpSize;
-	// 被写界深度の範囲の逆数を計算
-	depthMat.scope = 1.0f / (depthMat.end - depthMat.start);
-	// 補間範囲とフォーカスがあっている範囲を含めた総距離を算出
-	dofTotalSize_ = dofInterpSize * 2.0f + dofFocusSize;
-
-	// 取得したデータをhlsl側に渡す
-	depthMat_[0] = depthMat;
-	MV1SetUseOrigShader(true);
-	objManager_->SetupDepthTex(*depthPS_, depthbuffer_);
-	MV1SetUseOrigShader(false);
-
-	// 描画用に切り替え
-	SetDrawScreen(*screenHandle_);
-	ClsDrawScreen();
-	// 被写界深度開始位置の計算
-	depthMat.start = dofInterpSize / dofTotalSize_;
-	// 被写界深度終了位置の計算
-	depthMat.end = (dofInterpSize + dofFocusSize) / dofTotalSize_;
-
-}
+//void GameScene::SetUpDepth(void)
+//{
+//	// 描画先を影用深度記録画像に変更
+//	SetDrawScreen(depth_);
+//	// 影用深度記録画像を一度真っ白にする
+//	SetBackgroundColor(255, 255, 255);
+//	ClsDrawScreen();
+//	SetBackgroundColor(0, 0, 0);
+//	camera_->SetScreen();
+//
+//	// 被写界深度開始位置の計算
+//	depthMat.start = dofFocus - dofFocusSize / 2.0f - dofInterpSize;
+//	// 被写界深度終了位置を計算
+//	depthMat.end = dofFocus + dofFocusSize / 2.0f + dofInterpSize;
+//	// 被写界深度の範囲の逆数を計算
+//	depthMat.scope = 1.0f / (depthMat.end - depthMat.start);
+//	// 補間範囲とフォーカスがあっている範囲を含めた総距離を算出
+//	dofTotalSize_ = dofInterpSize * 2.0f + dofFocusSize;
+//
+//	// 取得したデータをhlsl側に渡す
+//	depthMat_[0] = depthMat;
+//	MV1SetUseOrigShader(true);
+//	objManager_->SetupDepthTex(*depthPS_, depthbuffer_);
+//	MV1SetUseOrigShader(false);
+//
+//	// 描画用に切り替え
+//	SetDrawScreen(*screenHandle_);
+//	ClsDrawScreen();
+//	// 被写界深度開始位置の計算
+//	depthMat.start = dofInterpSize / dofTotalSize_;
+//	// 被写界深度終了位置の計算
+//	depthMat.end = (dofInterpSize + dofFocusSize) / dofTotalSize_;
+//
+//}
 
 void GameScene::SetOffsetScreen(void)
 {
@@ -336,7 +336,7 @@ void GameScene::SetSubScreen(void)
 
 bool GameScene::IsLoaded(void)
 {
-	return BaseScene::IsLoaded() && objManager_->IsLoaded() && uiManager_->IsLoaded();
+	return BaseScene::IsLoaded() && objManager_->IsLoaded();/*&& uiManager_->IsLoaded();*/ 
 }
 
 void GameScene::Loaded(Controller& controller)
@@ -345,116 +345,116 @@ void GameScene::Loaded(Controller& controller)
 	lpSceneManager.GetResourceManager().Loaded();
 	objManager_->Begin();
 	objManager_->Update(0.0f, controller, *this);
-	uiManager_->Begin();
+	//uiManager_->Begin();
 
 
-	lpSceneManager.GetResourceManager().LoadPS(shadowPs_, "Resource/resource/Shader/ShadowMap/ShadowMap.pso");
-	lpSceneManager.GetResourceManager().LoadPS(depthPS_, "Resource/resource/Shader/PostEffect/Dof/depth.pso");
+	//lpSceneManager.GetResourceManager().LoadPS(shadowPs_, "Resource/resource/Shader/ShadowMap/ShadowMap.pso");
+	//lpSceneManager.GetResourceManager().LoadPS(depthPS_, "Resource/resource/Shader/PostEffect/Dof/depth.pso");
 	SetUp();
-	RadarSetUp();
+	//RadarSetUp();
 }
-
-void GameScene::RadarSetUp(void)
-{
-	// プレイヤーの情報を取得
-	auto player = objManager_->GetComponent<Transform>(objManager_->GetPlayerID());
-	Vector2 pPos = Vector2(player->GetPos().x, player->GetPos().z);
-	// エネミーの情報を取得
-	auto stage = objManager_->GetComponent<StageBehavior>(objManager_->GetStageID());
-	auto& list = stage->GetEnemyPosList();
-	// プレイヤーとの距離と角度を取得
-	int i = 0;
-	for (auto ePos : list)
-	{
-		Radar radar;
-		// プレイヤーとの距離を取得
-		Vector2 tmp = ePos.second - pPos;
-		radar.range = tmp.Magnitude();
-		// プレイヤーとの角度を取得
-		// カメラの情報を取得
-		auto camera = objManager_->GetComponent<Transform>(objManager_->GetCameraID());
-		// カメラの向いている方向からの角度を求める
-		float angle = GetAngle2Vector(Vector2(camera->GetForward().x, camera->GetForward().z), tmp);
-		// 出たものを格納
-		radar.angle = angle;
-
-		// デフォルトは表示しない
-		radar.flag = false;
-		// 距離が表示可能範囲内であれば表示する
-		if (radar.range <= (RADAR_RANGE * RADAR_RANGE))
-		{
-			radar.flag = true;
-		}
-		radar_.emplace(i, radar);
-		i++;
-		count_++;
-	}
-}
-
-void GameScene::RadarUpdate(Vector2 pPos)
-{
-	// プレイヤーの情報を取得
-	auto player = objManager_->GetComponent<Transform>(objManager_->GetPlayerID());
-	// エネミーの情報を取得
-	auto stage = objManager_->GetComponent<StageBehavior>(objManager_->GetStageID());
-	auto& list = stage->GetEnemyPosList();
-	// プレイヤーとの距離と角度を取得
-	int i = 0;
-	for (auto ePos : list)
-	{
-		// プレイヤーとの距離を取得
-		Vector2 tmp = ePos.second - pPos;
-		float range = tmp.Magnitude();
-		// カメラの情報を取得
-		auto camera = objManager_->GetComponent<Transform>(objManager_->GetCameraID());
-		// カメラの向いている方向からの角度を求める
-		float angle = GetAngle2Vector(Vector2(camera->GetForward().x, camera->GetForward().z), tmp);
-		// デフォルトは表示しない
-		bool flag = false;
-		if (range <= (RADAR_RANGE * RADAR_RANGE))
-		{
-			flag = true;
-		}
-		radar_.at(i).range = range;
-		radar_.at(i).angle = angle;
-		radar_.at(i).flag = flag;
-		i++;
-	}
-	for (int n = i; n < count_; n++)
-	{
-		radar_.at(n).flag = false;
-	}
-}
-
-void GameScene::RadarDraw()
-{
-	SetDrawScreen(radarMap_);
-	ClsDrawScreen();
-	DrawGraph(0, 0, radarGraph_, true);
-
-	// 中心位置の取得
-	int SizeHalf = radarSize_ / 2;
-	// プレイヤーの位置
-	DrawCircle(SizeHalf, SizeHalf, 5, 0x0000ff);
-
-	for (const auto& map : radar_)
-	{
-		if (map.second.flag)
-		{
-			Vector3 pos = Vector3(0, -1, 0);
-			Vector3 tmp;
-			// 受け取った角度でsinとcosの値をだす
-			float sinParam = sin(-map.second.angle);
-			float cosParam = cos(-map.second.angle);
-			// sinParamとcosParamで敵の位置を取得する
-			tmp.x = (pos.x * cosParam) - (pos.y * sinParam);
-			tmp.y = (pos.x * sinParam) + (pos.y * cosParam);
-			tmp.z = 0.0f;
-			pos.x = tmp.x * (map.second.range / 50);
-			pos.y = tmp.y * (map.second.range / 50);
-			pos.z = tmp.z * (map.second.range / 50);
-			DrawCircle(static_cast<int>(pos.x) + SizeHalf, static_cast<int>(pos.y) + SizeHalf, 2, 0xff0000);
-		}
-	}
-
-}
+//
+//void GameScene::RadarSetUp(void)
+//{
+//	// プレイヤーの情報を取得
+//	auto player = objManager_->GetComponent<Transform>(objManager_->GetPlayerID());
+//	Vector2 pPos = Vector2(player->GetPos().x, player->GetPos().z);
+//	// エネミーの情報を取得
+//	auto stage = objManager_->GetComponent<StageBehavior>(objManager_->GetStageID());
+//	auto& list = stage->GetEnemyPosList();
+//	// プレイヤーとの距離と角度を取得
+//	int i = 0;
+//	for (auto ePos : list)
+//	{
+//		Radar radar;
+//		// プレイヤーとの距離を取得
+//		Vector2 tmp = ePos.second - pPos;
+//		radar.range = tmp.Magnitude();
+//		// プレイヤーとの角度を取得
+//		// カメラの情報を取得
+//		auto camera = objManager_->GetComponent<Transform>(objManager_->GetCameraID());
+//		// カメラの向いている方向からの角度を求める
+//		float angle = GetAngle2Vector(Vector2(camera->GetForward().x, camera->GetForward().z), tmp);
+//		// 出たものを格納
+//		radar.angle = angle;
+//
+//		// デフォルトは表示しない
+//		radar.flag = false;
+//		// 距離が表示可能範囲内であれば表示する
+//		if (radar.range <= (RADAR_RANGE * RADAR_RANGE))
+//		{
+//			radar.flag = true;
+//		}
+//		radar_.emplace(i, radar);
+//		i++;
+//		count_++;
+//	}
+//}
+//
+//void GameScene::RadarUpdate(Vector2 pPos)
+//{
+//	// プレイヤーの情報を取得
+//	auto player = objManager_->GetComponent<Transform>(objManager_->GetPlayerID());
+//	// エネミーの情報を取得
+//	auto stage = objManager_->GetComponent<StageBehavior>(objManager_->GetStageID());
+//	auto& list = stage->GetEnemyPosList();
+//	// プレイヤーとの距離と角度を取得
+//	int i = 0;
+//	for (auto ePos : list)
+//	{
+//		// プレイヤーとの距離を取得
+//		Vector2 tmp = ePos.second - pPos;
+//		float range = tmp.Magnitude();
+//		// カメラの情報を取得
+//		auto camera = objManager_->GetComponent<Transform>(objManager_->GetCameraID());
+//		// カメラの向いている方向からの角度を求める
+//		float angle = GetAngle2Vector(Vector2(camera->GetForward().x, camera->GetForward().z), tmp);
+//		// デフォルトは表示しない
+//		bool flag = false;
+//		if (range <= (RADAR_RANGE * RADAR_RANGE))
+//		{
+//			flag = true;
+//		}
+//		radar_.at(i).range = range;
+//		radar_.at(i).angle = angle;
+//		radar_.at(i).flag = flag;
+//		i++;
+//	}
+//	for (int n = i; n < count_; n++)
+//	{
+//		radar_.at(n).flag = false;
+//	}
+//}
+//
+//void GameScene::RadarDraw()
+//{
+//	SetDrawScreen(radarMap_);
+//	ClsDrawScreen();
+//	DrawGraph(0, 0, radarGraph_, true);
+//
+//	// 中心位置の取得
+//	int SizeHalf = radarSize_ / 2;
+//	// プレイヤーの位置
+//	DrawCircle(SizeHalf, SizeHalf, 5, 0x0000ff);
+//
+//	for (const auto& map : radar_)
+//	{
+//		if (map.second.flag)
+//		{
+//			Vector3 pos = Vector3(0, -1, 0);
+//			Vector3 tmp;
+//			// 受け取った角度でsinとcosの値をだす
+//			float sinParam = sin(-map.second.angle);
+//			float cosParam = cos(-map.second.angle);
+//			// sinParamとcosParamで敵の位置を取得する
+//			tmp.x = (pos.x * cosParam) - (pos.y * sinParam);
+//			tmp.y = (pos.x * sinParam) + (pos.y * cosParam);
+//			tmp.z = 0.0f;
+//			pos.x = tmp.x * (map.second.range / 50);
+//			pos.y = tmp.y * (map.second.range / 50);
+//			pos.z = tmp.z * (map.second.range / 50);
+//			DrawCircle(static_cast<int>(pos.x) + SizeHalf, static_cast<int>(pos.y) + SizeHalf, 2, 0xff0000);
+//		}
+//	}
+//
+//}

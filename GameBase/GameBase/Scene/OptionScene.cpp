@@ -10,8 +10,8 @@ OptionScene::OptionScene(SceneUptr owner) :
 	WindowScene{ std::move(owner), 0.25f, ScreenID::OptionUi,ScreenID::Option, SceneID::Option }
 {
 	SetUseASyncLoadFlag(false);
-	uiManager_ = std::make_unique<UiManager>("Resource/Other/UiData/Option.ui", false);
-	uiManager_->Begin();
+	//uiManager_ = std::make_unique<UiManager>("Resource/Other/UiData/Option.ui", false);
+	//uiManager_->Begin();
 	lpSceneManager.GetResourceManager().LoadTexture(frame_, "Resource/resource/Ui/OptionWindow.png");
 	SetUseASyncLoadFlag(true);
 
@@ -60,13 +60,13 @@ void OptionScene::Save(void)
 
 void OptionScene::UpdateOpend(float delta, Controller& controller)
 {
-	uiManager_->Update(delta, *this, *objManager_, controller);
+	//uiManager_->Update(delta, *this, *objManager_, controller);
 }
 
 void OptionScene::DrawWindow(void)
 {
 	DrawRotaGraph(SceneManager::screenSize_<int>.x / 2, SceneManager::screenSize_<int>.y / 2, 1.0, 0.0f, *frame_, true);
-	uiManager_->Draw();
+	//uiManager_->Draw();
 }
 
 void OptionScene::Closed(void)

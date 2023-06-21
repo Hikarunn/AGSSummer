@@ -20,7 +20,7 @@ FadeLoading::FadeLoading(SceneUptr after, float transTime) :
 
 void FadeLoading::Update(float delta, Controller& controller)
 {
-	uiManager_->Update(delta, *this, *objManager_, controller);
+	//uiManager_->Update(delta, *this, *objManager_, controller);
 	(this->*update_)(delta, controller);
 }
 
@@ -63,7 +63,7 @@ void FadeLoading::UpdateFadesIn(float delta, Controller& controller)
 
 void FadeLoading::DrawFadeIn(void)
 {
-	uiManager_->Draw();
+	//uiManager_->Draw();
 	float alpha = stepTime_ / transTime_;
 	SetDrawBlendMode(DX_BLENDMODE_ALPHA, static_cast<int>(255.0f * alpha));
 	after_->Draw();
@@ -72,12 +72,12 @@ void FadeLoading::DrawFadeIn(void)
 
 void FadeLoading::DrawLoading(void)
 {
-	uiManager_->Draw();
+	//uiManager_->Draw();
 }
 
 void FadeLoading::DrawFadeOut(void)
 {
-	uiManager_->Draw();
+	//uiManager_->Draw();
 
 	float alpha = stepTime_ / transTime_;
 	alpha = 1.0f - alpha;

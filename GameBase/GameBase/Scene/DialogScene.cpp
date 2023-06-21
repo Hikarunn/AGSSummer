@@ -1,7 +1,7 @@
 #include <DxLib.h>
 #include "../SceneManager.h"
 #include "../Common/ResourceManager.h"
-#include "../UI/UiManager.h"
+//#include "../UI/UiManager.h"
 #include "DialogScene.h"
 
 
@@ -10,8 +10,8 @@ DialogScene::DialogScene(SceneUptr owner) :
 {
 
 	SetUseASyncLoadFlag(false);
-	uiManager_ = std::make_unique<UiManager>("Resource/Other/UiData/dialog.ui", false);
-	uiManager_->Begin();
+	//uiManager_ = std::make_unique<UiManager>("Resource/Other/UiData/dialog.ui", false);
+//	uiManager_->Begin();
 	lpSceneManager.GetResourceManager().LoadTexture(frame_, L"Resource/resource/DialogFrame.png");
 	SetUseASyncLoadFlag(true);
 }
@@ -28,13 +28,13 @@ void DialogScene::Cancel(void)
 
 void DialogScene::UpdateOpend(float delta, Controller& controller)
 {
-	uiManager_->Update(delta, *this, *objManager_, controller);
+	//uiManager_->Update(delta, *this, *objManager_, controller);
 }
 
 void DialogScene::DrawWindow(void)
 {
 	DrawRotaGraph(SceneManager::screenSize_<int>.x / 2, SceneManager::screenSize_<int>.y / 2, 1.0, 0.0f, *frame_, true);
-	uiManager_->Draw();
+//	uiManager_->Draw();
 }
 
 void DialogScene::Closed(void)

@@ -7,7 +7,7 @@
 #include "../Common/ResourceManager.h"
 //#include "../Common/SoundPross.h"
 #include "SelectScene.h"
-#include "../UI/UiManager.h"
+//#include "../UI/UiManager.h"
 #include "../Object/ObjectManager.h"
 #include "../Component/Render/ModelRender.h"
 #include "../Component/Transform/Transform.h"
@@ -22,14 +22,14 @@ TitleScene::TitleScene() :
 	BaseScene{ ScreenID::Title,SceneID::Title },
 	update_{ &TitleScene::UpdateNon }, draw_{ &TitleScene::DrawNon }, stepTime_{ 0.0f }
 {
-	SetMakeSceneFunc(std::bind(&TitleScene::MakeGameFunc, this, std::placeholders::_1), SceneID::Select);
+	SetMakeSceneFunc(std::bind(&TitleScene::MakeGameFunc, this, std::placeholders::_1), SceneID::Game);
 	//lpSooundPross.Init(SceneID::Title);		// タイトルシーン用にロードしたサウンドを呼びだす
 	//lpSooundPross.PlayBackSound(SOUNDNAME_BGM::TitleSceneBGM, lpSooundPross.GetVolume(), true);
 
 
 	/*peMng_ = std::make_unique<PEManager>();*/
 
-	uiManager_ = std::make_unique<UiManager>("Resource/Other/UiData/title.ui", true, false, false);
+	//uiManager_ = std::make_unique<UiManager>("Resource/Other/UiData/title.ui", true, false, false);
 
 	// シャドウマップ
 	int x, y;
@@ -42,6 +42,8 @@ TitleScene::TitleScene() :
 	lightMat_ = static_cast<LIGHT_MAT*>(GetBufferShaderConstantBuffer(shadowBuff_));
 	lightMat.view = MGetIdent();
 	lightMat.proj = MGetIdent();
+
+	image_ = LoadGraph(L"Resource/resource/kk.png", 0);
 
 	CreateBackGround();
 
@@ -69,23 +71,24 @@ void TitleScene::DrawScene(void)
 	// 影の描画
 
 	// 描画
-
 	// ポストエフェクト
 	//peMng_->SetFlag(PEID::Default, true);
 
 	//objMng_->Draw();
 	// ここに直書きしているが後から変えること
-	DrawFormatString(0, 0, 0xff0000, TEXT("%dIDのシーンです"), static_cast<unsigned int>(screenID_));
+	DrawFormatString(360, 200, 0xff0000, TEXT("アンチマジック"), static_cast<unsigned int>(screenID_));
+
+	
 }
 
 bool TitleScene::IsLoaded(void)
 {
-	return BaseScene::IsLoaded() && uiManager_->IsLoaded();
+	return BaseScene::IsLoaded() /*&& uiManager_->IsLoaded()*/;
 }
 
 void TitleScene::UpdateNon(float delta, Controller& controller)
 {
-	uiManager_->Update(delta, *this, *objManager_, controller);
+	//uiManager_->Update(delta, *this, *objManager_, controller);
 	if (controller.Pressed(InputID::Jump))
 	{
 		update_ = &TitleScene::UpdateLogoOff;
@@ -97,7 +100,7 @@ void TitleScene::UpdateLogoOff(float delta, Controller& controller)
 {
 	if ((stepTime_ += delta) >= logoUiOffTIme)
 	{
-		ChangeSceneID(SceneID::Select);
+		ChangeSceneID(SceneID::Game);
 	}
 }
 
@@ -113,9 +116,9 @@ void TitleScene::SetupShadowMap(void)
 	// シャドウマップ用にカメラをセット
 	camera_->SetUpShadow(offsetOrtho, offsetNear, offsetFar, camTar);
 
-	MV1SetUseOrigShader(true);
+	/*MV1SetUseOrigShader(true);
 	objManager_->SetupDepthTex(*shadowPs_, -1);
-	MV1SetUseOrigShader(false);
+	MV1SetUseOrigShader(false);*/
 
 	lightMat.view = GetCameraViewMatrix();
 	lightMat.proj = GetCameraProjectionMatrix();
@@ -127,15 +130,17 @@ void TitleScene::DrawLogoOff(void)
 	objManager_->ShadowDraw(shadowMap_, shadowBuff_);
 	auto alpha = 1.0f - stepTime_ / logoUiOffTIme;
 	SetDrawBlendMode(DX_BLENDMODE_ALPHA, static_cast<int>(255.0f * alpha));
-	uiManager_->Draw();
+	//uiManager_->Draw();
 	SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 255);
+	
+
 }
 
 void TitleScene::DrawNon(void)
 {
 	camera_->SetScreen();
 	objManager_->ShadowDraw(shadowMap_, shadowBuff_);
-	uiManager_->Draw();
+//	uiManager_->Draw(); 
 }
 
 void TitleScene::CreateBackGround(void)
@@ -168,5 +173,5 @@ void TitleScene::Loaded(Controller& controller)
 	lpSceneManager.GetResourceManager().Loaded();
 	objManager_->Begin();
 	objManager_->Update(0.0f, controller, *this);
-	uiManager_->Begin();
+	//uiManager_->Begin();
 }

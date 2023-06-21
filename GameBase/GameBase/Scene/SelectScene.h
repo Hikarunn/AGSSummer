@@ -88,7 +88,7 @@ private:
 
 	// シャドウマップ用の深度テクスチャ
 	// シャドウマップ用シェーダ
-	SharedShaderHandle shadowPs_;
+	//SharedShaderHandle shadowPs_;
 	int shadowMap_;
 	LIGHT_MAT* lightMat_;
 	LIGHT_MAT lightMat;

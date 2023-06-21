@@ -16,14 +16,14 @@ struct WEIGHT_NUM
 {
 	float weight[8];
 };
-
-// 敵との距離と角度を確保
-struct Radar
-{
-	float angle;
-	float range;
-	bool flag;
-};
+//
+//// 敵との距離と角度を確保
+//struct Radar
+//{
+//	float angle;
+//	float range;
+//	bool flag;
+//};
 class GameScene :
 	public BaseScene
 {
@@ -146,7 +146,7 @@ private:
 	/// レーダーのセットアップ
 	/// </summary>
 	/// <param name=""></param>
-	void RadarSetUp(void);
+	/*void RadarSetUp(void);
 
 	/// <summary>
 	/// レーダーの更新
@@ -158,7 +158,7 @@ private:
 	/// レーダーの描画
 	/// </summary>
 	/// <param name=""></param>
-	void RadarDraw(void);
+	void RadarDraw(void);*/
 
 	// シャドウマップ用の深度テクスチャ
 	// シャドウマップ用シェーダ
@@ -170,11 +170,11 @@ private:
 
 	// 被写界深度用の深度テクスチャ
 	// 深度テクスチャ用シェーダ
-	SharedShaderHandle depthPS_;
-	int depth_;
-	DepthParameter* depthMat_;
-	DepthParameter depthMat;
-	int depthbuffer_;
+	//SharedShaderHandle depthPS_;
+	//int depth_;
+	//DepthParameter* depthMat_;
+	//DepthParameter depthMat;
+	//int depthbuffer_;
 
 	float dofTotalSize_;
 
@@ -191,7 +191,7 @@ private:
 	int radarMap_;
 
 	// プレイヤーとエネミーの距離と角度をエネミーの数だけ取得
-	std::map<int, Radar>radar_;
+	//std::map<int, Radar>radar_;
 
 	// 作成したmapの数を格納
 	int count_;

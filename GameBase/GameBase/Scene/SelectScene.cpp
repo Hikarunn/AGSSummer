@@ -120,12 +120,12 @@ BaseScene::SceneUptr SelectScene::MakeTitleFunc(SceneUptr own)
 
 void SelectScene::UpdateOpend(float delta, Controller& controller)
 {
-	uiManager_->Update(delta, *this, *objManager_, controller);
+	//uiManager_->Update(delta, *this, *objManager_, controller);
 
 #ifdef _DEBUG
-	if (CheckHitKey(KEY_INPUT_SPACE))
+	if (CheckHitKey(KEY_INPUT_1))
 	{
-		ChangeSceneID(SceneID::Title);
+		ChangeSceneID(SceneID::Game);
 	}
 #endif
 }
@@ -133,8 +133,8 @@ void SelectScene::UpdateOpend(float delta, Controller& controller)
 void SelectScene::DrawWindow(void)
 {
 	DrawRotaGraph(SceneManager::screenSize_<int>.x / 2, SceneManager::screenSize_<int>.y / 2, 1.0, 0.0f, *frame_, true);
-	uiManager_->Draw();
-	DrawFormatString(0, 0, 0xff0000, TEXT("%dシーンです"), static_cast<unsigned int>(screenID_));
+	//uiManager_->Draw();
+	DrawFormatString(400, 0, 0xff0000, TEXT("セレクトシーンです"), static_cast<unsigned int>(screenID_));
 
 }
 
@@ -150,7 +150,7 @@ void SelectScene::Closed(void)
 
 bool SelectScene::IsLoaded(void)
 {
-	return BaseScene::IsLoaded() && uiManager_->IsLoaded();
+	return BaseScene::IsLoaded();// && uiManager_->IsLoaded();
 }
 
 void SelectScene::Init(void)
@@ -163,9 +163,9 @@ void SelectScene::Init(void)
 	SetMakeSceneFunc(std::bind(&SelectScene::MakeTitleFunc, this, std::placeholders::_1), SceneID::Title);
 #endif
 
-	uiManager_ = std::make_unique<UiManager>("Resource/Other/UiData/select.ui");
-	AddLoadedFunc([this](auto&) { uiManager_->Begin(); });
-	lpSceneManager.GetResourceManager().LoadTexture(frame_, "Resource/resource/SelectFrame.png");
+	//uiManager_ = std::make_unique<UiManager>("Resource/Other/UiData/select.ui");
+	//AddLoadedFunc([this](auto&)); { //uiManager_->Begin(); });
+//	lpSceneManager.GetResourceManager().LoadTexture(frame_, "Resource/resource/SelectFrame.png");
 	staegID_ = StageID::Stage1;
 	//lpSooundPross.Init(SceneID::Select);
 	//lpSooundPross.PlayBackSound(SOUNDNAME_SE::openMenu, lpSooundPross.GetVolume(), false);
@@ -215,9 +215,9 @@ void SelectScene::SetupShadowMap(void)
 	// シャドウマップ用にカメラをセット
 	camera_->SetUpShadow(offsetOrtho, offsetNear, offsetFar, camTar);
 
-	MV1SetUseOrigShader(true);
+	/*MV1SetUseOrigShader(true);
 	objManager_->SetupDepthTex(*shadowPs_, -1);
-	MV1SetUseOrigShader(false);
+	MV1SetUseOrigShader(false);*/
 
 	lightMat.view = GetCameraViewMatrix();
 	lightMat.proj = GetCameraProjectionMatrix();
