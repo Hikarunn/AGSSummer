@@ -4,14 +4,20 @@
 		<Data>
 			<posX>640</posX>
 			<posY>300</posY>
-			<imageName>Resource/resource/TitleLogoKijin.png</imageName>
+			<imageName>Resource/resource/Title/TitleLogo.png</imageName>
 			<viewType>0</viewType>
 		</Data>
 		<Data>
 			<posX>640</posX>
 			<posY>500</posY>
-			<imageName>Resource/resource/TitleKey.png</imageName>
+			<imageName>Resource/resource/Title/TitleKey.png</imageName>
 			<viewType>1</viewType>
+		</Data>
+		<Data>
+			<posX>1130</posX>
+			<posY>620</posY>
+			<imageName>Resource/resource/Title/TeamIcon.png</imageName>
+			<viewType>0</viewType>
 		</Data>
 	</Datas>
 </root>
