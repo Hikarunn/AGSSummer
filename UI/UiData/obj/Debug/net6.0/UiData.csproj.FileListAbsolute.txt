@@ -3,3 +3,13 @@ D:\Users\2016008\Desktop\AGSSummer\UI\UiData\obj\Debug\net6.0\UiData.GeneratedMS
 D:\Users\2016008\Desktop\AGSSummer\UI\UiData\obj\Debug\net6.0\UiData.AssemblyInfoInputs.cache
 D:\Users\2016008\Desktop\AGSSummer\UI\UiData\obj\Debug\net6.0\UiData.AssemblyInfo.cs
 D:\Users\2016008\Desktop\AGSSummer\UI\UiData\obj\Debug\net6.0\UiData.csproj.CoreCompileInputs.cache
+D:\Users\2016008\Desktop\AGSSummer\UI\UiData\bin\Debug\net6.0\UiData.exe
+D:\Users\2016008\Desktop\AGSSummer\UI\UiData\bin\Debug\net6.0\UiData.deps.json
+D:\Users\2016008\Desktop\AGSSummer\UI\UiData\bin\Debug\net6.0\UiData.runtimeconfig.json
+D:\Users\2016008\Desktop\AGSSummer\UI\UiData\bin\Debug\net6.0\UiData.dll
+D:\Users\2016008\Desktop\AGSSummer\UI\UiData\bin\Debug\net6.0\ref\UiData.dll
+D:\Users\2016008\Desktop\AGSSummer\UI\UiData\bin\Debug\net6.0\UiData.pdb
+D:\Users\2016008\Desktop\AGSSummer\UI\UiData\obj\Debug\net6.0\UiData.dll
+D:\Users\2016008\Desktop\AGSSummer\UI\UiData\obj\Debug\net6.0\ref\UiData.dll
+D:\Users\2016008\Desktop\AGSSummer\UI\UiData\obj\Debug\net6.0\UiData.pdb
+D:\Users\2016008\Desktop\AGSSummer\UI\UiData\obj\Debug\net6.0\UiData.genruntimeconfig.cache

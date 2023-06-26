@@ -33,7 +33,7 @@ class App
 		loadFuncs.Add("load", CreateLoadExport);
 		loadFuncs.Add("combo", CreateComboExport);
 		loadFuncs.Add("gage", CreateGageExport);
-		loadFuncs.Add("switch", CreateSwitchButtonExport);
+	//	loadFuncs.Add("switch", CreateSwitchButtonExport);
 
 		// リストを作成
 		List<IExport> exports = new List<IExport>();
@@ -126,8 +126,8 @@ class App
     }
 
 
-	static IExport CreateSwitchButtonExport(string filePath) 
-	{
-		return new SwitchButton(filePath);
-	}
+	//static IExport CreateSwitchButtonExport(string filePath) 
+	//{
+	//	return new SwitchButton(filePath);
+	//}
 }
