@@ -109,7 +109,7 @@ void PlayerBehavior::Update(BaseScene& scene, ObjectManager& objectManager, floa
 	// アニメーション制御
 	Animation(controller, objectManager);
 	// 音関係制御
-	Sound();
+	//Sound();
 }
 
 float PlayerBehavior::ProcessMove(BaseScene& scene, ObjectManager& objectManager, Controller& controller, float speed, float delta)
@@ -249,9 +249,7 @@ void PlayerBehavior::ProcessJump(Controller& controller)
 		{
 			jump_.vel += jump_.acc * hoverUD;
 			collider_->SetGravityPow(jump_.vel);
-			//sand_->Stop();
-			//blaster_->Stop();
-			//sandDiff_->Play();
+		
 		}
 		collider_->SetGroundFlag(false);
 		// 座標更新
@@ -277,7 +275,7 @@ void PlayerBehavior::ProcessFloat(void)
 {
 	auto floatUD = (float_.isUp) ? 1 : -1;									// Up : Down
 	float_.vel += float_.acc * floatUD;										// 浮遊速度計算
-	auto disY = Clamp(transform_->GetUp().y * float_.vel, -0.14f, 0.14f);		// 浮遊ふれ幅計算
+	auto disY = Clamp(transform_->GetUp().y * float_.vel, -0.14f, 0.14f);	// 浮遊ふれ幅計算
 	transform_->Pos().y += disY;											// 座標更新
 	// 浮遊方向切り替え
 	float_.isUp = (disY >= 0.14) ? false									// 下降させる
@@ -325,33 +323,33 @@ void PlayerBehavior::ResetCombo(void)
 	combo_ = 0;
 	atkLimit_ = false;
 }
-
+//
 void PlayerBehavior::ProcessStamina(Controller& controller)
 {
-	//auto& value = gauge_.at(UiID::Stamina);
-	//auto& [min, max] = value.second;
-	//auto dashFlag = (controller.Press(InputID::Dash) && controller.GetLeftInput().SqMagnitude() > 0.0f && !isStaminaLoss_);
-	//// ダッシュ
-	//value.first = (dashFlag && isDodge_) ? value.first - RiseValue				// 回避
-	//	: dashFlag ? value.first - RiseValue * 0.5								// ダッシュ
-	//	: value.first;															// 回復
-	//// ジャンプ
-	//auto jumpFlag = (controller.Press(InputID::Jump) && !isStaminaLoss_);
-	//value.first = (jumpFlag && jump_.vel >= 15.0f) ? value.first - RiseValue	// ジャンプ加速後
-	//	: (jumpFlag && jump_.vel < 15.0f) ? value.first - RiseValue * 0.5		// ジャンプ加速中
-	//	: value.first;															// 回復
-
-	//if ((!controller.Press(InputID::Jump) && !(controller.Press(InputID::Dash) && (controller.GetLeftInput().SqMagnitude() > 0.0f))) || isStaminaLoss_)
-	//{
-	//	value.first += RiseValue;
-	//}
-	//value.first = Clamp(value.first, min, max);
-	//// スタミナ切れ
-	//if (value.first <= min)
-	//{
-	//	isStaminaLoss_ = true;
-	//
-	//}
+//	//auto& value = gauge_.at(UiID::Stamina);
+//	//auto& [min, max] = value.second;
+//	//auto dashFlag = (controller.Press(InputID::Dash) && controller.GetLeftInput().SqMagnitude() > 0.0f && !isStaminaLoss_);
+//	//// ダッシュ
+//	//value.first = (dashFlag && isDodge_) ? value.first - RiseValue				// 回避
+//	//	: dashFlag ? value.first - RiseValue * 0.5								// ダッシュ
+//	//	: value.first;															// 回復
+//	//// ジャンプ
+//	//auto jumpFlag = (controller.Press(InputID::Jump) && !isStaminaLoss_);
+//	//value.first = (jumpFlag && jump_.vel >= 15.0f) ? value.first - RiseValue	// ジャンプ加速後
+//	//	: (jumpFlag && jump_.vel < 15.0f) ? value.first - RiseValue * 0.5		// ジャンプ加速中
+//	//	: value.first;															// 回復
+//
+//	//if ((!controller.Press(InputID::Jump) && !(controller.Press(InputID::Dash) && (controller.GetLeftInput().SqMagnitude() > 0.0f))) || isStaminaLoss_)
+//	//{
+//	//	value.first += RiseValue;
+//	//}
+//	//value.first = Clamp(value.first, min, max);
+//	//// スタミナ切れ
+//	//if (value.first <= min)
+//	//{
+//	//	isStaminaLoss_ = true;
+//	//
+//	//}
 }
 
 void PlayerBehavior::CoolTimer(float& delta)
@@ -476,23 +474,23 @@ void PlayerBehavior::OnHit(Collider& col, ObjectManager& objectManager)
 		objectManager.GetComponent<Transform>(effect)->Scale() = Vector3{ 0.3f,0.3f ,0.3f };
 		objectManager.Begin(effect);*/
 
-		// HP減らす
+		// エネルギーを減らす
 		auto power = objectManager.GetComponent<EnemyBehavior>(objectManager.GetEnemyID())->GetEnemyPower();
 		auto& value = gauge_.at(UiID::Torion);
 		auto& [min, max] = value.second;
-		// HP消費
+		// エネルギー消費
 		value.first = Clamp(value.first - power, min, max);
-		// HP全損
+		// エネルギー全損
 		if (value.first <= 0.0f)
 		{
 			// プレイヤー消滅処理
 			objectManager.GetComponent<ObjectInfo>(objectManager.GetPlayerID())->Destory();
 		//	sound_.at(static_cast<int>(SOUNDNAME_SE::playerDestory)).second = true;
 		}
-		else
-		{
-		//	sound_.at(static_cast<int>(SOUNDNAME_SE::playerHit)).second = true;
-		}
+		//else
+		//{
+		////	sound_.at(static_cast<int>(SOUNDNAME_SE::playerHit)).second = true;
+		//}
 	}
 }
 
