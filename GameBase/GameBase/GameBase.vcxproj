@@ -207,6 +207,17 @@
     <ClCompile Include="Factory\SkyFactory.cpp" />
     <ClCompile Include="Factory\StageFactory.cpp" />
     <ClCompile Include="Component\Behavior\TutorialBehavior.cpp" />
+    <ClCompile Include="UI\Button.cpp" />
+    <ClCompile Include="UI\ButtonBase.cpp" />
+    <ClCompile Include="UI\Cursor.cpp" />
+    <ClCompile Include="UI\Gage.cpp" />
+    <ClCompile Include="UI\Image.cpp" />
+    <ClCompile Include="UI\InputSetButton.cpp" />
+    <ClCompile Include="UI\LoadIndicatorUi.cpp" />
+    <ClCompile Include="UI\Slider.cpp" />
+    <ClCompile Include="UI\SwitchButton.cpp" />
+    <ClCompile Include="UI\UiBase.cpp" />
+    <ClCompile Include="UI\UiManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Scene\Transition\BackLoading.h" />
@@ -287,6 +298,18 @@
     <ClInclude Include="Factory\SkyFactory.h" />
     <ClInclude Include="Factory\StageFactory.h" />
     <ClInclude Include="Component\Behavior\TutorialBehavior.h" />
+    <ClInclude Include="UI\Button.h" />
+    <ClInclude Include="UI\ButtonBase.h" />
+    <ClInclude Include="UI\Cursor.h" />
+    <ClInclude Include="UI\Gage.h" />
+    <ClInclude Include="UI\Image.h" />
+    <ClInclude Include="UI\InputSetButton.h" />
+    <ClInclude Include="UI\LoadIndicatorUi.h" />
+    <ClInclude Include="UI\Slider.h" />
+    <ClInclude Include="UI\SwitchButton.h" />
+    <ClInclude Include="UI\UiBase.h" />
+    <ClInclude Include="UI\UiID.h" />
+    <ClInclude Include="UI\UiManager.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="Resource\Model\Log.txt" />

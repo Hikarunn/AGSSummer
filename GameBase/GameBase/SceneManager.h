@@ -72,7 +72,7 @@ public:
 
 	// スクリーンサイズ
 	template<ValueC C>
-	static constexpr Vector2Tmp<C> screenSize_{ 800, 600 };
+	static constexpr Vector2Tmp<C> screenSize_{ 1280, 720 };
 
 	Controller& GetController(void);
 
