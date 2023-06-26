@@ -7,7 +7,6 @@
 #include "../Common/ResourceManager.h"
 //#include "../Common/SoundPross.h"
 #include "SelectScene.h"
-#include "OpeningScene.h"
 #include "../UI/UiManager.h"
 #include "../Object/ObjectManager.h"
 #include "../Component/Render/ModelRender.h"

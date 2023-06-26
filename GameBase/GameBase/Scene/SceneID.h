@@ -3,7 +3,6 @@
 // スクリーンのID 
 enum class SceneID
 {
-	Opening,			// オープニング
 	Title,			// タイトル 
 	Select,			// 選択シーン
 	Game,			// プレイ中
