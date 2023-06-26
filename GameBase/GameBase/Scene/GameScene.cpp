@@ -24,14 +24,23 @@ GameScene::GameScene(StageID stageID) :
 	SetMakeSceneFunc(std::bind(&GameScene::MakePauseFunc, this, std::placeholders::_1), SceneID::Pause);
 	objManager_ = std::make_unique<ObjectManager>(10);
 //	peMng_ = std::make_unique<PEManager>();
-	if (stageID_ == StageID::Tutorial)
-	{
-		// チュートリアル時
-		//uiManager_ = std::make_unique<UiManager>("Resource/Other/UiData/game.ui", true, true, false);
-		objManager_->AddFactory(std::make_unique<StageFactory>(*objManager_));
-		SetMakeSceneFunc(std::bind(&GameScene::MakeSelectFunc, this, std::placeholders::_1), SceneID::Select);
-	}
-	else
+//	if (stageID_ == StageID::Tutorial)
+//	{
+//		// チュートリアル時
+//		//uiManager_ = std::make_unique<UiManager>("Resource/Other/UiData/game.ui", true, true, false);
+//		objManager_->AddFactory(std::make_unique<StageFactory>(*objManager_));
+//		SetMakeSceneFunc(std::bind(&GameScene::MakeSelectFunc, this, std::placeholders::_1), SceneID::Select);
+//	}
+//	else
+//	{
+//		// 通常時のゲーム時
+//		objManager_->AddFactory(std::make_unique<StageFactory>("Resource/Other/Stage" + std::to_string(static_cast<int>(stageID)) + ".data", *objManager_));
+//		//objMng_->AddFactory(std::make_unique<StageFactory>("Resource/Other/dbg.data", *objMng_));
+//		//uiManager_ = std::make_unique<UiManager>("Resource/Other/UiData/game.ui", true, false, false);
+////		lpSceneManager.GetResourceManager().MakeRenderTarget(resultCapture_, ScreenID::ResultCapture, SceneManager::screenSize_<float>, true);
+//	}
+	
+	if (stageID_ == StageID::Stage1) 
 	{
 		// 通常時のゲーム時
 		objManager_->AddFactory(std::make_unique<StageFactory>("Resource/Other/Stage" + std::to_string(static_cast<int>(stageID)) + ".data", *objManager_));
@@ -223,15 +232,15 @@ void GameScene::DrawScene(void)
 
 	// 被写界深度用の深度テクスチャの作成
 	//SetUpDepth();
-
+	//
 	//depthMat_[0] = depthMat;
 	////peMng_->SetBuffer(depthbuffer_);
 	//// ポストエフェクトか通常描画
 	////peMng_->Draw(offScreen_, *screenHandle_, depth_, skyScreen_, subScreen_);
-
+	//
 	//// ミニマップの作成
 	//DrawGraph(10, 10, radarMap_, true);
-
+	//
 	// UIの描画
 	//uiManager_->Draw();
 	// ここに直書きしているが後から変えること

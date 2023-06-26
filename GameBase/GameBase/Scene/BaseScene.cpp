@@ -4,7 +4,7 @@
 #include "../Object/ObjectManager.h"
 #include "../Common/Camera.h"
 #include "../Common/ResourceManager.h"
-//#include "../UI/UiManager.h"
+#include "../UI/UiManager.h"
 #include "../Common/Input/InputType/Keyboard.h"
 #include "../Common/Input/InputType/Pad.h"
 

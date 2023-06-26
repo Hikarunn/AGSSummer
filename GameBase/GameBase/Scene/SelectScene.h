@@ -40,7 +40,7 @@ public:
 	/// チュートリアルへ
 	/// </summary>
 	/// <param name=""></param>
-	void Tutorial(void);
+	//void Tutorial(void);
 private:
 	const SceneID GetID(void) const
 	{

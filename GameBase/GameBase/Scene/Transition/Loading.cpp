@@ -1,5 +1,5 @@
 #include "../../SceneManager.h"
-//#include "../../UI/UiManager.h"
+#include "../../UI/UiManager.h"
 #include "Loading.h"
 
 #include "../../Common/Debug.h"
@@ -10,8 +10,8 @@ Loading::Loading(SceneUptr befor, SceneUptr after, float transTime) :
 	transTime_{ transTime }, stepTime_{ 0.0f }
 {
 	SetMakeSceneFunc(std::bind(&Loading::MakeNextFunc, this, std::placeholders::_1), after_->GetID());
-	//uiManager_ = std::make_unique<UiManager>("Resource/Other/UiData/load.ui", false, false, false);
-	//uiManager_->Begin();
+	uiManager_ = std::make_unique<UiManager>("Resource/Other/UiData/load.ui", false, false, false);
+	uiManager_->Begin();
 }
 
 Loading::~Loading()

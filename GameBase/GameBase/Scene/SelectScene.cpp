@@ -86,13 +86,13 @@ void SelectScene::Play(void)
 	Close();
 }
 
-void SelectScene::Tutorial(void)
-{
-	staegID_ = StageID::Tutorial;
-	choiceNextID_ = SceneID::Game;
-	//lpSooundPross.PlayBackSound(SOUNDNAME_SE::cursorMove, lpSooundPross.GetVolume(), false);
-	Close();
-}
+//void SelectScene::Tutorial(void)
+//{
+//	staegID_ = StageID::Tutorial;
+//	choiceNextID_ = SceneID::Game;
+//	//lpSooundPross.PlayBackSound(SOUNDNAME_SE::cursorMove, lpSooundPross.GetVolume(), false);
+//	Close();
+//}
 
 BaseScene::SceneUptr SelectScene::MakeGameFunc(SceneUptr own)
 {

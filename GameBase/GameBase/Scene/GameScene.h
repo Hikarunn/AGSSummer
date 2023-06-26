@@ -115,7 +115,7 @@ private:
 	/// 被写界深度用の深度テクスチャ
 	/// </summary>
 	/// <param name=""></param>
-	void SetUpDepth(void);
+	//void SetUpDepth(void);
 
 	/// <summary>
 	/// ポストエフェクトで使うスクリーンの作成

@@ -7,7 +7,8 @@
 #include "../Common/ResourceManager.h"
 //#include "../Common/SoundPross.h"
 #include "SelectScene.h"
-//#include "../UI/UiManager.h"
+#include "OpeningScene.h"
+#include "../UI/UiManager.h"
 #include "../Object/ObjectManager.h"
 #include "../Component/Render/ModelRender.h"
 #include "../Component/Transform/Transform.h"
@@ -29,7 +30,7 @@ TitleScene::TitleScene() :
 
 	/*peMng_ = std::make_unique<PEManager>();*/
 
-	//uiManager_ = std::make_unique<UiManager>("Resource/Other/UiData/title.ui", true, false, false);
+	uiManager_ = std::make_unique<UiManager>("Resource/Other/UiData/title.ui", true, false, false);
 
 	// シャドウマップ
 	int x, y;
@@ -74,21 +75,22 @@ void TitleScene::DrawScene(void)
 	// ポストエフェクト
 	//peMng_->SetFlag(PEID::Default, true);
 
-	//objMng_->Draw();
+//
+	//objManager_->Draw();
 	// ここに直書きしているが後から変えること
-	DrawFormatString(360, 200, 0xff0000, TEXT("アンチマジック"), static_cast<unsigned int>(screenID_));
+	//DrawFormatString(360, 200, 0xff0000, TEXT("アンチマジック"), static_cast<unsigned int>(screenID_));
 
 	
 }
 
 bool TitleScene::IsLoaded(void)
 {
-	return BaseScene::IsLoaded() /*&& uiManager_->IsLoaded()*/;
+	return BaseScene::IsLoaded() && uiManager_->IsLoaded();
 }
 
 void TitleScene::UpdateNon(float delta, Controller& controller)
 {
-	//uiManager_->Update(delta, *this, *objManager_, controller);
+	uiManager_->Update(delta, *this, *objManager_, controller);
 	if (controller.Pressed(InputID::Jump))
 	{
 		update_ = &TitleScene::UpdateLogoOff;
@@ -130,7 +132,7 @@ void TitleScene::DrawLogoOff(void)
 	objManager_->ShadowDraw(shadowMap_, shadowBuff_);
 	auto alpha = 1.0f - stepTime_ / logoUiOffTIme;
 	SetDrawBlendMode(DX_BLENDMODE_ALPHA, static_cast<int>(255.0f * alpha));
-	//uiManager_->Draw();
+	uiManager_->Draw();
 	SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 255);
 	
 
@@ -140,7 +142,7 @@ void TitleScene::DrawNon(void)
 {
 	camera_->SetScreen();
 	objManager_->ShadowDraw(shadowMap_, shadowBuff_);
-//	uiManager_->Draw(); 
+	uiManager_->Draw(); 
 }
 
 void TitleScene::CreateBackGround(void)
@@ -150,7 +152,7 @@ void TitleScene::CreateBackGround(void)
 	auto id = objManager_->MakeObjectID();
 
 	std::unique_ptr<Render> render = std::make_unique<ModelRender>();
-	render->Load("Resource/resource/Title/Title.mv1");
+	//render->Load("Resource/resource/Title/Title.mv1");
 	//render->Load("Resource/Model/Player/妖夢.mv1");
 	objManager_->AddComponent(std::move(render), id);
 
@@ -173,5 +175,5 @@ void TitleScene::Loaded(Controller& controller)
 	lpSceneManager.GetResourceManager().Loaded();
 	objManager_->Begin();
 	objManager_->Update(0.0f, controller, *this);
-	//uiManager_->Begin();
+	uiManager_->Begin();
 }

@@ -20,7 +20,7 @@ FadeLoading::FadeLoading(SceneUptr after, float transTime) :
 
 void FadeLoading::Update(float delta, Controller& controller)
 {
-	//uiManager_->Update(delta, *this, *objManager_, controller);
+	uiManager_->Update(delta, *this, *objManager_, controller);
 	(this->*update_)(delta, controller);
 }
 
@@ -72,7 +72,8 @@ void FadeLoading::DrawFadeIn(void)
 
 void FadeLoading::DrawLoading(void)
 {
-	//uiManager_->Draw();
+	uiManager_->Draw();
+	DebugLog("ƒ[ƒh’†");
 }
 
 void FadeLoading::DrawFadeOut(void)

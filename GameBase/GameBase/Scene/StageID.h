@@ -2,8 +2,8 @@
 
 enum class StageID
 {
-	Tutorial,
+	//Tutorial,
 	Stage1,
-	Stage2,
+	//Stage2,
 	Max,
 };
