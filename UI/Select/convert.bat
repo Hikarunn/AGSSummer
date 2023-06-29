@@ -1,2 +1,2 @@
-.\..\UiData.exe ./select.ui ./button.button
+.\..\UiData.exe ./select.ui ./SelectImage.image ./button.button
 pause
