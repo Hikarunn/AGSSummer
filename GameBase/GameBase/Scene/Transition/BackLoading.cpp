@@ -25,6 +25,6 @@ void BackLoading::DrawScene(void)
 	SetDrawScreen(*screenHandle_);
 	ClsDrawScreen();
 	befor_->Draw();
-	uiManager_->Draw();
+	uiManager_->Draw(*screenHandle_);
 
 }

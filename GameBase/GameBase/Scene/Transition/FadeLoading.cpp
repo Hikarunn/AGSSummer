@@ -63,7 +63,7 @@ void FadeLoading::UpdateFadesIn(float delta, Controller& controller)
 
 void FadeLoading::DrawFadeIn(void)
 {
-	//uiManager_->Draw();
+	uiManager_->Draw(*screenHandle_);
 	float alpha = stepTime_ / transTime_;
 	SetDrawBlendMode(DX_BLENDMODE_ALPHA, static_cast<int>(255.0f * alpha));
 	after_->Draw();
@@ -72,8 +72,8 @@ void FadeLoading::DrawFadeIn(void)
 
 void FadeLoading::DrawLoading(void)
 {
-	uiManager_->Draw();
-	DebugLog("ロード中");
+	uiManager_->Draw(*screenHandle_);
+	//DebugLog("ロード中");
 }
 
 void FadeLoading::DrawFadeOut(void)
