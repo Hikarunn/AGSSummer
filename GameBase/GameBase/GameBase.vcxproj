@@ -127,6 +127,11 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(DXLIB_DIR)</AdditionalLibraryDirectories>
     </Link>
+    <FxCompile>
+      <ShaderModel>5.0</ShaderModel>
+      <ObjectFileOutput>Resource/resource/Shader</ObjectFileOutput>
+      <ShaderType>Pixel</ShaderType>
+    </FxCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -146,6 +151,9 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Common\Input\InputConfig\InputConfig.cpp" />
+    <ClCompile Include="Component\Render\BillboardRender.cpp" />
+    <ClCompile Include="Component\Render\CapsuleRender.cpp" />
+    <ClCompile Include="Component\Render\LineRender.cpp" />
     <ClCompile Include="Scene\Transition\BackLoading.cpp" />
     <ClCompile Include="Scene\Transition\FadeLoading.cpp" />
     <ClCompile Include="Scene\Transition\Loading.cpp" />
@@ -207,6 +215,16 @@
     <ClCompile Include="Factory\SkyFactory.cpp" />
     <ClCompile Include="Factory\StageFactory.cpp" />
     <ClCompile Include="Component\Behavior\TutorialBehavior.cpp" />
+    <ClCompile Include="Shader\PEBase.cpp" />
+    <ClCompile Include="Shader\PEManager.cpp" />
+    <ClCompile Include="Shader\PEType\AveblurPE.cpp" />
+    <ClCompile Include="Shader\PEType\ColortoMono.cpp" />
+    <ClCompile Include="Shader\PEType\DofPE.cpp" />
+    <ClCompile Include="Shader\PEType\GaussPE.cpp" />
+    <ClCompile Include="Shader\PEType\MonoPE.cpp" />
+    <ClCompile Include="Shader\PEType\NoPE.cpp" />
+    <ClCompile Include="Shader\PEType\VolfogPE.cpp" />
+    <ClCompile Include="Shader\ShrinkBuff.cpp" />
     <ClCompile Include="UI\Button.cpp" />
     <ClCompile Include="UI\ButtonBase.cpp" />
     <ClCompile Include="UI\Cursor.cpp" />
@@ -220,6 +238,9 @@
     <ClCompile Include="UI\UiManager.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Component\Render\BillboardRender.h" />
+    <ClInclude Include="Component\Render\CapsuleRender.h" />
+    <ClInclude Include="Component\Render\LineRender.h" />
     <ClInclude Include="Scene\Transition\BackLoading.h" />
     <ClInclude Include="Scene\Transition\FadeLoading.h" />
     <ClInclude Include="Scene\Transition\Loading.h" />
@@ -298,6 +319,17 @@
     <ClInclude Include="Factory\SkyFactory.h" />
     <ClInclude Include="Factory\StageFactory.h" />
     <ClInclude Include="Component\Behavior\TutorialBehavior.h" />
+    <ClInclude Include="Shader\PEBase.h" />
+    <ClInclude Include="Shader\PEID.h" />
+    <ClInclude Include="Shader\PEManager.h" />
+    <ClInclude Include="Shader\PEType\AveblurPE.h" />
+    <ClInclude Include="Shader\PEType\ColortoMono.h" />
+    <ClInclude Include="Shader\PEType\DofPE.h" />
+    <ClInclude Include="Shader\PEType\GaussPE.h" />
+    <ClInclude Include="Shader\PEType\MonoPE.h" />
+    <ClInclude Include="Shader\PEType\NoPE.h" />
+    <ClInclude Include="Shader\PEType\VolfogPE.h" />
+    <ClInclude Include="Shader\ShrinkBuff.h" />
     <ClInclude Include="UI\Button.h" />
     <ClInclude Include="UI\ButtonBase.h" />
     <ClInclude Include="UI\Cursor.h" />
@@ -316,6 +348,76 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resource\Model\Map.mv1" />
+  </ItemGroup>
+  <ItemGroup>
+    <FxCompile Include="Shader\Pixel\NormTex.hlsl">
+      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Resource/resource/Shader/Pixel/NormTex.pso</ObjectFileOutput>
+    </FxCompile>
+    <FxCompile Include="Shader\Pixel\Tex.hlsl">
+      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Resource/resource/Shader/Pixel/Tex.pso</ObjectFileOutput>
+    </FxCompile>
+    <FxCompile Include="Shader\PostEffect\AverageBlur.hlsl">
+      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Resource/resource/Shader/PostEffect/aveblur.pso</ObjectFileOutput>
+    </FxCompile>
+    <FxCompile Include="Shader\PostEffect\BlackandWhite.hlsl">
+      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Resource/resource/Shader/PostEffect/baw.pso</ObjectFileOutput>
+    </FxCompile>
+    <FxCompile Include="Shader\PostEffect\DepthTex.hlsl">
+      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Resource/resource/Shader/PostEffect/Dof/depth.pso</ObjectFileOutput>
+    </FxCompile>
+    <FxCompile Include="Shader\PostEffect\DofPS.hlsl">
+      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Resource/resource/Shader/PostEffect/Dof/dof.pso</ObjectFileOutput>
+    </FxCompile>
+    <FxCompile Include="Shader\PostEffect\FogAndRed.hlsl">
+      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Resource/resource/Shader/PostEffect/FtR.pso</ObjectFileOutput>
+    </FxCompile>
+    <FxCompile Include="Shader\PostEffect\Gaussian.hlsl">
+      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Resource/resource/Shader/PostEffect/gauss.pso</ObjectFileOutput>
+    </FxCompile>
+    <FxCompile Include="Shader\PostEffect\Meah4.hlsl">
+      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+      </EntryPointName>
+      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Resource/resource/Shader/PostEffect/Dof/mesh1.vs</ObjectFileOutput>
+    </FxCompile>
+    <FxCompile Include="Shader\PostEffect\Mesh1.hlsl">
+      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Resource/resource/Shader/PostEffect/Dof/mesh4.vs</ObjectFileOutput>
+    </FxCompile>
+    <FxCompile Include="Shader\PostEffect\mono.hlsl">
+      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Resource/resource/Shader/PostEffect/mono.pso</ObjectFileOutput>
+    </FxCompile>
+    <FxCompile Include="Shader\PostEffect\VolumeFog.hlsl">
+      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Resource/resource/Shader/PostEffect/volFog.pso</ObjectFileOutput>
+    </FxCompile>
+    <FxCompile Include="Shader\PostEffect\Xblur.hlsl">
+      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Resource/resource/Shader/PostEffect/Xblur.vso</ObjectFileOutput>
+    </FxCompile>
+    <FxCompile Include="Shader\PostEffect\Yblur.hlsl">
+      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Resource/resource/Shader/PostEffect/Yblur.vso</ObjectFileOutput>
+    </FxCompile>
+    <FxCompile Include="Shader\ShadowMap\Mesh1Shadow.hlsl">
+      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Resource/resource/Shader/ShadowMap/Mesh.vso</ObjectFileOutput>
+    </FxCompile>
+    <FxCompile Include="Shader\ShadowMap\Mesh4Shadow.hlsl">
+      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Resource/resource/Shader/ShadowMap/Mesh4.vso</ObjectFileOutput>
+    </FxCompile>
+    <FxCompile Include="Shader\ShadowMap\NMesh1Shadow.hlsl">
+      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Resource/resource/Shader/ShadowMap/NormMesh.vso</ObjectFileOutput>
+    </FxCompile>
+    <FxCompile Include="Shader\ShadowMap\ShadowMapPixelShader.hlsl">
+      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Resource/resource/Shader/ShadowMap/ShadowMap.pso</ObjectFileOutput>
+    </FxCompile>
+    <FxCompile Include="Shader\ShadowMap\ShadowMapPS.hlsl">
+      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Resource/resource/Shader/ShadowMap/ShadowMap.pso</ObjectFileOutput>
+    </FxCompile>
+    <FxCompile Include="Shader\Vertex\Mesh.hlsl">
+      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Resource/resource/Shader/Vertex/Mesh.vso</ObjectFileOutput>
+    </FxCompile>
+    <FxCompile Include="Shader\Vertex\Mesh4.hlsl">
+      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Resource/resource/Shader/Vertex/Mesh4.vso</ObjectFileOutput>
+    </FxCompile>
+    <FxCompile Include="Shader\Vertex\NormMesh.hlsl">
+      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Resource/resource/Shader/Vertex/NormMesh.vso</ObjectFileOutput>
+    </FxCompile>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

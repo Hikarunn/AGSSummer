@@ -108,8 +108,7 @@ bool SceneManager::Init(void)
 	//scene_ = std::make_unique<Loading>(std::make_unique<GameScene>(), TransitionType::Fade, 1.0f);
 	//scene_ = std::make_unique<FadeLoading>(std::make_unique<GameScene>(), 1.0f);
 	scene_ = std::make_unique<FadeLoading>(std::make_unique<TitleScene>(), 1.0f);	DebugLog("シーン作成終了");
-	//scene_ = std::make_unique<FadeLoading>(std::make_unique<OpeningScene>(), 1.0f);	DebugLog("シーン作成終了");
-
+	
 	timeClass_.DeltaTimeEnd();
 	timeClass_.DeltaTimeStart();
 	timeClass_.GameTimeEnd();
