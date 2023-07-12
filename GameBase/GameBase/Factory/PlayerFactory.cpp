@@ -51,9 +51,9 @@ ObjectID PlayerFactory::Create(ObjectID ownerID, const Vector3& pos, const Vecto
 
 	objectManager_.GetComponent<Render>(id)->Load(modelPath_);
 	auto col = objectManager_.GetComponent<CharactorCollider>(id);
-	col->SetHeight(70.0f);
+	col->SetHeight(90.0f);
 	col->SetRadius(50.0f);
-	col->SetOffset({ 0.0f, 40.0f, 0.0f });
+	col->SetOffset({ 0.0f, 120.0f, -10.0f });
 
 	objectManager_.SetPlayerID(id);
 	return id;
