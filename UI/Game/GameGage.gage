@@ -3,24 +3,8 @@
 	<Datas>
 		<Data>
 			<funcID>0</funcID>
-			<imageName>Resource/resource/Ui/Hp.png</imageName>
-			<frameImageName>Resource/resource/Ui/frame.png</frameImageName>
-			<startValue>1</startValue>
-			<posX>50</posX>
-			<posY>650</posY>
-		</Data>
-		<Data>
-			<funcID>1</funcID>
-			<imageName>Resource/resource/Ui/Skill.png</imageName>
-			<frameImageName>Resource/resource/Ui/frame.png</frameImageName>
-			<startValue>0</startValue>
-			<posX>50</posX>
-			<posY>673</posY>
-		</Data>
-		<Data>
-			<funcID>2</funcID>
-			<imageName>Resource/resource/Ui/Stamina.png</imageName>
-			<frameImageName>Resource/resource/Ui/frame.png</frameImageName>
+			<imageName>Resource/resource/Ui/Trion.png</imageName>
+			<frameImageName>Resource/resource/Ui/Frame.png</frameImageName>
 			<startValue>1</startValue>
 			<posX>50</posX>
 			<posY>696</posY>

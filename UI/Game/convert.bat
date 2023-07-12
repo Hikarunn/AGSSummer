@@ -1,2 +1,2 @@
-.\..\UiData.exe ./game.ui ./GameGage.gage ./ImageArray.imageArray ./GameCombo.combo
+.\..\UiData.exe ./game.ui ./GameGage.gage ./IconImage.image 
 pause
