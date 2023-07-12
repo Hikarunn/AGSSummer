@@ -104,7 +104,7 @@ void InputSetButton::Update(float delta, BaseScene& scene, ObjectManager& objMng
 	nowCode_ = static_cast<OptionScene&>(scene).GetInputCode()[id_];
 }
 
-void InputSetButton::Draw()
+void InputSetButton::Draw(int mainScr)
 {
 	auto infoY = (size_.y - 47.0f) / 2.0f;
 	DrawGraph(static_cast<int>(pos_.x), static_cast<int>(pos_.y), *button_, true);

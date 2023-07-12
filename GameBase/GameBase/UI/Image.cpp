@@ -37,7 +37,7 @@ void Image::Update(float delta, BaseScene& scene, ObjectManager& objMng, Control
 	time_ += delta;
 }
 
-void Image::Draw()
+void Image::Draw(int mainScr)
 {
 	(this->*draw_)();
 }

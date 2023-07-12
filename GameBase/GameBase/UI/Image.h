@@ -15,7 +15,7 @@ public:
 	Image(const std::filesystem::path& path, const Vector2I& div, const Vector2I& size, const Vector2& pos, const Vector2& interval);
 private:
 	void Update(float delta, BaseScene& scene, ObjectManager& objMng, Controller& controller) final;
-	void Draw();
+	void Draw(int mainScr);
 	UiID GetUIID(void)
 	{
 		return UiID::Frame;

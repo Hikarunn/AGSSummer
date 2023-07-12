@@ -9,7 +9,7 @@ private:
     static constexpr int Interval = 3;
 
     void Update(float delta, BaseScene& scene, ObjectManager& objMng, Controller& controller) override;
-    void Draw() override;
+    void Draw(int mainScr) override;
     UiID GetUIID(void) override { return UiID::Indicator; }
 
     // •`‰æŠp“x

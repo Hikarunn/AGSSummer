@@ -36,7 +36,7 @@ public:
 	/// •`‰æ
 	/// </summary>
 	/// <param name=""></param>
-	void Draw(void);
+	void Draw(int mainScr);
 
 	const std::list<std::unique_ptr<UiBase>>& GetUiList(void) const { return uiList_; }
 

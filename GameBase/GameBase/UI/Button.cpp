@@ -18,7 +18,7 @@ void Button::Update(float delta, BaseScene& scene, ObjectManager& objMng, Contro
 {
 }
 
-void Button::Draw()
+void Button::Draw(int mainScr)
 {
 	(this->*draw_)();
 }

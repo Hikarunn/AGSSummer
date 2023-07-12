@@ -177,7 +177,7 @@ void UiManager::CreateButton(std::ifstream& file, int num)
 {
 	// ƒ{ƒ^ƒ“‚Ìˆ—
 	std::vector<std::function<void(BaseScene&)>> funcs{
-	//	[](BaseScene& scene) { static_cast<SelectScene&>(scene).Tutorial(); },
+		[](BaseScene& scene) { static_cast<SelectScene&>(scene).Tutorial(); },
 		[](BaseScene& scene) { static_cast<SelectScene&>(scene).Play(); },
 		[](BaseScene& scene) { static_cast<SelectScene&>(scene).Option(); },
 		[](BaseScene& scene) { static_cast<SelectScene&>(scene).Dialog(); },
@@ -600,10 +600,10 @@ void UiManager::Update(float delta, BaseScene& scene, ObjectManager& obj, Contro
 	}
 }
 
-void UiManager::Draw(void)
+void UiManager::Draw(int mainScr)
 {
 	for (auto& ui : uiList_)
 	{
-		ui->Draw();
+		ui->Draw(mainScr);
 	}
 }

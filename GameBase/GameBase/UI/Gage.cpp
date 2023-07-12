@@ -22,7 +22,7 @@ void Gage::Update(float delta, BaseScene& scene, ObjectManager& objMng, Controll
 	switch (id_)
 	{
 	case GageID::Trion:
-		HpUpdate(objMng);
+		TrionUpdate(objMng);
 		break;
 
 	default:
@@ -30,45 +30,45 @@ void Gage::Update(float delta, BaseScene& scene, ObjectManager& objMng, Controll
 	}
 }
 
-void Gage::HpUpdate(ObjectManager& objMng)
+void Gage::TrionUpdate(ObjectManager& objManager)
 {
 	// ゲージ変化なしの状態は入らない
-	if (Clamp(dataBindFunc_(objMng) / size_.x) == subGageValue_)
+	if (Clamp(dataBindFunc_(objManager) / size_.x) == subGageValue_)
 	{
 		return;
 	}
 	// 減少値
-	power_ = objMng.GetComponent<EnemyBehavior>(objMng.GetEnemyID())->GetEnemyPower();
+	power_ = objManager.GetComponent<EnemyBehavior>(objManager.GetEnemyID())->GetEnemyPower();
 	// 規定値に到達したら
-	if (value_ <= Clamp(dataBindFunc_(objMng) / size_.x))
+	if (value_ <= Clamp(dataBindFunc_(objManager) / size_.x))
 	{
 		// 規定値代入
-		AssignGageValue(objMng);
+		AssignGageValue(objManager);
 		// サブゲージ減少処理
-		DecSubGageValue(objMng, 100.0f);
+		DecSubGageValue(objManager, 100.0f);
 		return;
 	}
 	// 値増減処理
-	FlucGageValue(objMng, 20.0f, false);
+	FlucGageValue(objManager, 20.0f, false);
 }
 
-void Gage::SkillUpdate(ObjectManager& objMng)
-{
-	// ゲージリセット
-	if (!dataBindFunc_(objMng))
-	{
-		value_ = 0.0f;
-	}
-	// 規定値に到達したら
-	if (value_ >= Clamp(dataBindFunc_(objMng) / size_.x))
-	{
-		// 規定値代入
-		AssignGageValue(objMng);
-		return;
-	}
-	// 値増減処理
-	FlucGageValue(objMng, 50.0f, true);
-}
+//void Gage::SkillUpdate(ObjectManager& objMng)
+//{
+//	// ゲージリセット
+//	if (!dataBindFunc_(objMng))
+//	{
+//		value_ = 0.0f;
+//	}
+//	// 規定値に到達したら
+//	if (value_ >= Clamp(dataBindFunc_(objMng) / size_.x))
+//	{
+//		// 規定値代入
+//		AssignGageValue(objMng);
+//		return;
+//	}
+//	// 値増減処理
+//	FlucGageValue(objMng, 50.0f, true);
+//}
 
 void Gage::FlucGageValue(ObjectManager& objMng, float cnt, bool isUp)
 {
@@ -97,7 +97,7 @@ void Gage::AssignGageValue(ObjectManager& objMng)
 	value_ = Clamp(dataBindFunc_(objMng) / size_.x);
 }
 
-void Gage::Draw()
+void Gage::Draw(int mainScr)
 {
 	// HPゲージのみサブゲージ表示
 	if (id_ == GageID::Trion)

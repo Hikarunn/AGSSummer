@@ -13,7 +13,7 @@ public:
 	SwitchButton(const PushFunc& pushFunc, const UpdateFunc& updateFunc, const std::filesystem::path& onPath, const std::filesystem::path& offPath, const std::filesystem::path& cursorPath, const Vector2& pos);
 private:
 	void Update(float delta, BaseScene& scene, ObjectManager& objMng, Controller& controller) final;
-	void Draw() final;
+	void Draw(int mainScr) final;
 	void Push(BaseScene& scene, Controller& controller) final;
 	void HitCursor(void) final;
 	void NotHitCursor(void)final;

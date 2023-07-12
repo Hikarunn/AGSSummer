@@ -20,12 +20,12 @@ public:
 
 private:
 	void Update(float delta, BaseScene& scene, ObjectManager& objMng, Controller& controller) final;
-	void HpUpdate(ObjectManager& objMng);
-	void SkillUpdate(ObjectManager& objMng);
+	void TrionUpdate(ObjectManager& objMng);
+	//void SkillUpdate(ObjectManager& objMng);
 	void FlucGageValue(ObjectManager& objMng, float cnt, bool isUp);
 	void DecSubGageValue(ObjectManager& objMng, float cnt);
 	void AssignGageValue(ObjectManager& objMng);
-	void Draw() final;
+	void Draw(int mainScr) final;
 	UiID GetUIID(void) final
 	{
 		return UiID::Frame;

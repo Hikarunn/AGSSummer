@@ -13,7 +13,7 @@ public:
 	void Check(std::list<std::unique_ptr<UiBase>>& uiList, BaseScene& scene, Controller& controller);
 private:
 	void Update(float delta, BaseScene& scene, ObjectManager& objMng, Controller& controller) final;
-	void Draw(void) final;
+	void Draw(int mainScr) final;
 	UiID GetUIID(void) { return UiID::Cursor; };
 
 	// ƒJ[ƒ\ƒ‹‰æ‘œ

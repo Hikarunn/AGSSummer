@@ -19,7 +19,7 @@ public:
 	virtual ~UiBase() = default;
 
 	virtual void Update(float delta, BaseScene& scene, ObjectManager& objMng, Controller& controller) = 0;
-	virtual void Draw() = 0;
+	virtual void Draw(int mainScr) = 0;
 	virtual UiID GetUIID(void) = 0;
 	virtual void Loaded(void);
 

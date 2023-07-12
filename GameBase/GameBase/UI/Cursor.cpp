@@ -20,7 +20,7 @@ void Cursor::Update(float delta, BaseScene& scene, ObjectManager& objMng, Contro
 	pos_ = controller.GetCursorPos();
 }
 
-void Cursor::Draw(void)
+void Cursor::Draw(int mainScr)
 {
 	DrawRotaGraphF(pos_.x, pos_.y, 1.0, 0.0, *handle_, true);
 }

@@ -10,7 +10,7 @@ class Slider :
 public:
 	Slider(const ValueGetFunc& valueGetFunc, const std::filesystem::path& sliderBarPath, const std::filesystem::path& sliderTabPath, float defaultValue, const Vector2& pos);
 	void Update(float delta, BaseScene& scene, ObjectManager& objMng, Controller& controller);
-	void Draw();
+	void Draw(int mainScr);
 
 private:
 	void Push(BaseScene& scene, Controller& controller) final;

@@ -15,7 +15,7 @@ void Slider::Update(float delta, BaseScene& scene, ObjectManager& objMng, Contro
 {
 }
 
-void Slider::Draw()
+void Slider::Draw(int mainScr)
 {
 	DrawGraph(static_cast<int>(pos_.x), static_cast<int>(pos_.y), *sliderBar_, true);
 	DrawGraph(static_cast<int>(sliderTabPos_.x), static_cast<int>(sliderTabPos_.y), *sliderTab_, true);

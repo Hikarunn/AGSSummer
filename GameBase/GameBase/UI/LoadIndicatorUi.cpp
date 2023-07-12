@@ -25,7 +25,7 @@ void LoadIndicatorUi::Update(float delta, BaseScene& scene, ObjectManager& objMn
 	cnt_++;
 }
 
-void LoadIndicatorUi::Draw()
+void LoadIndicatorUi::Draw(int mainScr)
 {
 	// インジケーター描画
 	DrawRotaGraphF(pos_.x, pos_.y, 1.0, angle_, *handle_, true, false);

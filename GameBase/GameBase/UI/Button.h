@@ -12,7 +12,7 @@ class Button :
 public:
 	Button(const PushFunc& pushFunc, const std::filesystem::path& btnPath, const std::filesystem::path& hitCursorPath, const Vector2& pos);
 	void Update(float delta, BaseScene& scene, ObjectManager& objMng, Controller& controller) final;
-	void Draw() final;
+	void Draw(int mainScr) final;
 
 private:
 	void Push(BaseScene& scene, Controller& controller) final;

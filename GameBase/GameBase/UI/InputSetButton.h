@@ -10,7 +10,7 @@ public:
 	InputSetButton(InputID id, const Vector2& pos);
 private:
 	void Update(float delta, BaseScene& scene, ObjectManager& objMng, Controller& controller) final;
-	void Draw() final;
+	void Draw(int mainScr) final;
 	void Push(BaseScene& scene, Controller& controller) final;
 	void HitCursor(void) final;
 	void NotHitCursor(void)final;

@@ -26,7 +26,7 @@ void SwitchButton::Update(float delta, BaseScene& scene, ObjectManager& objMng, 
 	}
 }
 
-void SwitchButton::Draw()
+void SwitchButton::Draw(int mainScr)
 {
 	(this->*drawButton_)();
 	(this->*drawFrame_)();
