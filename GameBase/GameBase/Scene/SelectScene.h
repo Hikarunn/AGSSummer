@@ -40,7 +40,7 @@ public:
 	/// チュートリアルへ
 	/// </summary>
 	/// <param name=""></param>
-	//void Tutorial(void);
+	void Tutorial(void);
 private:
 	const SceneID GetID(void) const
 	{
@@ -93,6 +93,8 @@ private:
 	LIGHT_MAT* lightMat_;
 	LIGHT_MAT lightMat;
 	int shadowBuff_;
+
+	int image_;
 
 	// 選択したステージ
 	StageID staegID_;

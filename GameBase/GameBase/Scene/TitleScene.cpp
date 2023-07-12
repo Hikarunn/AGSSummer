@@ -22,7 +22,7 @@ TitleScene::TitleScene() :
 	BaseScene{ ScreenID::Title,SceneID::Title },
 	update_{ &TitleScene::UpdateNon }, draw_{ &TitleScene::DrawNon }, stepTime_{ 0.0f }
 {
-	SetMakeSceneFunc(std::bind(&TitleScene::MakeGameFunc, this, std::placeholders::_1), SceneID::Game);
+	SetMakeSceneFunc(std::bind(&TitleScene::MakeGameFunc, this, std::placeholders::_1), SceneID::Select);
 	//lpSooundPross.Init(SceneID::Title);		// タイトルシーン用にロードしたサウンドを呼びだす
 	//lpSooundPross.PlayBackSound(SOUNDNAME_BGM::TitleSceneBGM, lpSooundPross.GetVolume(), true);
 
@@ -42,8 +42,6 @@ TitleScene::TitleScene() :
 	lightMat_ = static_cast<LIGHT_MAT*>(GetBufferShaderConstantBuffer(shadowBuff_));
 	lightMat.view = MGetIdent();
 	lightMat.proj = MGetIdent();
-
-	image_ = LoadGraph(L"Resource/resource/kk.png", 0);
 
 	CreateBackGround();
 
@@ -73,13 +71,10 @@ void TitleScene::DrawScene(void)
 	// 描画
 	// ポストエフェクト
 	//peMng_->SetFlag(PEID::Default, true);
-
-//
+	// 
 	//objManager_->Draw();
 	// ここに直書きしているが後から変えること
 	//DrawFormatString(360, 200, 0xff0000, TEXT("アンチマジック"), static_cast<unsigned int>(screenID_));
-
-	
 }
 
 bool TitleScene::IsLoaded(void)
@@ -101,7 +96,7 @@ void TitleScene::UpdateLogoOff(float delta, Controller& controller)
 {
 	if ((stepTime_ += delta) >= logoUiOffTIme)
 	{
-		ChangeSceneID(SceneID::Game);
+		ChangeSceneID(SceneID::Select);
 	}
 }
 
@@ -117,9 +112,9 @@ void TitleScene::SetupShadowMap(void)
 	// シャドウマップ用にカメラをセット
 	camera_->SetUpShadow(offsetOrtho, offsetNear, offsetFar, camTar);
 
-	/*MV1SetUseOrigShader(true);
+	MV1SetUseOrigShader(true);
 	objManager_->SetupDepthTex(*shadowPs_, -1);
-	MV1SetUseOrigShader(false);*/
+	MV1SetUseOrigShader(false);
 
 	lightMat.view = GetCameraViewMatrix();
 	lightMat.proj = GetCameraProjectionMatrix();
@@ -131,17 +126,15 @@ void TitleScene::DrawLogoOff(void)
 	objManager_->ShadowDraw(shadowMap_, shadowBuff_);
 	auto alpha = 1.0f - stepTime_ / logoUiOffTIme;
 	SetDrawBlendMode(DX_BLENDMODE_ALPHA, static_cast<int>(255.0f * alpha));
-	uiManager_->Draw();
+	uiManager_->Draw(*screenHandle_);
 	SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 255);
-	
-
 }
 
 void TitleScene::DrawNon(void)
 {
 	camera_->SetScreen();
 	objManager_->ShadowDraw(shadowMap_, shadowBuff_);
-	uiManager_->Draw(); 
+	uiManager_->Draw(*screenHandle_);
 }
 
 void TitleScene::CreateBackGround(void)
@@ -152,7 +145,7 @@ void TitleScene::CreateBackGround(void)
 
 	std::unique_ptr<Render> render = std::make_unique<ModelRender>();
 	//render->Load("Resource/resource/Title/Title.mv1");
-	//render->Load("Resource/Model/Player/妖夢.mv1");
+	//render->Load("Resource/Model/Player/Player.mv1");
 	objManager_->AddComponent(std::move(render), id);
 
 	auto transform = std::make_unique<Transform>();

@@ -59,6 +59,12 @@ public:
 	}
 
 	/// <summary>
+	/// 画面をキャプチャする
+	/// </summary>
+	/// <param name=""></param>
+	void Capture(void);
+
+	/// <summary>
 	/// ゲームに戻るときに挟む処理
 	/// </summary>
 	/// <param name=""></param>
@@ -115,7 +121,7 @@ private:
 	/// 被写界深度用の深度テクスチャ
 	/// </summary>
 	/// <param name=""></param>
-	//void SetUpDepth(void);
+	void SetUpDepth(void);
 
 	/// <summary>
 	/// ポストエフェクトで使うスクリーンの作成
@@ -170,11 +176,11 @@ private:
 
 	// 被写界深度用の深度テクスチャ
 	// 深度テクスチャ用シェーダ
-	//SharedShaderHandle depthPS_;
-	//int depth_;
-	//DepthParameter* depthMat_;
-	//DepthParameter depthMat;
-	//int depthbuffer_;
+	SharedShaderHandle depthPS_;
+	int depth_;
+	DepthParameter* depthMat_;
+	DepthParameter depthMat;
+	int depthbuffer_;
 
 	float dofTotalSize_;
 

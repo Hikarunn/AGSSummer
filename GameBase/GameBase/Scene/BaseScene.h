@@ -13,6 +13,7 @@ class BaseScene;
 class Camera;
 class ObjectManager;
 class UiManager;
+class PEManager;
 class Controller;
 
 struct LIGHT_MAT
@@ -160,6 +161,9 @@ protected:
 
 	// オブジェクトマネージャー
 	std::unique_ptr<ObjectManager> objManager_;
+
+	// ポストエフェクトマネージャー
+	std::unique_ptr<PEManager> peManager_;
 
 private:
 	

@@ -5,6 +5,7 @@
 #include "../Common/Camera.h"
 #include "../Common/ResourceManager.h"
 #include "../UI/UiManager.h"
+#include "../Shader/PEManager.h"
 #include "../Common/Input/InputType/Keyboard.h"
 #include "../Common/Input/InputType/Pad.h"
 

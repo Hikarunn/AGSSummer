@@ -5,6 +5,7 @@
 #include "../UI/UiManager.h"
 #include "../Factory/StageFactory.h"
 #include "PauseScene.h"
+#include "../Shader/PEManager.h"
 #include "../Common/ResourceManager.h"
 #include "../Component/Transform/Transform.h"
 #include "Transition/FadeLoading.h"
@@ -23,33 +24,35 @@ GameScene::GameScene(StageID stageID) :
 	SetMakeSceneFunc(std::bind(&GameScene::MakeResultFunc, this, std::placeholders::_1), SceneID::Result);
 	SetMakeSceneFunc(std::bind(&GameScene::MakePauseFunc, this, std::placeholders::_1), SceneID::Pause);
 	objManager_ = std::make_unique<ObjectManager>(10);
-//	peMng_ = std::make_unique<PEManager>();
-//	if (stageID_ == StageID::Tutorial)
-//	{
-//		// チュートリアル時
-//		//uiManager_ = std::make_unique<UiManager>("Resource/Other/UiData/game.ui", true, true, false);
-//		objManager_->AddFactory(std::make_unique<StageFactory>(*objManager_));
-//		SetMakeSceneFunc(std::bind(&GameScene::MakeSelectFunc, this, std::placeholders::_1), SceneID::Select);
-//	}
-//	else
-//	{
-//		// 通常時のゲーム時
-//		objManager_->AddFactory(std::make_unique<StageFactory>("Resource/Other/Stage" + std::to_string(static_cast<int>(stageID)) + ".data", *objManager_));
-//		//objMng_->AddFactory(std::make_unique<StageFactory>("Resource/Other/dbg.data", *objMng_));
-//		//uiManager_ = std::make_unique<UiManager>("Resource/Other/UiData/game.ui", true, false, false);
-////		lpSceneManager.GetResourceManager().MakeRenderTarget(resultCapture_, ScreenID::ResultCapture, SceneManager::screenSize_<float>, true);
-//	}
-	
-	if (stageID_ == StageID::Stage1) 
+	//peMng_ = std::make_unique<PEManager>();
+	if (stageID_ == StageID::Tutorial)
+	{
+		// チュートリアル時
+		uiManager_ = std::make_unique<UiManager>("Resource/Other/UiData/game.ui", true, true, false);
+		objManager_->AddFactory(std::make_unique<StageFactory>(*objManager_));
+		SetMakeSceneFunc(std::bind(&GameScene::MakeSelectFunc, this, std::placeholders::_1), SceneID::Select);
+	}
+	else
 	{
 		// 通常時のゲーム時
 		objManager_->AddFactory(std::make_unique<StageFactory>("Resource/Other/Stage" + std::to_string(static_cast<int>(stageID)) + ".data", *objManager_));
 		//objMng_->AddFactory(std::make_unique<StageFactory>("Resource/Other/dbg.data", *objMng_));
-		//uiManager_ = std::make_unique<UiManager>("Resource/Other/UiData/game.ui", true, false, false);
+		uiManager_ = std::make_unique<UiManager>("Resource/Other/UiData/game.ui", true, false, false);
 //		lpSceneManager.GetResourceManager().MakeRenderTarget(resultCapture_, ScreenID::ResultCapture, SceneManager::screenSize_<float>, true);
+	
+		DebugLog("A");
 	}
+	
+	//if (stageID_ == StageID::Stage1) 
+	//{
+	//	// 通常時のゲーム時
+	//	objManager_->AddFactory(std::make_unique<StageFactory>("Resource/Other/Stage" + std::to_string(static_cast<int>(stageID)) + ".data", *objManager_));
+	////	objMng_->AddFactory(std::make_unique<StageFactory>("Resource/Other/dbg.data", *objMng_));
+	//	uiManager_ = std::make_unique<UiManager>("Resource/Other/UiData/game.ui", true, false, false);
+	//	//lpSceneManager.GetResourceManager().MakeRenderTarget(resultCapture_, ScreenID::ResultCapture, SceneManager::screenSize_<float>, true);
+	//}
 	AddLoadedFunc(std::bind(&GameScene::Loaded, this, std::placeholders::_1));
-	//result_ = Result::Max;
+	result_ = Result::Max;
 
 	// ゲームシーンで使うシェーダをあらかじめロードしておく
 	//useShaders_.resize(3);
@@ -105,12 +108,14 @@ GameScene::GameScene(StageID stageID) :
 	lightMat.proj = MGetIdent();
 
 	// 被写界深度用のカメラ情報の初期化
-	/*depthbuffer_ = CreateShaderConstantBuffer(sizeof(DepthParameter) * 4);
+	depthbuffer_ = CreateShaderConstantBuffer(sizeof(DepthParameter) * 4);
 	depthMat_ = static_cast<DepthParameter*>(GetBufferShaderConstantBuffer(depthbuffer_));
 	depthMat.start = 0.0f;
 	depthMat.end = 0.0f;
 	depthMat.scope = 0.0f;
-	SetUseASyncLoadFlag(true);*/
+	SetUseASyncLoadFlag(true);
+
+	SetAlwaysRunFlag(true);
 
 	// ゲームシーン用のBGMのロード
 	//lpSooundPross.Init(SceneID::Game);
@@ -123,6 +128,9 @@ GameScene::GameScene(StageID stageID) :
 GameScene::~GameScene()
 {
 	DeleteShaderConstantBuffer(shadowBuff_);
+	DeleteShaderConstantBuffer(depthbuffer_);
+	DeleteGraph(shadowMap_);
+	DeleteGraph(depth_);
 	//DeleteShaderConstantBuffer(depthbuffer_);
 	//radar_.erase(count_);
 }
@@ -145,8 +153,8 @@ GameScene::~GameScene()
 
 void GameScene::SetUp(void)
 {
-	//peMng_->SetFlag(PEID::Mono, lpConfigMng.GetPeConfig().at(PEID::Mono));
-	//peMng_->SetFlag(PEID::VolFog, lpConfigMng.GetPeConfig().at(PEID::VolFog));
+	peManager_->SetFlag(PEID::Mono, lpConfigManager.GetPeConfig().at(PEID::Mono));
+	peManager_->SetFlag(PEID::VolFog, lpConfigManager.GetPeConfig().at(PEID::VolFog));
 	//lpSooundPross.PlayBackSound(SOUNDNAME_BGM::GameSceneBGM, lpSooundPross.GetVolume(), true);	// ゲームシーンのBGM
 	//lpSooundPross.PlayBackSound(SOUNDNAME_BGM::GameSceneBGM, lpSooundPross.GetVolume(), true);	// ゲームシーンのBGM
 
@@ -154,7 +162,9 @@ void GameScene::SetUp(void)
 	if (cam.IsActive())
 	{
 		cam->SetSpeed(lpConfigManager.GetCameraSpeed());
+		DebugLog("B");
 	}
+
 }
 
 BaseScene::SceneUptr GameScene::MakeResultFunc(SceneUptr own)
@@ -211,7 +221,8 @@ void GameScene::Update(float delta, Controller& controller)
 
 	auto player = (objManager_->GetComponent<Transform>(objManager_->GetPlayerID()));
 	objManager_->Update(delta, controller, *this);
-	//uiManager_->Update(delta, *this, *objManager_, controller);
+	uiManager_->Update(delta, *this, *objManager_, controller);
+	DebugLog("C");
 //	if (player.IsActive())
 //	{
 ////		RadarUpdate(Vector2(player->GetPos().x, player->GetPos().z));
@@ -231,21 +242,21 @@ void GameScene::DrawScene(void)
 	SetSubScreen();
 
 	// 被写界深度用の深度テクスチャの作成
-	//SetUpDepth();
+	SetUpDepth();
 	//
-	//depthMat_[0] = depthMat;
-	////peMng_->SetBuffer(depthbuffer_);
+	depthMat_[0] = depthMat;
+	peManager_->SetBuffer(depthbuffer_);
 	//// ポストエフェクトか通常描画
-	////peMng_->Draw(offScreen_, *screenHandle_, depth_, skyScreen_, subScreen_);
+	peManager_->Draw(offScreen_, *screenHandle_, depth_, skyScreen_, subScreen_);
 	//
 	//// ミニマップの作成
 	//DrawGraph(10, 10, radarMap_, true);
 	//
 	// UIの描画
-	//uiManager_->Draw();
+	DebugLog("D");
+	uiManager_->Draw(*screenHandle_);
 	// ここに直書きしているが後から変えること
 	DrawFormatString(0, 0, 0xffffff, TEXT("%dIDです"), static_cast<unsigned int>(screenID_));
-
 
 }
 
@@ -275,40 +286,40 @@ void GameScene::SetupShadowMap(void)
 	lightMat_[0] = lightMat;
 }
 
-//void GameScene::SetUpDepth(void)
-//{
-//	// 描画先を影用深度記録画像に変更
-//	SetDrawScreen(depth_);
-//	// 影用深度記録画像を一度真っ白にする
-//	SetBackgroundColor(255, 255, 255);
-//	ClsDrawScreen();
-//	SetBackgroundColor(0, 0, 0);
-//	camera_->SetScreen();
-//
-//	// 被写界深度開始位置の計算
-//	depthMat.start = dofFocus - dofFocusSize / 2.0f - dofInterpSize;
-//	// 被写界深度終了位置を計算
-//	depthMat.end = dofFocus + dofFocusSize / 2.0f + dofInterpSize;
-//	// 被写界深度の範囲の逆数を計算
-//	depthMat.scope = 1.0f / (depthMat.end - depthMat.start);
-//	// 補間範囲とフォーカスがあっている範囲を含めた総距離を算出
-//	dofTotalSize_ = dofInterpSize * 2.0f + dofFocusSize;
-//
-//	// 取得したデータをhlsl側に渡す
-//	depthMat_[0] = depthMat;
-//	MV1SetUseOrigShader(true);
-//	objManager_->SetupDepthTex(*depthPS_, depthbuffer_);
-//	MV1SetUseOrigShader(false);
-//
-//	// 描画用に切り替え
-//	SetDrawScreen(*screenHandle_);
-//	ClsDrawScreen();
-//	// 被写界深度開始位置の計算
-//	depthMat.start = dofInterpSize / dofTotalSize_;
-//	// 被写界深度終了位置の計算
-//	depthMat.end = (dofInterpSize + dofFocusSize) / dofTotalSize_;
-//
-//}
+void GameScene::SetUpDepth(void)
+{
+	// 描画先を影用深度記録画像に変更
+	SetDrawScreen(depth_);
+	// 影用深度記録画像を一度真っ白にする
+	SetBackgroundColor(255, 255, 255);
+	ClsDrawScreen();
+	SetBackgroundColor(0, 0, 0);
+	camera_->SetScreen();
+
+	// 被写界深度開始位置の計算
+	depthMat.start = dofFocus - dofFocusSize / 2.0f - dofInterpSize;
+	// 被写界深度終了位置を計算
+	depthMat.end = dofFocus + dofFocusSize / 2.0f + dofInterpSize;
+	// 被写界深度の範囲の逆数を計算
+	depthMat.scope = 1.0f / (depthMat.end - depthMat.start);
+	// 補間範囲とフォーカスがあっている範囲を含めた総距離を算出
+	dofTotalSize_ = dofInterpSize * 2.0f + dofFocusSize;
+
+	// 取得したデータをhlsl側に渡す
+	depthMat_[0] = depthMat;
+	MV1SetUseOrigShader(true);
+	objManager_->SetupDepthTex(*depthPS_, depthbuffer_);
+	MV1SetUseOrigShader(false);
+
+	// 描画用に切り替え
+	SetDrawScreen(*screenHandle_);
+	ClsDrawScreen();
+	// 被写界深度開始位置の計算
+	depthMat.start = dofInterpSize / dofTotalSize_;
+	// 被写界深度終了位置の計算
+	depthMat.end = (dofInterpSize + dofFocusSize) / dofTotalSize_;
+
+}
 
 void GameScene::SetOffsetScreen(void)
 {
@@ -333,6 +344,7 @@ void GameScene::SetSubScreen(void)
 	camera_->SetScreen();
 	auto [result, id] = objManager_->Find(ObjectAttribute::Sky);
 	objManager_->GetComponent<Render>(id)->Draw();
+	DebugLog("E");
 
 	// スカイドームとステージのみのスクリーン
 	SetDrawScreen(subScreen_);
@@ -341,11 +353,12 @@ void GameScene::SetSubScreen(void)
 	auto [result1, id1] = objManager_->Find(ObjectAttribute::Stage);
 	objManager_->GetComponent<Render>(id)->Draw();
 	objManager_->GetComponent<Render>(id1)->Draw();
+	DebugLog("F");
 }
 
 bool GameScene::IsLoaded(void)
 {
-	return BaseScene::IsLoaded() && objManager_->IsLoaded();/*&& uiManager_->IsLoaded();*/ 
+	return BaseScene::IsLoaded() && objManager_->IsLoaded()&& uiManager_->IsLoaded(); 
 }
 
 void GameScene::Loaded(Controller& controller)
@@ -354,7 +367,7 @@ void GameScene::Loaded(Controller& controller)
 	lpSceneManager.GetResourceManager().Loaded();
 	objManager_->Begin();
 	objManager_->Update(0.0f, controller, *this);
-	//uiManager_->Begin();
+	uiManager_->Begin();
 
 
 	//lpSceneManager.GetResourceManager().LoadPS(shadowPs_, "Resource/resource/Shader/ShadowMap/ShadowMap.pso");

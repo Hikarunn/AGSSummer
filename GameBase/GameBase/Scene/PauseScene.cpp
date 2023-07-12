@@ -22,8 +22,8 @@ PauseScene::PauseScene(SceneUptr owner) :
 	SetMakeSceneFunc(std::bind(&PauseScene::MakeDialogFunc, this, std::placeholders::_1), SceneID::Dialog);
 	SetMakeSceneFunc(std::bind(&PauseScene::MakeOptionFunc, this, std::placeholders::_1), SceneID::Option);
 	SetUseASyncLoadFlag(false);
-	//uiManager_ = std::make_unique<UiManager>("Resource/Other/UiData/pause.ui", false);
-	//uiManager_->Begin();
+	uiManager_ = std::make_unique<UiManager>("Resource/Other/UiData/pause.ui", false);
+	uiManager_->Begin();
 	lpSceneManager.GetResourceManager().LoadTexture(frame_, "Resource/resource/PauseFrame.png");
 	SetUseASyncLoadFlag(true);
 }
@@ -66,13 +66,13 @@ BaseScene::SceneUptr PauseScene::MakeOptionFunc(SceneUptr own)
 
 void PauseScene::UpdateOpend(float delta, Controller& controller)
 {
-	//uiManager_->Update(delta, *this, *objManager_, controller);
+	uiManager_->Update(delta, *this, *objManager_, controller);
 }
 
 void PauseScene::DrawWindow(void)
 {
 	DrawRotaGraph(SceneManager::screenSize_<int>.x / 2, SceneManager::screenSize_<int>.y / 2, 1.0, 0.0f, *frame_, true);
-	//uiManager_->Draw();
+	uiManager_->Draw(*screenHandle_);
 }
 
 void PauseScene::Closed(void)

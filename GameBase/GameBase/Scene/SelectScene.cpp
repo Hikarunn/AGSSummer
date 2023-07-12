@@ -26,7 +26,7 @@ SelectScene::SelectScene()
 	auto id = objManager_->MakeObjectID();
 
 	std::unique_ptr<Render> render = std::make_unique<ModelRender>();
-	render->Load("Resource/resource/Title/Title.mv1");
+	//render->Load("Resource/resource/Title/Title.mv1");
 	objManager_->AddComponent(std::move(render), id);
 
 	auto transform = std::make_unique<Transform>();
@@ -37,6 +37,7 @@ SelectScene::SelectScene()
 
 	AddLoadedFunc(std::bind(&SelectScene::Loaded, this, std::placeholders::_1));
 
+	
 	//camera_->SetPos(Vector3(0.0f, 50.0f, -300.0f));
 	//camera_->SetRotation(Quaternion(0.0f, Deg2Rad(180.0f), 0.0f));
 	//SetLightDirection(VGet(0.0f, -1.0f, 0.0f));
@@ -81,18 +82,19 @@ void SelectScene::Option(void)
 
 void SelectScene::Play(void)
 {
-	choiceNextID_ = SceneID::Game;
+ 	choiceNextID_ = SceneID::Game;
+
 	//lpSooundPross.PlayBackSound(SOUNDNAME_SE::cursorMove, lpSooundPross.GetVolume(), false);
 	Close();
 }
 
-//void SelectScene::Tutorial(void)
-//{
-//	staegID_ = StageID::Tutorial;
-//	choiceNextID_ = SceneID::Game;
-//	//lpSooundPross.PlayBackSound(SOUNDNAME_SE::cursorMove, lpSooundPross.GetVolume(), false);
-//	Close();
-//}
+void SelectScene::Tutorial(void)
+{
+	staegID_ = StageID::Tutorial;
+	choiceNextID_ = SceneID::Game;
+	//lpSooundPross.PlayBackSound(SOUNDNAME_SE::cursorMove, lpSooundPross.GetVolume(), false);
+	Close();
+}
 
 BaseScene::SceneUptr SelectScene::MakeGameFunc(SceneUptr own)
 {
@@ -120,7 +122,7 @@ BaseScene::SceneUptr SelectScene::MakeTitleFunc(SceneUptr own)
 
 void SelectScene::UpdateOpend(float delta, Controller& controller)
 {
-	//uiManager_->Update(delta, *this, *objManager_, controller);
+	uiManager_->Update(delta, *this, *objManager_, controller);
 
 #ifdef _DEBUG
 	if (CheckHitKey(KEY_INPUT_1))
@@ -133,8 +135,8 @@ void SelectScene::UpdateOpend(float delta, Controller& controller)
 void SelectScene::DrawWindow(void)
 {
 	DrawRotaGraph(SceneManager::screenSize_<int>.x / 2, SceneManager::screenSize_<int>.y / 2, 1.0, 0.0f, *frame_, true);
-	//uiManager_->Draw();
-	DrawFormatString(400, 0, 0xff0000, TEXT("セレクトシーンです"), static_cast<unsigned int>(screenID_));
+	uiManager_->Draw(*screenHandle_);
+//	DrawFormatString(400, 0, 0xff0000, TEXT("セレクトシーンです"), static_cast<unsigned int>(screenID_));
 
 }
 
@@ -150,7 +152,7 @@ void SelectScene::Closed(void)
 
 bool SelectScene::IsLoaded(void)
 {
-	return BaseScene::IsLoaded();// && uiManager_->IsLoaded();
+	return BaseScene::IsLoaded() && uiManager_->IsLoaded();
 }
 
 void SelectScene::Init(void)
@@ -159,12 +161,13 @@ void SelectScene::Init(void)
 	SetMakeSceneFunc(std::bind(&SelectScene::MakeDialogFunc, this, std::placeholders::_1), SceneID::Dialog);
 	SetMakeSceneFunc(std::bind(&SelectScene::MakeOptionFunc, this, std::placeholders::_1), SceneID::Option);
 
+
 #ifdef _DEBUG
 	SetMakeSceneFunc(std::bind(&SelectScene::MakeTitleFunc, this, std::placeholders::_1), SceneID::Title);
 #endif
-
-	//uiManager_ = std::make_unique<UiManager>("Resource/Other/UiData/select.ui");
-	//AddLoadedFunc([this](auto&)); { //uiManager_->Begin(); });
+	
+	uiManager_ = std::make_unique<UiManager>("Resource/Other/UiData/select.ui");
+	AddLoadedFunc([this](auto&) { uiManager_->Begin(); });
 //	lpSceneManager.GetResourceManager().LoadTexture(frame_, "Resource/resource/SelectFrame.png");
 	staegID_ = StageID::Stage1;
 	//lpSooundPross.Init(SceneID::Select);
@@ -187,7 +190,7 @@ void SelectScene::Init(void)
 	lightMat_ = static_cast<LIGHT_MAT*>(GetBufferShaderConstantBuffer(shadowBuff_));
 	lightMat.view = MGetIdent();
 	lightMat.proj = MGetIdent();
-
+	
 }
 
 void SelectScene::DrawBackGround(void)
