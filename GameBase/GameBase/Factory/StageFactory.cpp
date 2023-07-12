@@ -105,10 +105,10 @@ void StageFactory::LoadTutorial(void)
 	m->Load(model_);
 
 	objectManager_.AddComponent(std::make_unique<TerrainCollider>(), id_);
-	//objectManager_.AddComponent(std::make_unique<TutorialBehavior>(), id_);
+	objectManager_.AddComponent(std::make_unique<TutorialBehavior>(), id_);
 
 	auto col = objectManager_.GetComponent<TerrainCollider>(id_);
-	col->Load("Resource/resource/StageCol.mv1");
+	col->Load("Resource/resource/Stage/StageCol.mv1");
 
 	auto info = objectManager_.GetComponent<ObjectInfo>(id_);
 	info->SetAttribute(ObjectAttribute::Stage);
