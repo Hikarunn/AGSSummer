@@ -8,6 +8,7 @@ enum class DataType
 	Collider,		// 当たり判定
 	Model,			// モデル
 	Spawn,			// スポーン座標
+	Spawner,		// スポナー座標
 	Other			// その他
 };
 
