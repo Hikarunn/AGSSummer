@@ -131,7 +131,9 @@ const bool ObjectManager::IsLoaded(void)
 	{
 		if (!f.second->IsLoaded())
 		{
+			DebugLog("Loaded_False");
 			return false;
+			
 		}
 	}
 	return true;
