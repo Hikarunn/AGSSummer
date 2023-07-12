@@ -3,7 +3,7 @@
 #include <unordered_map>
 #include <string>
 #include "../InputID.h"
-//#include "../../../Shader/PEID.h"
+#include "../../../Shader/PEID.h"
 
 
 #define lpConfigManager (InputConfig::GetInstance())
@@ -14,7 +14,7 @@ using InputCode = std::map<InputID, int>;
 class InputConfig
 {
 	using TypeDataTbl = std::unordered_map<int, std::pair<std::string, void(InputConfig::*)(void)>>;
-	//using PeConfig = std::unordered_map<PEID, bool>;
+	using PeConfig = std::unordered_map<PEID, bool>;
 public:
 	static void Create(void);
 	static void Destroy(void);
@@ -68,14 +68,14 @@ public:
 	/// </summary>
 	/// <param name=""></param>
 	/// <returns></returns>
-	//const PeConfig& GetPeConfig(void) const&;
+	const PeConfig& GetPeConfig(void) const&;
 
 	/// <summary>
 	/// ポストエフェクトのフラグをセットする
 	/// </summary>
 	/// <param name="id"></param>
 	/// <param name="flag"></param>
-	//void SetPeConfig(PEID id, bool flag);
+	void SetPeConfig(PEID id, bool flag);
 
 	void SetCameraSpeed(float speed)
 	{
@@ -126,7 +126,7 @@ private:
 	int nowType_;
 
 	// ポストエフェクト用コンフィグ
-	//PeConfig peConfig_;
+	PeConfig peConfig_;
 
 	// カメラの感度
 	float camSpeed_;

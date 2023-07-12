@@ -106,16 +106,16 @@ void InputConfig::SetKeyDefalutCode(void)
 	inputCode_.emplace(InputID::CameraFlont, MOUSE_INPUT_RIGHT);
 
 }
-//
-//const InputConfig::PeConfig& InputConfig::GetPeConfig(void) const&
-//{
-//	return peConfig_;
-//}
-//
-//void InputConfig::SetPeConfig(PEID id, bool flag)
-//{
-//	peConfig_[id] = flag;
-//}
+
+const InputConfig::PeConfig& InputConfig::GetPeConfig(void) const&
+{
+	return peConfig_;
+}
+
+void InputConfig::SetPeConfig(PEID id, bool flag)
+{
+	peConfig_[id] = flag;
+}
 
 InputConfig::InputConfig()
 {
@@ -126,9 +126,9 @@ InputConfig::InputConfig()
 	InitSound();
 
 	// ポストプロセスの初期化
-	/*peConfig_.reserve(2);
+	peConfig_.reserve(2);
 	peConfig_[PEID::Mono] = false;
-	peConfig_[PEID::VolFog] = true;*/
+	peConfig_[PEID::VolFog] = true;
 
 	// カメラスピードを初期化
 	camSpeed_ = 0.5f;
