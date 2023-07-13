@@ -204,44 +204,44 @@ void ResourceManager::RemoveModel(const int handle)
 		});
 
 }
-//
-//void ResourceManager::LoadPS(SharedShaderHandle& out, const std::filesystem::path& path, bool isNotRelese)
-//{
-//	auto key{ std::hash<std::string>()(path.string()) };
-//	if (shaderMap_.contains(key))
-//	{
-//		out.SetPtr(shaderMap_[key].first);
-//		return;
-//	}
-//	int h{ LoadPixelShader(path.wstring().c_str()) };
-//	if (h == -1)
-//	{
-//		DebugErrorLog("ピクセルシェーダ読み込み失敗");
-//	}
-//	shaderMap_.emplace(key, std::make_pair(std::make_shared<int>(), isNotRelese));
-//	*shaderMap_[key].first = h;
-//	out.SetPtr(shaderMap_[key].first);
-//	return;
-//}
-//
-//void ResourceManager::LoadVS(SharedShaderHandle& out, const std::filesystem::path& path, bool isNotRelese)
-//{
-//	auto key{ std::hash<std::string>()(path.string()) };
-//	if (shaderMap_.contains(key))
-//	{
-//		out.SetPtr(shaderMap_[key].first);
-//		return;
-//	}
-//	int h{ LoadVertexShader(path.wstring().c_str()) };
-//	if (h == -1)
-//	{
-//		DebugErrorLog("頂点シェーダ読み込み失敗");
-//	}
-//	shaderMap_.emplace(key, std::make_pair(std::make_shared<int>(), isNotRelese));
-//	*shaderMap_[key].first = h;
-//	out.SetPtr(shaderMap_[key].first);
-//	return;
-//}
+
+void ResourceManager::LoadPS(SharedShaderHandle& out, const std::filesystem::path& path, bool isNotRelese)
+{
+	auto key{ std::hash<std::string>()(path.string()) };
+	if (shaderMap_.contains(key))
+	{
+		out.SetPtr(shaderMap_[key].first);
+		return;
+	}
+	int h{ LoadPixelShader(path.wstring().c_str()) };
+	if (h == -1)
+	{
+		DebugErrorLog("ピクセルシェーダ読み込み失敗");
+	}
+	shaderMap_.emplace(key, std::make_pair(std::make_shared<int>(), isNotRelese));
+	*shaderMap_[key].first = h;
+	out.SetPtr(shaderMap_[key].first);
+	return;
+}
+
+void ResourceManager::LoadVS(SharedShaderHandle& out, const std::filesystem::path& path, bool isNotRelese)
+{
+	auto key{ std::hash<std::string>()(path.string()) };
+	if (shaderMap_.contains(key))
+	{
+		out.SetPtr(shaderMap_[key].first);
+		return;
+	}
+	int h{ LoadVertexShader(path.wstring().c_str()) };
+	if (h == -1)
+	{
+		DebugErrorLog("頂点シェーダ読み込み失敗");
+	}
+	shaderMap_.emplace(key, std::make_pair(std::make_shared<int>(), isNotRelese));
+	*shaderMap_[key].first = h;
+	out.SetPtr(shaderMap_[key].first);
+	return;
+}
 
 bool ResourceManager::IsRemove(SharedShaderHandle& handle)
 {

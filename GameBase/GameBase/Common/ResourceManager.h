@@ -98,7 +98,7 @@ public:
 	/// <param name="path"></param>
 	/// <param name="isNotRelese"></param>
 	/// <returns></returns>
-	/*void LoadPS(SharedShaderHandle& out, const std::filesystem::path& path, bool isNotRelese = false);
+	void LoadPS(SharedShaderHandle& out, const std::filesystem::path& path, bool isNotRelese = false);
 
 	/// <summary>
 	/// 頂点シェーダを読み込む
@@ -106,7 +106,7 @@ public:
 	/// <param name="path"></param>
 	/// <param name="isNotRelese"></param>
 	/// <returns></returns>
-	void LoadVS(SharedShaderHandle& out, const std::filesystem::path& path, bool isNotRelese = false);*/
+	void LoadVS(SharedShaderHandle& out, const std::filesystem::path& path, bool isNotRelese = false);
 
 	/// <summary>
 	/// 一致するシェーダハンドルが管理から削除すべきか

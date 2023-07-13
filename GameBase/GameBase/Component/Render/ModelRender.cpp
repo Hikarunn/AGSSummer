@@ -9,11 +9,11 @@
 #include "../../Common/Debug.h"
 
 // 頂点タイプに合わせたシェーダパスのテーブル
-//const std::unordered_map<int, std::string> vsShaderNameTbl{
-//	{DX_MV1_VERTEX_TYPE_1FRAME, "Mesh.vso"},
-//	{DX_MV1_VERTEX_TYPE_4FRAME,"Mesh4.vso"},
-//	{DX_MV1_VERTEX_TYPE_NMAP_1FRAME,"NormMesh.vso"}
-//};
+const std::unordered_map<int, std::string> vsShaderNameTbl{
+	{DX_MV1_VERTEX_TYPE_1FRAME, "Mesh.vso"},
+	{DX_MV1_VERTEX_TYPE_4FRAME,"Mesh4.vso"},
+	{DX_MV1_VERTEX_TYPE_NMAP_1FRAME,"NormMesh.vso"}
+};
 
 
 ModelRender::ModelRender()
@@ -108,25 +108,25 @@ void ModelRender::Begin(ObjectManager& objectManager)
 
 	Render::Begin(objectManager);
 	auto type = MV1GetTriangleListVertexType(*handle_, 0);
-	//if (vsShaderNameTbl.contains(type))
-	//{
-	////	lpSceneManager.GetResourceManager().LoadVS(vs_, "Resource/resource/Shader/Vertex/" + vsShaderNameTbl.at(type));
-	//	//lpSceneManager.GetResourceManager().LoadVS(shadowVs_, "Resource/resource/Shader/ShadowMap/" + vsShaderNameTbl.at(type));
-	//}
-	//else
-	//{
-	//	DebugLog("このタイプのシェーダは無いです");
-	//}
-
-	if (type < 3)
+	if (vsShaderNameTbl.contains(type))
 	{
-		//lpSceneManager.GetResourceManager().LoadPS(ps_, "Resource/resource/Shader/Pixel/Tex.pso");
+		lpSceneManager.GetResourceManager().LoadVS(vs_, "Resource/resource/Shader/Vertex/" + vsShaderNameTbl.at(type));
+		lpSceneManager.GetResourceManager().LoadVS(shadowVs_, "Resource/resource/Shader/ShadowMap/" + vsShaderNameTbl.at(type));
 	}
 	else
 	{
-	//	lpSceneManager.GetResourceManager().LoadPS(ps_, "Resource/resource/Shader/Pixel/NormTex.pso");
+		DebugLog("このタイプのシェーダは無いです");
 	}
-//	lpSceneManager.GetResourceManager().LoadPS(shadowPs_, "Resource/resource/Shader/ShadowMap/ShadowMap.pso");
+
+	if (type < 3)
+	{
+		lpSceneManager.GetResourceManager().LoadPS(ps_, "Resource/resource/Shader/Pixel/Tex.pso");
+	}
+	else
+	{
+		lpSceneManager.GetResourceManager().LoadPS(ps_, "Resource/resource/Shader/Pixel/NormTex.pso");
+	}
+	lpSceneManager.GetResourceManager().LoadPS(shadowPs_, "Resource/resource/Shader/ShadowMap/ShadowMap.pso");
 
 	int meshNum = MV1GetMeshNum(*handle_);
 	for (int i = 0; i < meshNum; i++)

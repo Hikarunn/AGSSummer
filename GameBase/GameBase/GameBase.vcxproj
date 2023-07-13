@@ -81,6 +81,8 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
+    <IncludePath>$(DXLIB_DIR);$(IncludePath)</IncludePath>
+    <LibraryPath>$(DXLIB_DIR);$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -141,9 +143,11 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
     </ClCompile>
     <Link>
-      <SubSystem>Console</SubSystem>
+      <SubSystem>Windows</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -348,76 +352,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resource\Model\Map.mv1" />
-  </ItemGroup>
-  <ItemGroup>
-    <FxCompile Include="Shader\Pixel\NormTex.hlsl">
-      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Resource/resource/Shader/Pixel/NormTex.pso</ObjectFileOutput>
-    </FxCompile>
-    <FxCompile Include="Shader\Pixel\Tex.hlsl">
-      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Resource/resource/Shader/Pixel/Tex.pso</ObjectFileOutput>
-    </FxCompile>
-    <FxCompile Include="Shader\PostEffect\AverageBlur.hlsl">
-      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Resource/resource/Shader/PostEffect/aveblur.pso</ObjectFileOutput>
-    </FxCompile>
-    <FxCompile Include="Shader\PostEffect\BlackandWhite.hlsl">
-      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Resource/resource/Shader/PostEffect/baw.pso</ObjectFileOutput>
-    </FxCompile>
-    <FxCompile Include="Shader\PostEffect\DepthTex.hlsl">
-      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Resource/resource/Shader/PostEffect/Dof/depth.pso</ObjectFileOutput>
-    </FxCompile>
-    <FxCompile Include="Shader\PostEffect\DofPS.hlsl">
-      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Resource/resource/Shader/PostEffect/Dof/dof.pso</ObjectFileOutput>
-    </FxCompile>
-    <FxCompile Include="Shader\PostEffect\FogAndRed.hlsl">
-      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Resource/resource/Shader/PostEffect/FtR.pso</ObjectFileOutput>
-    </FxCompile>
-    <FxCompile Include="Shader\PostEffect\Gaussian.hlsl">
-      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Resource/resource/Shader/PostEffect/gauss.pso</ObjectFileOutput>
-    </FxCompile>
-    <FxCompile Include="Shader\PostEffect\Meah4.hlsl">
-      <EntryPointName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-      </EntryPointName>
-      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Resource/resource/Shader/PostEffect/Dof/mesh1.vs</ObjectFileOutput>
-    </FxCompile>
-    <FxCompile Include="Shader\PostEffect\Mesh1.hlsl">
-      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Resource/resource/Shader/PostEffect/Dof/mesh4.vs</ObjectFileOutput>
-    </FxCompile>
-    <FxCompile Include="Shader\PostEffect\mono.hlsl">
-      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Resource/resource/Shader/PostEffect/mono.pso</ObjectFileOutput>
-    </FxCompile>
-    <FxCompile Include="Shader\PostEffect\VolumeFog.hlsl">
-      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Resource/resource/Shader/PostEffect/volFog.pso</ObjectFileOutput>
-    </FxCompile>
-    <FxCompile Include="Shader\PostEffect\Xblur.hlsl">
-      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Resource/resource/Shader/PostEffect/Xblur.vso</ObjectFileOutput>
-    </FxCompile>
-    <FxCompile Include="Shader\PostEffect\Yblur.hlsl">
-      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Resource/resource/Shader/PostEffect/Yblur.vso</ObjectFileOutput>
-    </FxCompile>
-    <FxCompile Include="Shader\ShadowMap\Mesh1Shadow.hlsl">
-      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Resource/resource/Shader/ShadowMap/Mesh.vso</ObjectFileOutput>
-    </FxCompile>
-    <FxCompile Include="Shader\ShadowMap\Mesh4Shadow.hlsl">
-      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Resource/resource/Shader/ShadowMap/Mesh4.vso</ObjectFileOutput>
-    </FxCompile>
-    <FxCompile Include="Shader\ShadowMap\NMesh1Shadow.hlsl">
-      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Resource/resource/Shader/ShadowMap/NormMesh.vso</ObjectFileOutput>
-    </FxCompile>
-    <FxCompile Include="Shader\ShadowMap\ShadowMapPixelShader.hlsl">
-      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Resource/resource/Shader/ShadowMap/ShadowMap.pso</ObjectFileOutput>
-    </FxCompile>
-    <FxCompile Include="Shader\ShadowMap\ShadowMapPS.hlsl">
-      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Resource/resource/Shader/ShadowMap/ShadowMap.pso</ObjectFileOutput>
-    </FxCompile>
-    <FxCompile Include="Shader\Vertex\Mesh.hlsl">
-      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Resource/resource/Shader/Vertex/Mesh.vso</ObjectFileOutput>
-    </FxCompile>
-    <FxCompile Include="Shader\Vertex\Mesh4.hlsl">
-      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Resource/resource/Shader/Vertex/Mesh4.vso</ObjectFileOutput>
-    </FxCompile>
-    <FxCompile Include="Shader\Vertex\NormMesh.hlsl">
-      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Resource/resource/Shader/Vertex/NormMesh.vso</ObjectFileOutput>
-    </FxCompile>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -204,6 +204,9 @@ private:
 	// レーダーのサイズ
 	int radarSize_;
 
+	// 使用する頂点シェーダ
+	std::vector<SharedShaderHandle> useShaders_;
+
 	Result result_;
 
 	SharedRenderTargetHandle resultCapture_;

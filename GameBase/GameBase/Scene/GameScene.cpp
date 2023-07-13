@@ -24,7 +24,7 @@ GameScene::GameScene(StageID stageID) :
 	SetMakeSceneFunc(std::bind(&GameScene::MakeResultFunc, this, std::placeholders::_1), SceneID::Result);
 	SetMakeSceneFunc(std::bind(&GameScene::MakePauseFunc, this, std::placeholders::_1), SceneID::Pause);
 	objManager_ = std::make_unique<ObjectManager>(10);
-	//peMng_ = std::make_unique<PEManager>();
+	peManager_ = std::make_unique<PEManager>();
 	if (stageID_ == StageID::Tutorial)
 	{
 		// チュートリアル時
@@ -55,10 +55,10 @@ GameScene::GameScene(StageID stageID) :
 	result_ = Result::Max;
 
 	// ゲームシーンで使うシェーダをあらかじめロードしておく
-	//useShaders_.resize(3);
-	/*lpSceneManager.GetResourceManager().LoadVS(useShaders_[0], "Resource/resource/Shader/Vertex/Mesh.vso");
+	useShaders_.resize(3);
+	lpSceneManager.GetResourceManager().LoadVS(useShaders_[0], "Resource/resource/Shader/Vertex/Mesh.vso");
 	lpSceneManager.GetResourceManager().LoadVS(useShaders_[1], "Resource/resource/Shader/Vertex/Mesh4.vso");
-	lpSceneManager.GetResourceManager().LoadPS(useShaders_[2], "Resource/resource/Shader/Pixel/Tex.pso");*/
+	lpSceneManager.GetResourceManager().LoadPS(useShaders_[2], "Resource/resource/Shader/Pixel/Tex.pso");
 
 
 
@@ -84,7 +84,7 @@ GameScene::GameScene(StageID stageID) :
 	SetCreateDrawValidGraphChannelNum(4);
 	SetCreateGraphColorBitDepth(32);
 	// 被写界深度
-//	depth_ = MakeScreen(x, y, false);
+	depth_ = MakeScreen(x, y, false);
 
 	// オフスクリーンの初期化
 	offScreen_ = MakeScreen(x, y, false);
@@ -153,8 +153,8 @@ GameScene::~GameScene()
 
 void GameScene::SetUp(void)
 {
-	peManager_->SetFlag(PEID::Mono, lpConfigManager.GetPeConfig().at(PEID::Mono));
-	peManager_->SetFlag(PEID::VolFog, lpConfigManager.GetPeConfig().at(PEID::VolFog));
+	//peManager_->SetFlag(PEID::Mono, lpConfigManager.GetPeConfig().at(PEID::Mono));
+	//peManager_->SetFlag(PEID::VolFog, lpConfigManager.GetPeConfig().at(PEID::VolFog));
 	//lpSooundPross.PlayBackSound(SOUNDNAME_BGM::GameSceneBGM, lpSooundPross.GetVolume(), true);	// ゲームシーンのBGM
 	//lpSooundPross.PlayBackSound(SOUNDNAME_BGM::GameSceneBGM, lpSooundPross.GetVolume(), true);	// ゲームシーンのBGM
 
@@ -245,7 +245,7 @@ void GameScene::DrawScene(void)
 	SetUpDepth();
 	//
 	depthMat_[0] = depthMat;
-	peManager_->SetBuffer(depthbuffer_);
+	//peManager_->SetBuffer(depthbuffer_);
 	//// ポストエフェクトか通常描画
 	peManager_->Draw(offScreen_, *screenHandle_, depth_, skyScreen_, subScreen_);
 	//

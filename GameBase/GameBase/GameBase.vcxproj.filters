@@ -594,28 +594,4 @@
   <ItemGroup>
     <None Include="Resource\Model\Map.mv1" />
   </ItemGroup>
-  <ItemGroup>
-    <FxCompile Include="Shader\Pixel\NormTex.hlsl" />
-    <FxCompile Include="Shader\Pixel\Tex.hlsl" />
-    <FxCompile Include="Shader\PostEffect\AverageBlur.hlsl" />
-    <FxCompile Include="Shader\PostEffect\BlackandWhite.hlsl" />
-    <FxCompile Include="Shader\PostEffect\DepthTex.hlsl" />
-    <FxCompile Include="Shader\PostEffect\DofPS.hlsl" />
-    <FxCompile Include="Shader\PostEffect\FogAndRed.hlsl" />
-    <FxCompile Include="Shader\PostEffect\Gaussian.hlsl" />
-    <FxCompile Include="Shader\PostEffect\mono.hlsl" />
-    <FxCompile Include="Shader\PostEffect\VolumeFog.hlsl" />
-    <FxCompile Include="Shader\PostEffect\Xblur.hlsl" />
-    <FxCompile Include="Shader\PostEffect\Yblur.hlsl" />
-    <FxCompile Include="Shader\ShadowMap\Mesh1Shadow.hlsl" />
-    <FxCompile Include="Shader\ShadowMap\Mesh4Shadow.hlsl" />
-    <FxCompile Include="Shader\ShadowMap\NMesh1Shadow.hlsl" />
-    <FxCompile Include="Shader\ShadowMap\ShadowMapPixelShader.hlsl" />
-    <FxCompile Include="Shader\ShadowMap\ShadowMapPS.hlsl" />
-    <FxCompile Include="Shader\Vertex\Mesh.hlsl" />
-    <FxCompile Include="Shader\Vertex\Mesh4.hlsl" />
-    <FxCompile Include="Shader\Vertex\NormMesh.hlsl" />
-    <FxCompile Include="Shader\PostEffect\Meah4.hlsl" />
-    <FxCompile Include="Shader\PostEffect\Mesh1.hlsl" />
-  </ItemGroup>
 </Project>
