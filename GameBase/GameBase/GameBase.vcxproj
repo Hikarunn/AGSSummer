@@ -219,15 +219,6 @@
     <ClCompile Include="Factory\SkyFactory.cpp" />
     <ClCompile Include="Factory\StageFactory.cpp" />
     <ClCompile Include="Component\Behavior\TutorialBehavior.cpp" />
-    <ClCompile Include="Shader\PEBase.cpp" />
-    <ClCompile Include="Shader\PEManager.cpp" />
-    <ClCompile Include="Shader\PEType\AveblurPE.cpp" />
-    <ClCompile Include="Shader\PEType\ColortoMono.cpp" />
-    <ClCompile Include="Shader\PEType\DofPE.cpp" />
-    <ClCompile Include="Shader\PEType\GaussPE.cpp" />
-    <ClCompile Include="Shader\PEType\MonoPE.cpp" />
-    <ClCompile Include="Shader\PEType\NoPE.cpp" />
-    <ClCompile Include="Shader\PEType\VolfogPE.cpp" />
     <ClCompile Include="Shader\ShrinkBuff.cpp" />
     <ClCompile Include="UI\Button.cpp" />
     <ClCompile Include="UI\ButtonBase.cpp" />
@@ -323,16 +314,6 @@
     <ClInclude Include="Factory\SkyFactory.h" />
     <ClInclude Include="Factory\StageFactory.h" />
     <ClInclude Include="Component\Behavior\TutorialBehavior.h" />
-    <ClInclude Include="Shader\PEBase.h" />
-    <ClInclude Include="Shader\PEID.h" />
-    <ClInclude Include="Shader\PEManager.h" />
-    <ClInclude Include="Shader\PEType\AveblurPE.h" />
-    <ClInclude Include="Shader\PEType\ColortoMono.h" />
-    <ClInclude Include="Shader\PEType\DofPE.h" />
-    <ClInclude Include="Shader\PEType\GaussPE.h" />
-    <ClInclude Include="Shader\PEType\MonoPE.h" />
-    <ClInclude Include="Shader\PEType\NoPE.h" />
-    <ClInclude Include="Shader\PEType\VolfogPE.h" />
     <ClInclude Include="Shader\ShrinkBuff.h" />
     <ClInclude Include="UI\Button.h" />
     <ClInclude Include="UI\ButtonBase.h" />
@@ -352,6 +333,55 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resource\Model\Map.mv1" />
+  </ItemGroup>
+  <ItemGroup>
+    <FxCompile Include="Shader\Pixel\Tex.hlsl">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Pixel</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">5.0</ShaderModel>
+      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Resource/resource/Shader/Pixel/Tex.pso</ObjectFileOutput>
+      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Resource/resource/Shader/Pixel/Tex.pso</ObjectFileOutput>
+    </FxCompile>
+    <FxCompile Include="Shader\ShadowMap\Mesh1Shadow.hlsl">
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">5.0</ShaderModel>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Vertex</ShaderType>
+      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Resource/resource/Shader/ShadowMap/Mesh.vso</ObjectFileOutput>
+      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Resource/resource/Shader/ShadowMap/Mesh.vso</ObjectFileOutput>
+    </FxCompile>
+    <FxCompile Include="Shader\ShadowMap\Mesh4Shadow.hlsl">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Vertex</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">5.0</ShaderModel>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Vertex</ShaderType>
+      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Resource/resource/Shader/ShadowMap/Mesh4.vso</ObjectFileOutput>
+      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Resource/resource/Shader/ShadowMap/Mesh4.vso</ObjectFileOutput>
+    </FxCompile>
+    <FxCompile Include="Shader\ShadowMap\ShadowMapPS.hlsl">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Pixel</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">5.0</ShaderModel>
+      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Resource/resource/Shader/ShadowMap/ShadowMap.pso</ObjectFileOutput>
+      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Resource/resource/Shader/ShadowMap/ShadowMap.pso</ObjectFileOutput>
+    </FxCompile>
+    <FxCompile Include="Shader\Vertex\Mesh.hlsl">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Vertex</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">5.0</ShaderModel>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Vertex</ShaderType>
+      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Resource/resource/Shader/Vertex/Mesh.vso</ObjectFileOutput>
+      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Resource/resource/Shader/Vertex/Mesh.vso</ObjectFileOutput>
+    </FxCompile>
+    <FxCompile Include="Shader\Vertex\Mesh4.hlsl">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Vertex</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">5.0</ShaderModel>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Vertex</ShaderType>
+      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Resource/resource/Shader/Vertex/Mesh4.vso</ObjectFileOutput>
+      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Resource/resource/Shader/Vertex/Mesh4.vso</ObjectFileOutput>
+    </FxCompile>
+    <FxCompile Include="Shader\Vertex\NormMesh.hlsl">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Vertex</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">5.0</ShaderModel>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Vertex</ShaderType>
+      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Resource/resource/Shader/Vertex/NormMesh.vso</ObjectFileOutput>
+      <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Resource/resource/Shader/Vertex/NormMesh.vso</ObjectFileOutput>
+    </FxCompile>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

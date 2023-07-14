@@ -5,7 +5,7 @@
 #include "../UI/UiManager.h"
 #include "../Factory/StageFactory.h"
 #include "PauseScene.h"
-#include "../Shader/PEManager.h"
+//#include "../Shader/PEManager.h"
 #include "../Common/ResourceManager.h"
 #include "../Component/Transform/Transform.h"
 #include "Transition/FadeLoading.h"
@@ -24,7 +24,7 @@ GameScene::GameScene(StageID stageID) :
 	SetMakeSceneFunc(std::bind(&GameScene::MakeResultFunc, this, std::placeholders::_1), SceneID::Result);
 	SetMakeSceneFunc(std::bind(&GameScene::MakePauseFunc, this, std::placeholders::_1), SceneID::Pause);
 	objManager_ = std::make_unique<ObjectManager>(10);
-	peManager_ = std::make_unique<PEManager>();
+	//peManager_ = std::make_unique<PEManager>();
 	if (stageID_ == StageID::Tutorial)
 	{
 		// チュートリアル時
@@ -247,7 +247,7 @@ void GameScene::DrawScene(void)
 	depthMat_[0] = depthMat;
 	//peManager_->SetBuffer(depthbuffer_);
 	//// ポストエフェクトか通常描画
-	peManager_->Draw(offScreen_, *screenHandle_, depth_, skyScreen_, subScreen_);
+	//peManager_->Draw(offScreen_, *screenHandle_, depth_, skyScreen_, subScreen_);
 	//
 	//// ミニマップの作成
 	//DrawGraph(10, 10, radarMap_, true);
@@ -270,7 +270,14 @@ void GameScene::SetupShadowMap(void)
 	SetBackgroundColor(0, 0, 0);
 
 	// シャドウマップ用にカメラをセット
-	camera_->SetUpShadow(offsetOrtho, offsetNear, offsetFar, camTar);
+	auto player = objManager_->GetComponent<Transform>(objManager_->GetPlayerID());
+	if (player.IsActive())
+	{
+		auto& pPos = player->GetPos();
+		Vector3 pTar = Vector3(pPos.x + camTar.x, camTar.y, pPos.z - camTar.z);
+
+		camera_->SetUpShadow(offsetOrtho, offsetNear, offsetFar, camTar);
+	}
 
 	MV1SetUseOrigShader(true);
 	objManager_->SetupDepthTex(*shadowPs_, -1);

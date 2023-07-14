@@ -243,34 +243,7 @@
     <ClCompile Include="Component\Render\LineRender.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="Shader\PEBase.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="Shader\PEManager.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
     <ClCompile Include="Shader\ShrinkBuff.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="Shader\PEType\AveblurPE.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="Shader\PEType\ColortoMono.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="Shader\PEType\DofPE.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="Shader\PEType\GaussPE.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="Shader\PEType\MonoPE.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="Shader\PEType\NoPE.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="Shader\PEType\VolfogPE.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
   </ItemGroup>
@@ -554,37 +527,7 @@
     <ClInclude Include="Component\Render\LineRender.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="Shader\PEBase.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="Shader\PEID.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="Shader\PEManager.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
     <ClInclude Include="Shader\ShrinkBuff.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="Shader\PEType\AveblurPE.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="Shader\PEType\ColortoMono.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="Shader\PEType\DofPE.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="Shader\PEType\GaussPE.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="Shader\PEType\MonoPE.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="Shader\PEType\NoPE.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="Shader\PEType\VolfogPE.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
   </ItemGroup>
@@ -593,5 +536,14 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resource\Model\Map.mv1" />
+  </ItemGroup>
+  <ItemGroup>
+    <FxCompile Include="Shader\Vertex\Mesh.hlsl" />
+    <FxCompile Include="Shader\Vertex\Mesh4.hlsl" />
+    <FxCompile Include="Shader\Vertex\NormMesh.hlsl" />
+    <FxCompile Include="Shader\ShadowMap\Mesh1Shadow.hlsl" />
+    <FxCompile Include="Shader\ShadowMap\ShadowMapPS.hlsl" />
+    <FxCompile Include="Shader\Pixel\Tex.hlsl" />
+    <FxCompile Include="Shader\ShadowMap\Mesh4Shadow.hlsl" />
   </ItemGroup>
 </Project>
