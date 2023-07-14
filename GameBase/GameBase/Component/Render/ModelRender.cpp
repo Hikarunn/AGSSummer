@@ -35,8 +35,8 @@ void ModelRender::Draw(int shadowMap, int buff)
 
 	// シェーダをセットして描画
 	MV1SetUseOrigShader(true);
-	/*SetUseVertexShader(*vs_);
-	SetUsePixelShader(*ps_);*/
+	SetUseVertexShader(*vs_);
+	SetUsePixelShader(*ps_);
 	UpdateShaderConstantBuffer(buff);
 	SetShaderConstantBuffer(buff, DX_SHADERTYPE_VERTEX, 4);
 	// シャドウマップをテクスチャとしてセット

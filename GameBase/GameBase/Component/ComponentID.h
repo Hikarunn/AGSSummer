@@ -31,6 +31,9 @@ enum class ComponentID :
 	SkyBehavior = BehaviorBase | (1ull << 23),				// スカイドームの制御用
 	LineRender = RenderBase | (1ull << 24),					// 線の描画用
 	EnemyLaserSightBehavior = BehaviorBase | (1ull << 25),		// 敵の攻撃時に出る視線
-	reserve4 = 1ull << 26,
+	reserve1 = 1ull << 26,
+	reserve2 = 1ull << 27,
+	reserve3 = 1ull << 28,
+	reserve4 = 1ull << 29,
 	Max = ~Base
 };

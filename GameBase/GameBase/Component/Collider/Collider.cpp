@@ -230,7 +230,7 @@ bool Collider::HitCheck(CharactorCollider& a, TerrainCollider& b, ObjectManager&
 	if (lineResult.HitFlag > 0)
 	{
 		// 当たった座標
-		//auto hitPos = Vector3{ lineResult.HitPosition.x, lineResult.HitPosition.y , lineResult.HitPosition.z };
+		auto hitPos = Vector3{ lineResult.HitPosition.x, lineResult.HitPosition.y , lineResult.HitPosition.z };
 
 		// 当たったポリゴンの法制
 		auto hitNormal = Vector3{ lineResult.Normal.x , lineResult.Normal.y, lineResult.Normal.z };
@@ -247,6 +247,10 @@ bool Collider::HitCheck(CharactorCollider& a, TerrainCollider& b, ObjectManager&
 		trans->Pos() += v;
 		a.SetGroundFlag(true);
 		a.SetGravityPow(0.0f);
+
+		aTop = a.GetTop();
+		aBtm = a.GetBottom();
+
 	}
 	else
 	{
@@ -254,9 +258,7 @@ bool Collider::HitCheck(CharactorCollider& a, TerrainCollider& b, ObjectManager&
 	}
 
 
-	aTop = a.GetTop();
-	aBtm = a.GetBottom();
-
+	
 
 	// ダッシュを考慮した判定を取る
 	auto topDashStart = aTop + (-a.GetMoveDir() * a.GetSpeed());

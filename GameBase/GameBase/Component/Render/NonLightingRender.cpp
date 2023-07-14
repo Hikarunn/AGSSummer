@@ -8,10 +8,10 @@
 
 
 // 頂点タイプに合わせたシェーダパスのテーブル
-const std::unordered_map<int, std::string> vsShaderNameTbl{
-	{DX_MV1_VERTEX_TYPE_1FRAME, "Mesh.vso"},
-	{DX_MV1_VERTEX_TYPE_4FRAME,"Mesh4.vso"}
-};
+//const std::unordered_map<int, std::string> vsShaderNameTbl{
+//	{DX_MV1_VERTEX_TYPE_1FRAME, "Mesh.vso"},
+//	{DX_MV1_VERTEX_TYPE_4FRAME,"Mesh4.vso"}
+//};
 
 void NonLightingRender::Draw(int shadowMap, int buff)
 {
