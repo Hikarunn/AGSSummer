@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<root>
+	<Datas>
+		<Data>
+			<posX>35</posX>
+			<posY>705</posY>
+			<imageName>Resource/resource/UI/TrionIcon.png</imageName>
+			<viewType>0</viewType>
+		</Data>
+	</Datas>
+</root>

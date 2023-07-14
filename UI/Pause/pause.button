@@ -9,13 +9,6 @@
 			<posY>253.5</posY>
 		</Data>
 		<Data>
-			<funcID>5</funcID>
-			<imageName>Resource/resource/Ui/Setting.png</imageName>
-			<frameImageName>Resource/resource/Ui/SettingFrame.png</frameImageName>
-			<posX>640</posX>
-			<posY>360</posY>
-		</Data>
-		<Data>
 			<funcID>6</funcID>
 			<imageName>Resource/resource/Ui/End.png</imageName>
 			<frameImageName>Resource/resource/Ui/EndFrame.png</frameImageName>

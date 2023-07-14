@@ -13,17 +13,10 @@
 			<imageName>Resource/resource/Ui/play.png</imageName>
 			<frameImageName>Resource/resource/Ui/PlayFrame.png</frameImageName>
 			<posX>640</posX>
-			<posY>257.4</posY>
+			<posY>334.5</posY>
 		</Data>
 		<Data>
 			<funcID>2</funcID>
-			<imageName>Resource/resource/Ui/Setting.png</imageName>
-			<frameImageName>Resource/resource/Ui/SettingFrame.png</frameImageName>
-			<posX>640</posX>
-			<posY>411.6</posY>
-		</Data>
-		<Data>
-			<funcID>3</funcID>
 			<imageName>Resource/resource/Ui/End.png</imageName>
 			<frameImageName>Resource/resource/Ui/EndFrame.png</frameImageName>
 			<posX>640</posX>
