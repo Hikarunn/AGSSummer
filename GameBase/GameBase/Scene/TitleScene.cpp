@@ -35,13 +35,13 @@ TitleScene::TitleScene() :
 	int x, y;
 	GetDrawScreenSize(&x, &y);
 	shadowMap_ = MakeScreen(x, y, false);
-	// シャドウマップ用カメラ情報の初期化
-	SetUseASyncLoadFlag(false);
-	shadowBuff_ = CreateShaderConstantBuffer(sizeof(LIGHT_MAT) * 4);
-	SetUseASyncLoadFlag(true);
-	lightMat_ = static_cast<LIGHT_MAT*>(GetBufferShaderConstantBuffer(shadowBuff_));
-	lightMat.view = MGetIdent();
-	lightMat.proj = MGetIdent();
+	//// シャドウマップ用カメラ情報の初期化
+	//SetUseASyncLoadFlag(false);
+	//shadowBuff_ = CreateShaderConstantBuffer(sizeof(LIGHT_MAT) * 4);
+	//SetUseASyncLoadFlag(true);
+	//lightMat_ = static_cast<LIGHT_MAT*>(GetBufferShaderConstantBuffer(shadowBuff_));
+	//lightMat.view = MGetIdent();
+	//lightMat.proj = MGetIdent();
 
 	CreateBackGround();
 
@@ -63,7 +63,7 @@ void TitleScene::DrawScene(void)
 	SetupShadowMap();
 	SetDrawScreen(*screenHandle_);
 	ClsDrawScreen();
-	lightMat_[0] = lightMat;
+	//lightMat_[0] = lightMat;
 	(this->*draw_)();
 
 	// 影の描画
@@ -110,14 +110,14 @@ void TitleScene::SetupShadowMap(void)
 	SetBackgroundColor(0, 0, 0);
 
 	// シャドウマップ用にカメラをセット
-	camera_->SetUpShadow(offsetOrtho, offsetNear, offsetFar, camTar);
+	/*camera_->SetUpShadow(offsetOrtho, offsetNear, offsetFar, camTar);
 
 	MV1SetUseOrigShader(true);
 	objManager_->SetupDepthTex(*shadowPs_, -1);
 	MV1SetUseOrigShader(false);
 
 	lightMat.view = GetCameraViewMatrix();
-	lightMat.proj = GetCameraProjectionMatrix();
+	lightMat.proj = GetCameraProjectionMatrix();*/
 }
 
 void TitleScene::DrawLogoOff(void)
@@ -143,10 +143,10 @@ void TitleScene::CreateBackGround(void)
 
 	auto id = objManager_->MakeObjectID();
 
-	std::unique_ptr<Render> render = std::make_unique<ModelRender>();
+	//std::unique_ptr<Render> render = std::make_unique<ModelRender>();
 	//render->Load("Resource/resource/Title/Title.mv1");
 	//render->Load("Resource/Model/Player/Player.mv1");
-	objManager_->AddComponent(std::move(render), id);
+	//objManager_->AddComponent(std::move(render), id);
 
 	auto transform = std::make_unique<Transform>();
 	transform->Scale() = Vector3{ 1.0f,1.0f,1.0f };
