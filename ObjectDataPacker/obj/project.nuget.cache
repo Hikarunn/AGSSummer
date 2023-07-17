@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "MOv/HtqENBK1Ja75+UmdvQ8cX2mN1ASiDCh+F2j09VqI/RmgB6ojUDUt5/wp8lIMKK+fs3jec6zwB1z9YgBF9g==",
+  "dgSpecHash": "KTt5c/zbJZ9OBv8Qv4I4KlOoPAjcvxTLrodkA6YM+lJQsifn+vXgt7IonyJjr9an3OhyZ/vZsndt4I276Pixqg==",
   "success": true,
-  "projectFilePath": "D:\\Users\\2016008\\Desktop\\AGSSummer\\ObjectDataPacker\\ObjectDataPacker.csproj",
+  "projectFilePath": "D:\\AGSSummer\\ObjectDataPacker\\ObjectDataPacker.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }
