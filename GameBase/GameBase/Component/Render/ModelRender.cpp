@@ -18,6 +18,8 @@ const std::unordered_map<int, std::string> vsShaderNameTbl{
 
 ModelRender::ModelRender()
 {
+	draw_ = &ModelRender::DrawShader;
+	drawDepth_ = &ModelRender::DrawDepthShader;
 }
 
 ModelRender::~ModelRender()
@@ -30,7 +32,7 @@ void ModelRender::Draw(int shadowMap, int buff)
 	{
 		return;
 	}
-
+	//(this->draw_)(shadowMap, buff);
 	SetTextureAddressMode(DX_TEXADDRESS_CLAMP);
 
 	// シェーダをセットして描画
@@ -53,6 +55,7 @@ void ModelRender::SetUpDepthTex(int ps, int buff)
 	{
 		return;
 	}
+	//(this->drawDepth_)(ps, buff);
 	MV1SetUseOrigShader(true);
 	SetUsePixelShader(ps);
 	SetUseVertexShader(*shadowVs_);
@@ -71,6 +74,12 @@ std::string ModelRender::Load(std::ifstream& file)
 	str.resize(num);
 	file.read(str.data(), sizeof(str[0]) * num);
 	return str;
+}
+
+void ModelRender::SetNonShader(void)
+{
+	draw_ = &ModelRender::DrawNonShader;
+	drawDepth_ = &ModelRender::DrawDepthNonShader;
 }
 
 void ModelRender::Load(const std::filesystem::path& path)
@@ -118,13 +127,23 @@ void ModelRender::Begin(ObjectManager& objectManager)
 		DebugLog("このタイプのシェーダは無いです");
 	}
 
+	if (type == DX_MV1_VERTEX_TYPE_4FRAME)
+	{
+		normMap = LoadGraph(L"Resource/resource/Stage.fbm/ShedCorrugatedNormal.png");
+	}
+	else
+	{
+		normMap = -1;
+	}
+
+
 	if (type < 3)
 	{
 		lpSceneManager.GetResourceManager().LoadPS(ps_, "Resource/resource/Shader/Pixel/Tex.pso");
 	}
 	else
 	{
-		lpSceneManager.GetResourceManager().LoadPS(ps_, "Resource/resource/Shader/Pixel/NormTex.pso");
+		//lpSceneManager.GetResourceManager().LoadPS(ps_, "Resource/resource/Shader/Pixel/NormTex.pso");
 	}
 	lpSceneManager.GetResourceManager().LoadPS(shadowPs_, "Resource/resource/Shader/ShadowMap/ShadowMap.pso");
 
@@ -152,6 +171,51 @@ bool ModelRender::IsCameraView(void)
 	return true;
 }
 
+void ModelRender::DrawShader(int shadowMap, int buff)
+{
+	SetTextureAddressMode(DX_TEXADDRESS_CLAMP);
+
+	// シェーダをセットして描画
+	MV1SetUseOrigShader(true);
+	SetUseVertexShader(*vs_);
+	SetUsePixelShader(*ps_);
+	UpdateShaderConstantBuffer(buff);
+	SetShaderConstantBuffer(buff, DX_SHADERTYPE_VERTEX, 4);
+	// シャドウマップをテクスチャとしてセット
+	//SetUseTextureToShader(1, normMap);
+	SetUseTextureToShader(3, shadowMap);
+	// ここでセットしたシャドウマップのフィルタリングとアドレスUVの設定を行う
+	//MV1SetTextureSampleFilterMode(*handle_, 1, DX_DRAWMODE_ANISOTROPIC);
+	//MV1SetTextureAddressMode(*handle_, 1, DX_TEXADDRESS_MIRROR, DX_TEXADDRESS_MIRROR);
+
+	MV1DrawModel(*handle_);
+	MV1SetUseOrigShader(false);
+	SetUseTextureToShader(1, -1);
+	SetUseTextureToShader(3, -1);
+
+	//MV1DrawModelDebug(*handle_, 0xaaffaa, TRUE, 5.0f, FALSE, FALSE);
+}
+
+void ModelRender::DrawNonShader(int shadowMap, int buff)
+{
+	MV1DrawModel(*handle_);
+}
+
+void ModelRender::DrawDepthShader(int ps, int buff)
+{
+	MV1SetUseOrigShader(true);
+	SetUsePixelShader(ps);
+	SetUseVertexShader(*shadowVs_);
+	UpdateShaderConstantBuffer(buff);
+	SetShaderConstantBuffer(buff, DX_SHADERTYPE_PIXEL, 6);
+	MV1DrawModel(*handle_);
+	MV1SetUseOrigShader(false);
+	SetShaderConstantBuffer(-1, DX_SHADERTYPE_PIXEL, 6);
+}
+
+void ModelRender::DrawDepthNonShader(int ps, int buff)
+{
+}
 
 ModelRender::CameraBB::CameraBB() :
 	isCheck_{ false }
