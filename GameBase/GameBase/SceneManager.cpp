@@ -123,7 +123,7 @@ bool SceneManager::SystemInit(void)
 
 
 	DebugStart(timeClass_);
-	SetWindowText(TEXT("アンチマジック"));
+	SetWindowText(TEXT("FirstBurst"));
 	SetWindowIconID(IDI_ICON1);
 	SetGraphMode(screenSize_<int>.x, screenSize_<int>.y, 32);
 	Set3DSoundOneMetre(128.0f);			// 3D空間の1メートル相当の設定

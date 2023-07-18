@@ -25,9 +25,9 @@ SelectScene::SelectScene()
 
 	auto id = objManager_->MakeObjectID();
 
-	std::unique_ptr<Render> render = std::make_unique<ModelRender>();
+	//std::unique_ptr<Render> render = std::make_unique<ModelRender>();
 	//render->Load("Resource/resource/Title/Title.mv1");
-	objManager_->AddComponent(std::move(render), id);
+	//objManager_->AddComponent(std::move(render), id);
 
 	auto transform = std::make_unique<Transform>();
 	transform->Scale() = Vector3{ 1.0f,1.0f,1.0f };

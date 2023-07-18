@@ -377,7 +377,7 @@ void GameScene::Loaded(Controller& controller)
 	uiManager_->Begin();
 
 
-	//lpSceneManager.GetResourceManager().LoadPS(shadowPs_, "Resource/resource/Shader/ShadowMap/ShadowMap.pso");
+	lpSceneManager.GetResourceManager().LoadPS(shadowPs_, "Resource/resource/Shader/ShadowMap/ShadowMap.pso");
 	//lpSceneManager.GetResourceManager().LoadPS(depthPS_, "Resource/resource/Shader/PostEffect/Dof/depth.pso");
 	SetUp();
 	//RadarSetUp();

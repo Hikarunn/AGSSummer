@@ -32,21 +32,21 @@ void ModelRender::Draw(int shadowMap, int buff)
 	{
 		return;
 	}
-	//(this->draw_)(shadowMap, buff);
-	SetTextureAddressMode(DX_TEXADDRESS_CLAMP);
+	(this->*draw_)(shadowMap, buff);
+	//SetTextureAddressMode(DX_TEXADDRESS_CLAMP);
 
-	// シェーダをセットして描画
-	MV1SetUseOrigShader(true);
-	SetUseVertexShader(*vs_);
-	SetUsePixelShader(*ps_);
-	UpdateShaderConstantBuffer(buff);
-	SetShaderConstantBuffer(buff, DX_SHADERTYPE_VERTEX, 4);
-	// シャドウマップをテクスチャとしてセット
-	SetUseTextureToShader(3, shadowMap);
-	
-	MV1DrawModel(*handle_);
-	MV1SetUseOrigShader(false);
-	SetUseTextureToShader(3, -1);
+	//// シェーダをセットして描画
+	//MV1SetUseOrigShader(true);
+	//SetUseVertexShader(*vs_);
+	//SetUsePixelShader(*ps_);
+	//UpdateShaderConstantBuffer(buff);
+	//SetShaderConstantBuffer(buff, DX_SHADERTYPE_VERTEX, 4);
+	//// シャドウマップをテクスチャとしてセット
+	//SetUseTextureToShader(3, shadowMap);
+	//
+	//MV1DrawModel(*handle_);
+	//MV1SetUseOrigShader(false);
+	//SetUseTextureToShader(3, -1);
 }
 
 void ModelRender::SetUpDepthTex(int ps, int buff)
@@ -55,15 +55,15 @@ void ModelRender::SetUpDepthTex(int ps, int buff)
 	{
 		return;
 	}
-	//(this->drawDepth_)(ps, buff);
-	MV1SetUseOrigShader(true);
+	(this->*drawDepth_)(ps, buff);
+	/*MV1SetUseOrigShader(true);
 	SetUsePixelShader(ps);
 	SetUseVertexShader(*shadowVs_);
 	UpdateShaderConstantBuffer(buff);
 	SetShaderConstantBuffer(buff, DX_SHADERTYPE_PIXEL, 6);
 	MV1DrawModel(*handle_);
 	MV1SetUseOrigShader(false);
-	SetShaderConstantBuffer(-1, DX_SHADERTYPE_PIXEL, 6);
+	SetShaderConstantBuffer(-1, DX_SHADERTYPE_PIXEL, 6);*/
 }
 
 std::string ModelRender::Load(std::ifstream& file)
@@ -182,11 +182,11 @@ void ModelRender::DrawShader(int shadowMap, int buff)
 	UpdateShaderConstantBuffer(buff);
 	SetShaderConstantBuffer(buff, DX_SHADERTYPE_VERTEX, 4);
 	// シャドウマップをテクスチャとしてセット
-	//SetUseTextureToShader(1, normMap);
+	SetUseTextureToShader(1, normMap);
 	SetUseTextureToShader(3, shadowMap);
 	// ここでセットしたシャドウマップのフィルタリングとアドレスUVの設定を行う
-	//MV1SetTextureSampleFilterMode(*handle_, 1, DX_DRAWMODE_ANISOTROPIC);
-	//MV1SetTextureAddressMode(*handle_, 1, DX_TEXADDRESS_MIRROR, DX_TEXADDRESS_MIRROR);
+	MV1SetTextureSampleFilterMode(*handle_, 1, DX_DRAWMODE_ANISOTROPIC);
+	MV1SetTextureAddressMode(*handle_, 1, DX_TEXADDRESS_MIRROR, DX_TEXADDRESS_MIRROR);
 
 	MV1DrawModel(*handle_);
 	MV1SetUseOrigShader(false);

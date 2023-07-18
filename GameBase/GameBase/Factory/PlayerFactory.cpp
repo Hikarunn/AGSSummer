@@ -25,6 +25,7 @@ ObjectID PlayerFactory::Create(ObjectID ownerID, const Vector3& pos, const Vecto
 	auto id = objectManager_.MakeObjectID();
 
 	objectManager_.AddComponent(std::make_unique<ObjectInfo>(), id);
+	objectManager_.GetComponent<ObjectInfo>(id)->SetAttribute(ObjectAttribute::Player);
 
 	// capsuleを描画するコンポーネントを追加
 	objectManager_.AddComponent(std::make_unique<ModelRender>(), id);
